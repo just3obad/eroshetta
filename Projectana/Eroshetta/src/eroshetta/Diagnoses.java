@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Mouaz
  */
 @Entity
-@Table(name = "DIAGNOSES", catalog = "", schema = "APP")
+@Table(name = "DIAGNOSES")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Diagnoses.findAll", query = "SELECT d FROM Diagnoses d"),
@@ -25,22 +25,21 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Diagnoses implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "NAME", length = 60)
+    @Column(name = "NAME")
     private String name;
-    @Column(name = "DESCRIPTION", length = 120)
+    @Column(name = "DESCRIPTION")
     private String description;
     @JoinTable(name = "PATIENT_HAS_DIAGNOSIS", joinColumns = {
-        @JoinColumn(name = "DIAGNOSIS_ID", referencedColumnName = "ID", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID", nullable = false)})
+        @JoinColumn(name = "DIAGNOSIS_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Patients> patientsCollection;
     @JoinTable(name = "DRUG_CONTRADICT_DIAGNOSIS", joinColumns = {
-        @JoinColumn(name = "DIAGNOSIS_ID", referencedColumnName = "ID", nullable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID", nullable = false)})
+        @JoinColumn(name = "DIAGNOSIS_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Drugs> drugsCollection;
 

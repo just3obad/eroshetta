@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Mouaz
  */
 @Entity
-@Table(name = "PRESCRIPTIONS", catalog = "", schema = "APP")
+@Table(name = "PRESCRIPTIONS")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Prescriptions.findAll", query = "SELECT p FROM Prescriptions p"),
@@ -28,12 +28,12 @@ public class Prescriptions implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     private Integer id;
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
     private Date date;
-    @Column(name = "NOTES", length = 100)
+    @Column(name = "NOTES")
     private String notes;
     @ManyToMany(mappedBy = "prescriptionsCollection")
     private Collection<Drugs> drugsCollection;

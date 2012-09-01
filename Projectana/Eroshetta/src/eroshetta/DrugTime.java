@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Mouaz
  */
 @Entity
-@Table(name = "DRUG_TIME", catalog = "", schema = "APP")
+@Table(name = "DRUG_TIME")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DrugTime.findAll", query = "SELECT d FROM DrugTime d"),
@@ -25,15 +25,15 @@ public class DrugTime implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected DrugTimePK drugTimePK;
-    @Column(name = "DRUG_TIME", length = 40)
+    @Column(name = "DRUG_TIME")
     private String drugTime;
-    @JoinColumn(name = "PRESCRIPTION_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "PRESCRIPTION_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Prescriptions prescriptions;
-    @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Patients patients;
-    @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Drugs drugs;
 

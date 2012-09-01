@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Mouaz
  */
 @Entity
-@Table(name = "PATIENTS", catalog = "", schema = "APP")
+@Table(name = "PATIENTS")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Patients.findAll", query = "SELECT p FROM Patients p"),
@@ -36,9 +36,9 @@ public class Patients implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "NAME", length = 50)
+    @Column(name = "NAME")
     private String name;
     @Column(name = "BIRTH_DATE")
     @Temporal(TemporalType.DATE)
@@ -51,11 +51,11 @@ public class Patients implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date nextVisit;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "WEIGHT", precision = 7, scale = 3)
+    @Column(name = "WEIGHT")
     private BigDecimal weight;
     @Column(name = "HEIGHT")
     private Integer height;
-    @Column(name = "BMI", precision = 6, scale = 3)
+    @Column(name = "BMI")
     private BigDecimal bmi;
     @Column(name = "GENDER")
     private Character gender;
