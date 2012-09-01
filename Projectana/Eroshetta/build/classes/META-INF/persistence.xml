@@ -3,26 +3,19 @@
   <persistence-unit name="EroshettaPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>eroshetta.Doctor</class>
-    <class>eroshetta.Patients</class>
     <class>eroshetta.Diagnoses</class>
-    <class>eroshetta.Prescriptions</class>
-    <class>eroshetta.Drugs</class>
-    <class>eroshetta.DrugTime</class>
-    <class>eroshetta.Patients_1</class>
-    <class>eroshetta.Diagnoses_1</class>
-    <class>eroshetta.DrugTime_1</class>
-    <class>eroshetta.Prescriptions_1</class>
-    <class>eroshetta.Doctor_1</class>
-    <class>eroshetta.SideEffects</class>
-    <class>eroshetta.Foods</class>
     <class>eroshetta.GenericNames</class>
-    <shared-cache-mode>ALL</shared-cache-mode>
+    <class>eroshetta.Prescriptions</class>
+    <class>eroshetta.Patients</class>
+    <class>eroshetta.Foods</class>
+    <class>eroshetta.SideEffects</class>
+    <class>eroshetta.DrugTime</class>
+    <class>eroshetta.Drugs</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/eroshetta"/>
       <property name="javax.persistence.jdbc.password" value="APP"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.user" value="APP"/>
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
     </properties>
   </persistence-unit>
 </persistence>
