@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Mouaz
  */
 @Entity
-@Table(name = "DOCTOR")
+@Table(name = "DOCTOR", catalog = "", schema = "APP")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d"),
@@ -28,17 +28,17 @@ public class Doctor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     private Integer id;
-    @Column(name = "NAME")
+    @Column(name = "NAME", length = 100)
     private String name;
-    @Column(name = "ADDRESS")
+    @Column(name = "ADDRESS", length = 150)
     private String address;
     @Column(name = "MOBILE_NO")
     private Integer mobileNo;
     @Column(name = "OFFICE_NO")
     private Integer officeNo;
-    @Column(name = "DR_TITLE")
+    @Column(name = "DR_TITLE", length = 50)
     private String drTitle;
 
     public Doctor() {
