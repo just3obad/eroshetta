@@ -16,13 +16,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class DrugTimePK implements Serializable {
     @Basic(optional = false)
-    @Column(name = "PATIENT_ID", nullable = false)
+    @Column(name = "PATIENT_ID")
     private int patientId;
     @Basic(optional = false)
-    @Column(name = "PRESCRIPTION_ID", nullable = false)
+    @Column(name = "PRESCRIPTION_ID")
     private int prescriptionId;
     @Basic(optional = false)
-    @Column(name = "DRUG_ID", nullable = false)
+    @Column(name = "DRUG_ID")
     private int drugId;
 
     public DrugTimePK() {
