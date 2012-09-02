@@ -15,7 +15,7 @@ import javax.persistence.Query;
  * @author Mouaz
  */
 public class NewClass {
-    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
+    static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
 static EntityManager em = emf.createEntityManager();
     public static void main(String[] a) throws Exception {
         
