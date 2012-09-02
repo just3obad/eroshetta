@@ -7,6 +7,9 @@ package eroshetta;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.*;
+import javax.persistence.*;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -17,7 +20,13 @@ public class Eroshetta extends javax.swing.JFrame {
     /**
      * Creates new form Eroshetta
      */
+    
+    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
+    static EntityManager em = emf.createEntityManager();
+    
     public Eroshetta() {
+        
+
         initComponents();
     }
 
@@ -30,7 +39,10 @@ public class Eroshetta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanelPatientsBook = new javax.swing.JPanel();
+        jScrollPanePatientsBook = new javax.swing.JScrollPane();
+        jListPatientsBook = new javax.swing.JList();
+        jTextFieldPatientsBook = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -38,20 +50,50 @@ public class Eroshetta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Eroshetta");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("sh3'l3obad"));
+        jPanelPatientsBook.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Patients Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 12))); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 158, Short.MAX_VALUE)
+        jListPatientsBook.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        jListPatientsBook.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jListPatientsBook.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jListPatientsBookKeyReleased(evt);
+            }
+        });
+        jScrollPanePatientsBook.setViewportView(jListPatientsBook);
+
+        jTextFieldPatientsBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPatientsBookActionPerformed(evt);
+            }
+        });
+        jTextFieldPatientsBook.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPatientsBookKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelPatientsBookLayout = new javax.swing.GroupLayout(jPanelPatientsBook);
+        jPanelPatientsBook.setLayout(jPanelPatientsBookLayout);
+        jPanelPatientsBookLayout.setHorizontalGroup(
+            jPanelPatientsBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPanePatientsBook, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+            .addComponent(jTextFieldPatientsBook)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+        jPanelPatientsBookLayout.setVerticalGroup(
+            jPanelPatientsBookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPatientsBookLayout.createSequentialGroup()
+                .addComponent(jTextFieldPatientsBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPanePatientsBook))
         );
 
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MouseClicked(evt);
@@ -62,11 +104,11 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 709, Short.MAX_VALUE)
+            .addGap(0, 705, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 437, Short.MAX_VALUE)
+            .addGap(0, 435, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Patient Profile", jPanel3);
@@ -75,11 +117,11 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 709, Short.MAX_VALUE)
+            .addGap(0, 705, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 437, Short.MAX_VALUE)
+            .addGap(0, 435, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("New Prescription", jPanel5);
@@ -94,7 +136,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,7 +145,7 @@ public class Eroshetta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelPatientsBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -112,10 +154,9 @@ public class Eroshetta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addComponent(jPanelPatientsBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -125,6 +166,69 @@ public class Eroshetta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void jListPatientsBookKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jListPatientsBookKeyReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jListPatientsBookKeyReleased
+
+    private void jTextFieldPatientsBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientsBookActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPatientsBookActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        Query q = em.createNamedQuery("Patients.findAll");
+        patientsBookList = (List<Patients>) q.getResultList();
+        DefaultListModel model = new DefaultListModel();
+        jListPatientsBook.setModel(model);
+        for(int i=0; i<patientsBookList.size(); i++){
+            model.add(i,patientsBookList.get(i).getName());
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jTextFieldPatientsBookKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientsBookKeyReleased
+        // TODO add your handling code here:
+        Query q = em.createNamedQuery("Patients.findByName");
+        q.setParameter("pName", jTextFieldPatientsBook.getText()+"%");
+        patientsBookList = (List<Patients>) q.getResultList();
+        DefaultListModel model = new DefaultListModel();
+        jListPatientsBook.setModel(model);
+        for(int i=0; i<patientsBookList.size(); i++){
+            model.add(i,patientsBookList.get(i).getName());
+        }
+    }//GEN-LAST:event_jTextFieldPatientsBookKeyReleased
+
+    
+    public static void createPatients(){
+        em.getTransaction().begin();
+        for(int i=0; i<25; i++){
+            
+            Patients p = new Patients();
+            p.setName("Patient"+ i);
+            em.persist(p);
+            
+        }
+        
+        em.getTransaction().commit();
+        
+    }
+    
+    public static void findAllPatients(){
+       
+        Query q = em.createNamedQuery("Patients.findByName");
+        q.setParameter("pName", "P%");
+        
+        patientsBookList = (List<Patients>) q.getResultList();
+//         System.out.println();
+//         Patients p = l.get(0);
+//         System.out.println(p.getName());
+//         System.out.println(l.get(0));
+//         System.out.println(patientsBookList.toString());
+        System.out.println(patientsBookList.size());
+         
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -168,12 +272,30 @@ public class Eroshetta extends javax.swing.JFrame {
                 
             }
         });
+        
+        
+        
+        
+        
+        
+//        createPatients();
+        findAllPatients();
+//        em.close();
+//        emf.close();
+        
+        
+        
     }
+    
+    static List <Patients> patientsBookList  = new ArrayList<Patients>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JList jListPatientsBook;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelPatientsBook;
+    private javax.swing.JScrollPane jScrollPanePatientsBook;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextFieldPatientsBook;
     // End of variables declaration//GEN-END:variables
 }
