@@ -690,6 +690,48 @@ public class Eroshetta extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldSearchDragsActionPerformed
 
     
+	 public  void leapYearModification(){
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int selectedYear =(Integer) jComboBoxPatientProfileYear.getSelectedItem() ;
+        int selectedMonth = (Integer) jComboBoxPatientProfileMonth.getSelectedIndex() + 1;
+        boolean leapYearFlag;
+        DefaultComboBoxModel dayModelLeapYead = new DefaultComboBoxModel();
+        jComboBoxPatientProfileDay.setModel(dayModelLeapYead);
+       
+        if ((selectedYear % 4 == 0) && (selectedYear % 100 != 0) || (selectedYear % 400 == 0)) {
+            leapYearFlag = true;
+        } else {
+            leapYearFlag = false;
+        }
+        if(selectedMonth == 1 || selectedMonth ==3 || selectedMonth ==5||selectedMonth ==7||selectedMonth ==8||selectedMonth ==10||selectedMonth ==12 ){
+            for(int i=1; i<32; i++){
+                dayModelLeapYead.addElement(i);
+            }
+        }
+        else
+        {
+            if(selectedMonth == 4 || selectedMonth ==6 || selectedMonth ==9||selectedMonth ==11){
+                for(int i=1; i<31; i++){
+                    dayModelLeapYead.addElement(i);
+            }
+            }
+            else{
+                if(selectedMonth == 2 && leapYearFlag){
+                    for(int i=1; i<30; i++){
+                        dayModelLeapYead.addElement(i);
+                    }
+                }
+                else
+                {
+                    for(int i=1; i<29; i++){
+                        dayModelLeapYead.addElement(i);
+                    }
+                }
+            }
+        }
+    }
+	
+	
     public static void createPatients(){
         em.getTransaction().begin();
         for(int i=0; i<25; i++){
