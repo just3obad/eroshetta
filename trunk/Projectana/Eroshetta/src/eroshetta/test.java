@@ -144,7 +144,7 @@ public class test extends javax.swing.JFrame {
                 test t = new test();
                 t.jTabbedPane1.add("koko",t.jToolBar1);
                  t.setVisible(true);       
-                     
+                     System.out.println("erdswa".substring(0, 2));
             }
         });
     }

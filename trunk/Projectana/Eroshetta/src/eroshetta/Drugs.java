@@ -300,7 +300,8 @@ public class Drugs implements Serializable {
 
     @Override
     public String toString() {
-        return "eroshetta.Drugs[ id=" + id + " ]";
+        return "eroshetta.Drugs[ id=" + id + " ]" + this.tradeName + this.className;
     }
+    
     
 }
