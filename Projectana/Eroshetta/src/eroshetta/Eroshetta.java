@@ -31,7 +31,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 //run methode
         this.jTextFieldSearchDrags.setText("");
         String query = this.jTextFieldSearchDrags.getText();
-        ArrayList<Drugs> finos = Eroshetta.drug_search(query);
+        final ArrayList<Drugs> finos = Eroshetta.drug_search(query);
         final ArrayList<String> s = new ArrayList();
             for(int i=0;i<finos.size();i++){
 //                this.jArrayList_Drugs.(finos.get(i).getTradeName());
@@ -41,8 +41,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 
             }
             jList_Drugs.setModel(new javax.swing.AbstractListModel() {
-    public int getSize() { return s.size(); }
-    public Object getElementAt(int i) { return s.get(i); }
+    public int getSize() { return finos.size(); }
+    public Object getElementAt(int i) { return finos.get(i); }
 });
             //
     }
@@ -94,6 +94,29 @@ public class Eroshetta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList_Drugs = new javax.swing.JList();
         drugProfile = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        drugTradeName = new javax.swing.JLabel();
+        drugGenericNames = new javax.swing.JLabel();
+        drugDosage = new javax.swing.JLabel();
+        dosageForm = new javax.swing.JLabel();
+        drugRoute = new javax.swing.JLabel();
+        drugPrecautions = new javax.swing.JLabel();
+        drugHalfLife = new javax.swing.JLabel();
+        drugMajor = new javax.swing.JLabel();
+        drugMinor = new javax.swing.JLabel();
+        drugFoods = new javax.swing.JLabel();
+        drugCustomName = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         editMenu = new javax.swing.JMenu();
@@ -367,20 +390,170 @@ public class Eroshetta extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList_Drugs.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList_DrugsValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList_Drugs);
 
         drugProfile.setBorder(javax.swing.BorderFactory.createTitledBorder("Drug profile"));
         drugProfile.setAutoscrolls(true);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel2.setText("Custom name:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel3.setText("Trade name:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel4.setText("Dosage:");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel5.setText("Dosage form:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel6.setText("Route of elimination:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel7.setText("Precautions:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel8.setText("Half life:");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel9.setText("Generic names:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel10.setText("Major side effects:");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel11.setText("Minor side effects:");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel12.setText("Interactive foods:");
+
+        drugTradeName.setText("jLabel14");
+
+        drugGenericNames.setText("jLabel15");
+
+        drugDosage.setText("jLabel16");
+
+        dosageForm.setText("jLabel17");
+
+        drugRoute.setText("jLabel18");
+
+        drugPrecautions.setText("jLabel19");
+
+        drugHalfLife.setText("jLabel20");
+
+        drugMajor.setText("jLabel21");
+
+        drugMinor.setText("jLabel22");
+
+        drugFoods.setText("jLabel23");
+
+        drugCustomName.setText("jLabel24");
+
         javax.swing.GroupLayout drugProfileLayout = new javax.swing.GroupLayout(drugProfile);
         drugProfile.setLayout(drugProfileLayout);
         drugProfileLayout.setHorizontalGroup(
             drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugFoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugGenericNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugDosage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dosageForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugRoute, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugPrecautions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugHalfLife, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugMajor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugMinor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugTradeName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(drugCustomName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         drugProfileLayout.setVerticalGroup(
             drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 233, Short.MAX_VALUE)
+            .addGroup(drugProfileLayout.createSequentialGroup()
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel13)
+                    .addComponent(drugCustomName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(drugTradeName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(drugGenericNames))
+                .addGap(2, 2, 2)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(drugDosage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(dosageForm))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(drugRoute))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(drugPrecautions))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(drugHalfLife))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(drugMajor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(drugMinor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(drugFoods))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
@@ -558,7 +731,7 @@ public class Eroshetta extends javax.swing.JFrame {
             finalResult.addAll(drugsTopWithTradeName);
 //            }
 //            if(allDrugs != new ArrayList()){
-//            finalResult.addAll(allDrugs);
+            finalResult.addAll(allDrugs);
 //            }
          for(int o=0;o<finalResult.size();o++){
              Drugs nowDrug = finalResult.get(o);
@@ -597,12 +770,12 @@ public class Eroshetta extends javax.swing.JFrame {
             System.out.println("ew3a ;)");
         for(int k =0;k<field.size();k++){
             try{
-             if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))){
+                  if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))){
 //            if(field.get(k).contains(query)){
             System.out.print(query);
             match.add(field.get(k));
             }
-            }catch(Exception e){
+            }catch(NullPointerException e){
                 
             }
                 
@@ -663,7 +836,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jTextFieldSearchDragsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchDragsKeyReleased
        String query = this.jTextFieldSearchDrags.getText();
-        ArrayList<Drugs> finos = Eroshetta.drug_search(query);
+        final ArrayList<Drugs> finos = Eroshetta.drug_search(query);
         final ArrayList<String> s = new ArrayList();
             for(int i=0;i<finos.size();i++){
 //                this.jArrayList_Drugs.(finos.get(i).getTradeName());
@@ -673,8 +846,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 
             }
             jList_Drugs.setModel(new javax.swing.AbstractListModel() {
-    public int getSize() { return s.size(); }
-    public Object getElementAt(int i) { return s.get(i); }
+    public int getSize() { return finos.size(); }
+    public Object getElementAt(int i) { return finos.get(i); }
 }); // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSearchDragsKeyReleased
 
@@ -689,49 +862,14 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSearchDragsActionPerformed
 
+    private void jList_DrugsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_DrugsValueChanged
+        // TODO add your handling code here:
+        Drugs d = (Drugs)this.jList_Drugs.getSelectedValue();
+        int  drugId = d.getId();
+        System.out.println(drugId);
+    }//GEN-LAST:event_jList_DrugsValueChanged
+
     
-	 public  void leapYearModification(){
-        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int selectedYear =(Integer) jComboBoxPatientProfileYear.getSelectedItem() ;
-        int selectedMonth = (Integer) jComboBoxPatientProfileMonth.getSelectedIndex() + 1;
-        boolean leapYearFlag;
-        DefaultComboBoxModel dayModelLeapYead = new DefaultComboBoxModel();
-        jComboBoxPatientProfileDay.setModel(dayModelLeapYead);
-       
-        if ((selectedYear % 4 == 0) && (selectedYear % 100 != 0) || (selectedYear % 400 == 0)) {
-            leapYearFlag = true;
-        } else {
-            leapYearFlag = false;
-        }
-        if(selectedMonth == 1 || selectedMonth ==3 || selectedMonth ==5||selectedMonth ==7||selectedMonth ==8||selectedMonth ==10||selectedMonth ==12 ){
-            for(int i=1; i<32; i++){
-                dayModelLeapYead.addElement(i);
-            }
-        }
-        else
-        {
-            if(selectedMonth == 4 || selectedMonth ==6 || selectedMonth ==9||selectedMonth ==11){
-                for(int i=1; i<31; i++){
-                    dayModelLeapYead.addElement(i);
-            }
-            }
-            else{
-                if(selectedMonth == 2 && leapYearFlag){
-                    for(int i=1; i<30; i++){
-                        dayModelLeapYead.addElement(i);
-                    }
-                }
-                else
-                {
-                    for(int i=1; i<29; i++){
-                        dayModelLeapYead.addElement(i);
-                    }
-                }
-            }
-        }
-    }
-	
-	
     public static void createPatients(){
         em.getTransaction().begin();
         for(int i=0; i<25; i++){
@@ -822,7 +960,18 @@ public class Eroshetta extends javax.swing.JFrame {
     static List <Patients> patientsBookList  = new ArrayList<Patients>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_Drugs;
+    private javax.swing.JLabel dosageForm;
+    private javax.swing.JLabel drugCustomName;
+    private javax.swing.JLabel drugDosage;
+    private javax.swing.JLabel drugFoods;
+    private javax.swing.JLabel drugGenericNames;
+    private javax.swing.JLabel drugHalfLife;
+    private javax.swing.JLabel drugMajor;
+    private javax.swing.JLabel drugMinor;
+    private javax.swing.JLabel drugPrecautions;
     private javax.swing.JPanel drugProfile;
+    private javax.swing.JLabel drugRoute;
+    private javax.swing.JLabel drugTradeName;
     private javax.swing.JMenuItem editDoctorProfile;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
@@ -833,6 +982,18 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxPatientProfilePregnant;
     private javax.swing.JComboBox jComboBoxPatientProfileYear;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelPatientProfileBMI;
     private javax.swing.JLabel jLabelPatientProfileBirthday;
     private javax.swing.JLabel jLabelPatientProfileCurrentMedication;
