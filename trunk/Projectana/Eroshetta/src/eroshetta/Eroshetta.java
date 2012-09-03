@@ -558,7 +558,7 @@ public class Eroshetta extends javax.swing.JFrame {
             finalResult.addAll(drugsTopWithTradeName);
 //            }
 //            if(allDrugs != new ArrayList()){
-            finalResult.addAll(allDrugs);
+//            finalResult.addAll(allDrugs);
 //            }
          for(int o=0;o<finalResult.size();o++){
              Drugs nowDrug = finalResult.get(o);
@@ -597,12 +597,12 @@ public class Eroshetta extends javax.swing.JFrame {
             System.out.println("ew3a ;)");
         for(int k =0;k<field.size();k++){
             try{
-//                  if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))){
-            if(field.get(k).contains(query)){
+             if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))){
+//            if(field.get(k).contains(query)){
             System.out.print(query);
             match.add(field.get(k));
             }
-            }catch(NullPointerException e){
+            }catch(Exception e){
                 
             }
                 
