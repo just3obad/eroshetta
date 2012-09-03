@@ -22,29 +22,33 @@ public class Eroshetta extends javax.swing.JFrame {
     /**
      * Creates new form Eroshetta
      */
-    
     final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
     static EntityManager em = emf.createEntityManager();
-    
+
     public Eroshetta() {
         initComponents();
-                //run methode
+        //run methode
         this.jTextFieldSearchDrags.setText("");
         String query = this.jTextFieldSearchDrags.getText();
         final ArrayList<Drugs> finos = Eroshetta.drug_search(query);
         final ArrayList<String> s = new ArrayList();
-            for(int i=0;i<finos.size();i++){
+        for (int i = 0; i < finos.size(); i++) {
 //                this.jArrayList_Drugs.(finos.get(i).getTradeName());
-                if(finos.get(i).getTradeName()!=null || finos.get(i).getClassName()!=null){
-                s.add(finos.get(i).getTradeName() + "("+finos.get(i).getClassName()+ ")");
-                }
-                
+            if (finos.get(i).getTradeName() != null || finos.get(i).getClassName() != null) {
+                s.add(finos.get(i).getTradeName() + "(" + finos.get(i).getClassName() + ")");
             }
-            jList_Drugs.setModel(new javax.swing.AbstractListModel() {
-    public int getSize() { return finos.size(); }
-    public Object getElementAt(int i) { return finos.get(i); }
-});
-            //
+
+        }
+        jList_Drugs.setModel(new javax.swing.AbstractListModel() {
+            public int getSize() {
+                return finos.size();
+            }
+
+            public Object getElementAt(int i) {
+                return finos.get(i);
+            }
+        });
+        //
     }
 
     /**
@@ -186,7 +190,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
         jPanelPatientOldPrescLayout.setHorizontalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,6 +253,11 @@ public class Eroshetta extends javax.swing.JFrame {
         for(int i=Calendar.getInstance().get(Calendar.YEAR); i>=1970; i--){
             modelComboBoxYear.addElement(i);
         }
+        jComboBoxPatientProfileYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPatientProfileYearActionPerformed(evt);
+            }
+        });
 
         jComboBoxPatientProfileMarital.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -553,7 +562,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(drugFoods))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
@@ -634,25 +643,21 @@ public class Eroshetta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jListPatientsBookKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jListPatientsBookKeyReleased
         // TODO add your handling code here:
-        
-        
     }//GEN-LAST:event_jListPatientsBookKeyReleased
 
     private void jTextFieldPatientsBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientsBookActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPatientsBookActionPerformed
 
-
     /**
      * @param args the command line arguments
      */
-    public static ArrayList<Drugs> drug_search(String s){
-        
+    public static ArrayList<Drugs> drug_search(String s) {
+
         //inserting all names in ArrayLists to search with piriority
 //        em.getTransaction().begin();
         Drugs example = new Drugs();
@@ -663,26 +668,26 @@ public class Eroshetta extends javax.swing.JFrame {
         ArrayList<String> tradeNames = new ArrayList();
         ArrayList<String> genericNames = new ArrayList();
         ArrayList<String> classNames = new ArrayList();
-    Query q = em.createNamedQuery("Drugs.findAll");
-    List<Drugs> allDrugsList =  q.getResultList();
-    ArrayList<Drugs> allDrugs = new ArrayList();
-    allDrugs.addAll(allDrugsList);
-    for(int i=0;i < allDrugs.size();i++){
-        tradeNames.add(allDrugs.get(i).getTradeName());
-        classNames.add(allDrugs.get(i).getClassName());
-        
-        q = em.createNamedQuery("GenericNames.findByDrugId").setParameter("drugId", allDrugs.get(i).getId());
-        List<GenericNames> tmpList =  q.getResultList();
-        ArrayList<GenericNames> tmp = new ArrayList();
-    tmp.addAll(tmpList);
+        Query q = em.createNamedQuery("Drugs.findAll");
+        List<Drugs> allDrugsList = q.getResultList();
+        ArrayList<Drugs> allDrugs = new ArrayList();
+        allDrugs.addAll(allDrugsList);
+        for (int i = 0; i < allDrugs.size(); i++) {
+            tradeNames.add(allDrugs.get(i).getTradeName());
+            classNames.add(allDrugs.get(i).getClassName());
+
+            q = em.createNamedQuery("GenericNames.findByDrugId").setParameter("drugId", allDrugs.get(i).getId());
+            List<GenericNames> tmpList = q.getResultList();
+            ArrayList<GenericNames> tmp = new ArrayList();
+            tmp.addAll(tmpList);
 //        g = l.get(i).getGenericNames();
-        for(int j=0; j<tmp.size();j++){
-            genericNames.add(tmp.get(j).getGenericName());
+            for (int j = 0; j < tmp.size(); j++) {
+                genericNames.add(tmp.get(j).getGenericName());
+            }
         }
-    }
-    System.out.println("trade names : "+tradeNames);
-         System.out.println("class names : "+classNames);
-         System.out.println("generic names : "+genericNames);
+        System.out.println("trade names : " + tradeNames);
+        System.out.println("class names : " + classNames);
+        System.out.println("generic names : " + genericNames);
         //stop ArrayListing
         ArrayList<String> tradeNamesTopResults = new <String>ArrayList();
         tradeNamesTopResults = Eroshetta.topResults(s, tradeNames);
@@ -694,93 +699,93 @@ public class Eroshetta extends javax.swing.JFrame {
         ArrayList<Drugs> drugsTopWithClassName = new <Drugs>ArrayList();
         ArrayList<Drugs> drugsTopWithGenericNames = new <Drugs>ArrayList();
         ArrayList<GenericNames> drugsWithCertainGeneric = new <Drugs>ArrayList();
-        
-        if(tradeNamesTopResults!=null){
-        for(int b=0;b < tradeNamesTopResults.size();b++){
-            q = em.createNamedQuery("Drugs.findByTradeName").setParameter("tradeName", tradeNamesTopResults.get(b));
+
+        if (tradeNamesTopResults != null) {
+            for (int b = 0; b < tradeNamesTopResults.size(); b++) {
+                q = em.createNamedQuery("Drugs.findByTradeName").setParameter("tradeName", tradeNamesTopResults.get(b));
 //            ArrayList<Drugs> resultSet = q.getResultArrayList();
-             drugsTopWithTradeName.addAll( q.getResultList());
-        }
-        }
-        if(classNamesTopResults!=null){
-        for(int b=0;b < classNamesTopResults.size();b++){
-            q = em.createNamedQuery("Drugs.findByClassName").setParameter("className", classNamesTopResults.get(b));
-            drugsTopWithClassName.addAll( q.getResultList());
-        }
-        }
-        if(genericNamesTopResults!=null){
-        for(int b=0;b < genericNamesTopResults.size();b++){
-            q = em.createNamedQuery("GenericNames.findByGenericName").setParameter("genericName", genericNamesTopResults.get(b));
-            List<GenericNames> drugsWithCertainGenericList  =  q.getResultList();
-            drugsWithCertainGeneric.addAll(drugsWithCertainGenericList);
-            for(int e=0;e < drugsWithCertainGeneric.size();e++){ 
-                Drugs d = em.find(Drugs.class, drugsWithCertainGeneric.get(e).getDrugId());
-                drugsTopWithGenericNames.add(d);
+                drugsTopWithTradeName.addAll(q.getResultList());
             }
         }
+        if (classNamesTopResults != null) {
+            for (int b = 0; b < classNamesTopResults.size(); b++) {
+                q = em.createNamedQuery("Drugs.findByClassName").setParameter("className", classNamesTopResults.get(b));
+                drugsTopWithClassName.addAll(q.getResultList());
+            }
+        }
+        if (genericNamesTopResults != null) {
+            for (int b = 0; b < genericNamesTopResults.size(); b++) {
+                q = em.createNamedQuery("GenericNames.findByGenericName").setParameter("genericName", genericNamesTopResults.get(b));
+                List<GenericNames> drugsWithCertainGenericList = q.getResultList();
+                drugsWithCertainGeneric.addAll(drugsWithCertainGenericList);
+                for (int e = 0; e < drugsWithCertainGeneric.size(); e++) {
+                    Drugs d = em.find(Drugs.class, drugsWithCertainGeneric.get(e).getDrugId());
+                    drugsTopWithGenericNames.add(d);
+                }
+            }
         }
 
-            ArrayList<Drugs> finalResult = new ArrayList();
-            if(drugsTopWithGenericNames != null){
+        ArrayList<Drugs> finalResult = new ArrayList();
+        if (drugsTopWithGenericNames != null) {
             drugsTopWithClassName.addAll(drugsTopWithGenericNames);
-            }
-            if(drugsTopWithClassName != null){
+        }
+        if (drugsTopWithClassName != null) {
             drugsTopWithTradeName.addAll(drugsTopWithClassName);
-            }
+        }
 //            if(drugsTopWithTradeName != null){
-            finalResult.addAll(drugsTopWithTradeName);
+        finalResult.addAll(drugsTopWithTradeName);
 //            }
 //            if(allDrugs != new ArrayList()){
-            finalResult.addAll(allDrugs);
+        finalResult.addAll(allDrugs);
 //            }
-         for(int o=0;o<finalResult.size();o++){
-             Drugs nowDrug = finalResult.get(o);
+        for (int o = 0; o < finalResult.size(); o++) {
+            Drugs nowDrug = finalResult.get(o);
 //             int existenceAndIndex = 0;
 //           if(finalResult.size()!=allDrugs.size()){
-             System.out.println("nowDrug ID" + o);
-               for(int i=finalResult.size()-1;i>o;i--){
-                   if(finalResult.get(i).getId()==nowDrug.getId()){
-                   finalResult.remove(i);
-                   System.out.println("the index wich" + i);
-                   }
-               }
-             System.out.println(finalResult);
+            System.out.println("nowDrug ID" + o);
+            for (int i = finalResult.size() - 1; i > o; i--) {
+                if (finalResult.get(i).getId() == nowDrug.getId()) {
+                    finalResult.remove(i);
+                    System.out.println("the index wich" + i);
+                }
+            }
+            System.out.println(finalResult);
 //                   if(finalResult.subList(o+1, finalResult.size()).contains(nowDrug)){
 //                   finalResult.remove(nowDrug);
 //                   
 //               }
-                  
+
 //               }
-               
+
 //           }
         }
-        
+
 //        }catch(NullPointerException e){
 //            System.out.println("Searching>>")
 //        }
 //         System.out.println("trade names : "+tradeNamesTopResults);
 //         System.out.println("class names : "+classNamesTopResults);
 //         System.out.println("generic names : "+genericNamesTopResults);
-       return finalResult;
+        return finalResult;
     }
-    public static ArrayList<String> topResults(String query, ArrayList<String> field){
+
+    public static ArrayList<String> topResults(String query, ArrayList<String> field) {
         ArrayList<String> match = new ArrayList();
-        System.out.println("fild is empty??"+field.isEmpty()+"with size"+field.size()+ "and attributes" + field);
-        if(field!=null){
+        System.out.println("fild is empty??" + field.isEmpty() + "with size" + field.size() + "and attributes" + field);
+        if (field != null) {
             System.out.println("ew3a ;)");
-        for(int k =0;k<field.size();k++){
-            try{
-                  if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))){
+            for (int k = 0; k < field.size(); k++) {
+                try {
+                    if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))) {
 //            if(field.get(k).contains(query)){
-            System.out.print(query);
-            match.add(field.get(k));
+                        System.out.print(query);
+                        match.add(field.get(k));
+                    }
+                } catch (NullPointerException e) {
+                }
+
             }
-            }catch(NullPointerException e){
-                
-            }
-                
-        }
-        
+
 //           if(match.size()<field.size()){
 //               for(int a =0;a<field.size();a++){
 //                   if(!match.contains(field.get(a))){
@@ -788,9 +793,9 @@ public class Eroshetta extends javax.swing.JFrame {
 //                   }
 //               }
 //           }
-               
-           }
-        System.out.println("matched is "+match);
+
+        }
+        System.out.println("matched is " + match);
         return match;
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -799,21 +804,21 @@ public class Eroshetta extends javax.swing.JFrame {
         patientsBookList = (List<Patients>) q.getResultList();
         DefaultListModel model = new DefaultListModel();
         jListPatientsBook.setModel(model);
-        for(int i=0; i<patientsBookList.size(); i++){
-            model.add(i,patientsBookList.get(i).getName());
+        for (int i = 0; i < patientsBookList.size(); i++) {
+            model.add(i, patientsBookList.get(i).getName());
         }
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jTextFieldPatientsBookKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientsBookKeyReleased
         // TODO add your handling code here:
         Query q = em.createNamedQuery("Patients.findByName");
-        q.setParameter("pName", jTextFieldPatientsBook.getText()+"%");
+        q.setParameter("pName", jTextFieldPatientsBook.getText() + "%");
         patientsBookList = (List<Patients>) q.getResultList();
         DefaultListModel model = new DefaultListModel();
         jListPatientsBook.setModel(model);
-        for(int i=0; i<patientsBookList.size(); i++){
-            model.add(i,patientsBookList.get(i).getName());
+        for (int i = 0; i < patientsBookList.size(); i++) {
+            model.add(i, patientsBookList.get(i).getName());
         }
     }//GEN-LAST:event_jTextFieldPatientsBookKeyReleased
 
@@ -827,35 +832,40 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jComboBoxPatientProfileMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileMonthActionPerformed
         // TODO add your handling code here:
+        this.leapYearModification();
     }//GEN-LAST:event_jComboBoxPatientProfileMonthActionPerformed
 
     private void jComboBoxPatientProfileDayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileDayMouseClicked
         // TODO add your handling code here:
-
     }//GEN-LAST:event_jComboBoxPatientProfileDayMouseClicked
 
     private void jTextFieldSearchDragsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchDragsKeyReleased
-       String query = this.jTextFieldSearchDrags.getText();
+        String query = this.jTextFieldSearchDrags.getText();
         final ArrayList<Drugs> finos = Eroshetta.drug_search(query);
         final ArrayList<String> s = new ArrayList();
-            for(int i=0;i<finos.size();i++){
+        for (int i = 0; i < finos.size(); i++) {
 //                this.jArrayList_Drugs.(finos.get(i).getTradeName());
-                if(finos.get(i).getTradeName()!=null || finos.get(i).getClassName()!=null){
-                s.add(finos.get(i).getTradeName() + "("+finos.get(i).getClassName()+ ")");
-                }
-                
+            if (finos.get(i).getTradeName() != null || finos.get(i).getClassName() != null) {
+                s.add(finos.get(i).getTradeName() + "(" + finos.get(i).getClassName() + ")");
             }
-            jList_Drugs.setModel(new javax.swing.AbstractListModel() {
-    public int getSize() { return finos.size(); }
-    public Object getElementAt(int i) { return finos.get(i); }
-}); // TODO add your handling code here:
+
+        }
+        jList_Drugs.setModel(new javax.swing.AbstractListModel() {
+            public int getSize() {
+                return finos.size();
+            }
+
+            public Object getElementAt(int i) {
+                return finos.get(i);
+            }
+        }); // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSearchDragsKeyReleased
 
     private void editDoctorProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDoctorProfileActionPerformed
         // TODO add your handling code here:
         DoctorInfo info = new DoctorInfo();
         info.setVisible(true);
-        info.setDefaultCloseOperation(info.EXIT_ON_CLOSE); 
+        info.setDefaultCloseOperation(info.EXIT_ON_CLOSE);
     }//GEN-LAST:event_editDoctorProfileActionPerformed
 
     private void jTextFieldSearchDragsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchDragsActionPerformed
@@ -864,31 +874,72 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jList_DrugsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_DrugsValueChanged
         // TODO add your handling code here:
-        Drugs d = (Drugs)this.jList_Drugs.getSelectedValue();
-        int  drugId = d.getId();
+        Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
+        int drugId = d.getId();
         System.out.println(drugId);
     }//GEN-LAST:event_jList_DrugsValueChanged
 
-    
-    public static void createPatients(){
-        em.getTransaction().begin();
-        for(int i=0; i<25; i++){
-            
-            Patients p = new Patients();
-            p.setName("Patient"+ i);
-            em.persist(p);
-            
+    private void jComboBoxPatientProfileYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileYearActionPerformed
+        // TODO add your handling code here:
+        this.leapYearModification();
+        
+    }//GEN-LAST:event_jComboBoxPatientProfileYearActionPerformed
+
+    public void leapYearModification() {
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int selectedYear = (Integer) jComboBoxPatientProfileYear.getSelectedItem();
+        int selectedMonth = (Integer) jComboBoxPatientProfileMonth.getSelectedIndex() + 1;
+        boolean leapYearFlag;
+        DefaultComboBoxModel dayModelLeapYead = new DefaultComboBoxModel();
+        jComboBoxPatientProfileDay.setModel(dayModelLeapYead);
+
+        if ((selectedYear % 4 == 0) && (selectedYear % 100 != 0) || (selectedYear % 400 == 0)) {
+            leapYearFlag = true;
+        } else {
+            leapYearFlag = false;
         }
-        
-        em.getTransaction().commit();
-        
+        if (selectedMonth == 1 || selectedMonth == 3 || selectedMonth == 5 || selectedMonth == 7 || selectedMonth == 8 || selectedMonth == 10 || selectedMonth == 12) {
+            for (int i = 1; i < 32; i++) {
+                dayModelLeapYead.addElement(i);
+            }
+        } else {
+            if (selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9 || selectedMonth == 11) {
+                for (int i = 1; i < 31; i++) {
+                    dayModelLeapYead.addElement(i);
+                }
+            } else {
+                if (selectedMonth == 2 && leapYearFlag) {
+                    for (int i = 1; i < 30; i++) {
+                        dayModelLeapYead.addElement(i);
+                    }
+                } else {
+                    for (int i = 1; i < 29; i++) {
+                        dayModelLeapYead.addElement(i);
+                    }
+                }
+            }
+        }
     }
-    
-    public static void findAllPatients(){
-       
+
+    public static void createPatients() {
+        em.getTransaction().begin();
+        for (int i = 0; i < 25; i++) {
+
+            Patients p = new Patients();
+            p.setName("Patient" + i);
+            em.persist(p);
+
+        }
+
+        em.getTransaction().commit();
+
+    }
+
+    public static void findAllPatients() {
+
         Query q = em.createNamedQuery("Patients.findByName");
         q.setParameter("pName", "P%");
-        
+
         patientsBookList = (List<Patients>) q.getResultList();
 //         System.out.println();
 //         Patients p = l.get(0);
@@ -896,9 +947,9 @@ public class Eroshetta extends javax.swing.JFrame {
 //         System.out.println(l.get(0));
 //         System.out.println(patientsBookList.toString());
         System.out.println(patientsBookList.size());
-         
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -934,30 +985,28 @@ public class Eroshetta extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
-                Eroshetta e =  new Eroshetta();
+                Eroshetta e = new Eroshetta();
                 e.setVisible(true);
 //                e.setExtendedState(Frame.MAXIMIZED_BOTH);
-                
+
             }
         });
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
 //        createPatients();
         findAllPatients();
 //        em.close();
 //        emf.close();
-        
-        
-        
+
+
+
     }
-    
-    static List <Patients> patientsBookList  = new ArrayList<Patients>();
+    static List<Patients> patientsBookList = new ArrayList<Patients>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_Drugs;
     private javax.swing.JLabel dosageForm;

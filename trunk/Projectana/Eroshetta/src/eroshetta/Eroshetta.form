@@ -210,7 +210,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="361" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="353" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -443,6 +443,9 @@
                       <Connection code="modelComboBoxYear&#xa;    " type="code"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxPatientProfileYearActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="for(int i=Calendar.getInstance().get(Calendar.YEAR); i&gt;=1970; i--){&#xa;        modelComboBoxYear.addElement(i);&#xa;    }"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultComboBoxModel modelComboBoxYear = new DefaultComboBoxModel();"/>
@@ -712,7 +715,7 @@
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="drugFoods" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                              <EmptySpace pref="17" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
