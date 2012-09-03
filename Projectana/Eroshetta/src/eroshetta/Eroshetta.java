@@ -22,13 +22,28 @@ public class Eroshetta extends javax.swing.JFrame {
      * Creates new form Eroshetta
      */
     
-    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
+    final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
     static EntityManager em = emf.createEntityManager();
     
     public Eroshetta() {
-        
-
         initComponents();
+                //run methode
+        this.jTextFieldSearchDrags.setText("");
+        String query = this.jTextFieldSearchDrags.getText();
+        ArrayList<Drugs> finos = Eroshetta.drug_search(query);
+        final ArrayList<String> s = new ArrayList();
+            for(int i=0;i<finos.size();i++){
+//                this.jArrayList_Drugs.(finos.get(i).getTradeName());
+                if(finos.get(i).getTradeName()!=null || finos.get(i).getClassName()!=null){
+                s.add(finos.get(i).getTradeName() + "("+finos.get(i).getClassName()+ ")");
+                }
+                
+            }
+            jList_Drugs.setModel(new javax.swing.AbstractListModel() {
+    public int getSize() { return s.size(); }
+    public Object getElementAt(int i) { return s.get(i); }
+});
+            //
     }
 
     /**
@@ -69,6 +84,12 @@ public class Eroshetta extends javax.swing.JFrame {
         jTextFieldPatientProfileWeight = new javax.swing.JTextField();
         jTextFieldPatientProfileHeight = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
+        Panel_Drugs = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldSearchDrags = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList_Drugs = new javax.swing.JList();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Eroshetta");
@@ -128,7 +149,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
         jPanelPatientOldPrescLayout.setHorizontalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,15 +333,72 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Patient Profile", jPanel3);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Drugs");
+
+        jTextFieldSearchDrags.setText("jTextField1");
+        jTextFieldSearchDrags.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldSearchDragsKeyReleased(evt);
+            }
+        });
+
+        jList_Drugs.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList_Drugs);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Drug profile"));
+        jPanel2.setAutoscrolls(true);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 222, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
+        Panel_Drugs.setLayout(Panel_DrugsLayout);
+        Panel_DrugsLayout.setHorizontalGroup(
+            Panel_DrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_DrugsLayout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jLabel1)
+                .addContainerGap(117, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        Panel_DrugsLayout.setVerticalGroup(
+            Panel_DrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_DrugsLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 416, Short.MAX_VALUE)
+                .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
+            .addComponent(Panel_Drugs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("New Prescription", jPanel5);
@@ -360,6 +438,152 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPatientsBookActionPerformed
 
+
+    /**
+     * @param args the command line arguments
+     */
+    public static ArrayList<Drugs> drug_search(String s){
+        
+        //inserting all names in ArrayLists to search with piriority
+//        em.getTransaction().begin();
+        Drugs example = new Drugs();
+        example.setClassName("class Name");
+        example.setClassName("trade Name");
+        example.setClassName("generic Name");
+        em.persist(example);
+        ArrayList<String> tradeNames = new ArrayList();
+        ArrayList<String> genericNames = new ArrayList();
+        ArrayList<String> classNames = new ArrayList();
+    Query q = em.createNamedQuery("Drugs.findAll");
+    List<Drugs> allDrugsList =  q.getResultList();
+    ArrayList<Drugs> allDrugs = new ArrayList();
+    allDrugs.addAll(allDrugsList);
+    for(int i=0;i < allDrugs.size();i++){
+        tradeNames.add(allDrugs.get(i).getTradeName());
+        classNames.add(allDrugs.get(i).getClassName());
+        
+        q = em.createNamedQuery("GenericNames.findByDrugId").setParameter("drugId", allDrugs.get(i).getId());
+        List<GenericNames> tmpList =  q.getResultList();
+        ArrayList<GenericNames> tmp = new ArrayList();
+    tmp.addAll(tmpList);
+//        g = l.get(i).getGenericNames();
+        for(int j=0; j<tmp.size();j++){
+            genericNames.add(tmp.get(j).getGenericName());
+        }
+    }
+    System.out.println("trade names : "+tradeNames);
+         System.out.println("class names : "+classNames);
+         System.out.println("generic names : "+genericNames);
+        //stop ArrayListing
+        ArrayList<String> tradeNamesTopResults = new <String>ArrayList();
+        tradeNamesTopResults = Eroshetta.topResults(s, tradeNames);
+        ArrayList<String> classNamesTopResults = new <String>ArrayList();
+        classNamesTopResults = Eroshetta.topResults(s, classNames);
+        ArrayList<String> genericNamesTopResults = new <String>ArrayList();
+        genericNamesTopResults = Eroshetta.topResults(s, genericNames);
+        ArrayList<Drugs> drugsTopWithTradeName = new <Drugs>ArrayList();
+        ArrayList<Drugs> drugsTopWithClassName = new <Drugs>ArrayList();
+        ArrayList<Drugs> drugsTopWithGenericNames = new <Drugs>ArrayList();
+        ArrayList<GenericNames> drugsWithCertainGeneric = new <Drugs>ArrayList();
+        
+        if(tradeNamesTopResults!=null){
+        for(int b=0;b < tradeNamesTopResults.size();b++){
+            q = em.createNamedQuery("Drugs.findByTradeName").setParameter("tradeName", tradeNamesTopResults.get(b));
+//            ArrayList<Drugs> resultSet = q.getResultArrayList();
+             drugsTopWithTradeName.addAll( q.getResultList());
+        }
+        }
+        if(classNamesTopResults!=null){
+        for(int b=0;b < classNamesTopResults.size();b++){
+            q = em.createNamedQuery("Drugs.findByClassName").setParameter("className", classNamesTopResults.get(b));
+            drugsTopWithClassName.addAll( q.getResultList());
+        }
+        }
+        if(genericNamesTopResults!=null){
+        for(int b=0;b < genericNamesTopResults.size();b++){
+            q = em.createNamedQuery("GenericNames.findByGenericName").setParameter("genericName", genericNamesTopResults.get(b));
+            List<GenericNames> drugsWithCertainGenericList  =  q.getResultList();
+            drugsWithCertainGeneric.addAll(drugsWithCertainGenericList);
+            for(int e=0;e < drugsWithCertainGeneric.size();e++){ 
+                Drugs d = em.find(Drugs.class, drugsWithCertainGeneric.get(e).getDrugId());
+                drugsTopWithGenericNames.add(d);
+            }
+        }
+        }
+
+            ArrayList<Drugs> finalResult = new ArrayList();
+            if(drugsTopWithGenericNames != null){
+            drugsTopWithClassName.addAll(drugsTopWithGenericNames);
+            }
+            if(drugsTopWithClassName != null){
+            drugsTopWithTradeName.addAll(drugsTopWithClassName);
+            }
+//            if(drugsTopWithTradeName != null){
+            finalResult.addAll(drugsTopWithTradeName);
+//            }
+//            if(allDrugs != new ArrayList()){
+            finalResult.addAll(allDrugs);
+//            }
+         for(int o=0;o<finalResult.size();o++){
+             Drugs nowDrug = finalResult.get(o);
+//             int existenceAndIndex = 0;
+//           if(finalResult.size()!=allDrugs.size()){
+             System.out.println("nowDrug ID" + o);
+               for(int i=finalResult.size()-1;i>o;i--){
+                   if(finalResult.get(i).getId()==nowDrug.getId()){
+                   finalResult.remove(i);
+                   System.out.println("the index wich" + i);
+                   }
+               }
+             System.out.println(finalResult);
+//                   if(finalResult.subList(o+1, finalResult.size()).contains(nowDrug)){
+//                   finalResult.remove(nowDrug);
+//                   
+//               }
+                  
+//               }
+               
+//           }
+        }
+        
+//        }catch(NullPointerException e){
+//            System.out.println("Searching>>")
+//        }
+//         System.out.println("trade names : "+tradeNamesTopResults);
+//         System.out.println("class names : "+classNamesTopResults);
+//         System.out.println("generic names : "+genericNamesTopResults);
+       return finalResult;
+    }
+    public static ArrayList<String> topResults(String query, ArrayList<String> field){
+        ArrayList<String> match = new ArrayList();
+        System.out.println("fild is empty??"+field.isEmpty()+"with size"+field.size()+ "and attributes" + field);
+        if(field!=null){
+            System.out.println("ew3a ;)");
+        for(int k =0;k<field.size();k++){
+            try{
+//                  if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))){
+            if(field.get(k).contains(query)){
+            System.out.print(query);
+            match.add(field.get(k));
+            }
+            }catch(NullPointerException e){
+                
+            }
+                
+        }
+        
+//           if(match.size()<field.size()){
+//               for(int a =0;a<field.size();a++){
+//                   if(!match.contains(field.get(a))){
+//                       match.add(field.get(a));
+//                   }
+//               }
+//           }
+               
+           }
+        System.out.println("matched is "+match);
+        return match;
+    }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         Query q = em.createNamedQuery("Patients.findAll");
@@ -400,6 +624,23 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jComboBoxPatientProfileDayMouseClicked
+
+    private void jTextFieldSearchDragsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchDragsKeyReleased
+       String query = this.jTextFieldSearchDrags.getText();
+        ArrayList<Drugs> finos = Eroshetta.drug_search(query);
+        final ArrayList<String> s = new ArrayList();
+            for(int i=0;i<finos.size();i++){
+//                this.jArrayList_Drugs.(finos.get(i).getTradeName());
+                if(finos.get(i).getTradeName()!=null || finos.get(i).getClassName()!=null){
+                s.add(finos.get(i).getTradeName() + "("+finos.get(i).getClassName()+ ")");
+                }
+                
+            }
+            jList_Drugs.setModel(new javax.swing.AbstractListModel() {
+    public int getSize() { return s.size(); }
+    public Object getElementAt(int i) { return s.get(i); }
+}); // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSearchDragsKeyReleased
 
     
     public static void createPatients(){
@@ -491,12 +732,14 @@ public class Eroshetta extends javax.swing.JFrame {
     
     static List <Patients> patientsBookList  = new ArrayList<Patients>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Panel_Drugs;
     private javax.swing.JComboBox jComboBoxPatientProfileDay;
     private javax.swing.JComboBox jComboBoxPatientProfileGender;
     private javax.swing.JComboBox jComboBoxPatientProfileMarital;
     private javax.swing.JComboBox jComboBoxPatientProfileMonth;
     private javax.swing.JComboBox jComboBoxPatientProfilePregnant;
     private javax.swing.JComboBox jComboBoxPatientProfileYear;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelPatientProfileBMI;
     private javax.swing.JLabel jLabelPatientProfileBirthday;
     private javax.swing.JLabel jLabelPatientProfileCurrentMedication;
@@ -508,11 +751,14 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPatientProfilePregnant;
     private javax.swing.JLabel jLabelPatientProfileWeight;
     private javax.swing.JList jListPatientsBook;
+    private javax.swing.JList jList_Drugs;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanelPatientOldPresc;
     private javax.swing.JPanel jPanelPatientProfile;
     private javax.swing.JPanel jPanelPatientsBook;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPanePatientsBook;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextFieldPatientProfileBMI;
@@ -520,5 +766,6 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldPatientProfileName;
     private javax.swing.JTextField jTextFieldPatientProfileWeight;
     private javax.swing.JTextField jTextFieldPatientsBook;
+    private javax.swing.JTextField jTextFieldSearchDrags;
     // End of variables declaration//GEN-END:variables
 }
