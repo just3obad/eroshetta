@@ -11,6 +11,7 @@ import java.util.*;
 import javax.persistence.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 
 /**
  *
@@ -55,6 +56,9 @@ public class Eroshetta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jPanelPatientsBook = new javax.swing.JPanel();
         jScrollPanePatientsBook = new javax.swing.JScrollPane();
         jListPatientsBook = new javax.swing.JList();
@@ -90,6 +94,16 @@ public class Eroshetta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList_Drugs = new javax.swing.JList();
         jPanel2 = new javax.swing.JPanel();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        editMenu = new javax.swing.JMenu();
+        editDoctorProfile = new javax.swing.JMenuItem();
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Eroshetta");
@@ -361,7 +375,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 222, Short.MAX_VALUE)
+            .addGap(0, 226, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
@@ -403,6 +417,23 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("New Prescription", jPanel5);
 
+        fileMenu.setText("File");
+        jMenuBar2.add(fileMenu);
+
+        editMenu.setText("Edit");
+
+        editDoctorProfile.setText("Profile");
+        editDoctorProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editDoctorProfileActionPerformed(evt);
+            }
+        });
+        editMenu.add(editDoctorProfile);
+
+        jMenuBar2.add(editMenu);
+
+        setJMenuBar(jMenuBar2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -418,7 +449,7 @@ public class Eroshetta extends javax.swing.JFrame {
             .addComponent(jPanelPatientsBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pack();
@@ -642,6 +673,13 @@ public class Eroshetta extends javax.swing.JFrame {
 }); // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSearchDragsKeyReleased
 
+    private void editDoctorProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDoctorProfileActionPerformed
+        // TODO add your handling code here:
+        DoctorInfo info = new DoctorInfo();
+        info.setVisible(true);
+        info.setDefaultCloseOperation(info.EXIT_ON_CLOSE); 
+    }//GEN-LAST:event_editDoctorProfileActionPerformed
+
     
     public static void createPatients(){
         em.getTransaction().begin();
@@ -733,6 +771,9 @@ public class Eroshetta extends javax.swing.JFrame {
     static List <Patients> patientsBookList  = new ArrayList<Patients>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_Drugs;
+    private javax.swing.JMenuItem editDoctorProfile;
+    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JComboBox jComboBoxPatientProfileDay;
     private javax.swing.JComboBox jComboBoxPatientProfileGender;
     private javax.swing.JComboBox jComboBoxPatientProfileMarital;
@@ -752,6 +793,10 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPatientProfileWeight;
     private javax.swing.JList jListPatientsBook;
     private javax.swing.JList jList_Drugs;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
