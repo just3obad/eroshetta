@@ -171,6 +171,11 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jListPatientsBook.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         jListPatientsBook.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jListPatientsBook.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListPatientsBookValueChanged(evt);
+            }
+        });
         jListPatientsBook.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jListPatientsBookKeyReleased(evt);
@@ -217,7 +222,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
         jPanelPatientOldPrescLayout.setHorizontalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
+            .addGap(0, 383, Short.MAX_VALUE)
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -778,7 +783,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(jLabel15)
-                        .addGap(0, 115, Short.MAX_VALUE)))
+                        .addGap(0, 137, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -817,10 +822,11 @@ public class Eroshetta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelPatientsBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1073,6 +1079,16 @@ public class Eroshetta extends javax.swing.JFrame {
         this.leapYearModification();
         
     }//GEN-LAST:event_jComboBoxPatientProfileYearActionPerformed
+
+    private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
+// azon ya 3obad you will need this method for profile, me too for prescriptions
+        Patients p = (Patients)this.jListPatientsBook.getSelectedValue();
+        this.PatientName.setText(p.getName());
+        this.PatientBirthDate.setText(p.getBirthDate().toString());
+        this.PatientNextVisit.setText(p.getNextVisit().toString());
+        //that is it
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jListPatientsBookValueChanged
 
     public void leapYearModification() {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
