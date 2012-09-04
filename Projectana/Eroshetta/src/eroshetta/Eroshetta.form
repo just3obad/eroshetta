@@ -688,6 +688,11 @@
                               <Component id="drugClassName" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="addToPresc" min="-2" pref="241" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -748,7 +753,9 @@
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="drugFoods" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="43" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="addToPresc" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -895,6 +902,14 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugClassName">
+                    </Component>
+                    <Component class="javax.swing.JButton" name="addToPresc">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Add to Prescription"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addToPrescActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
