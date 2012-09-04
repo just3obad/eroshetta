@@ -920,9 +920,9 @@ public class Eroshetta extends javax.swing.JFrame {
                 genericNames.add(tmp.get(j).getGenericName());
             }
         }
-        System.out.println("trade names : " + tradeNames);
-        System.out.println("class names : " + classNames);
-        System.out.println("generic names : " + genericNames);
+//        System.out.println("trade names : " + tradeNames);
+//        System.out.println("class names : " + classNames);
+//        System.out.println("generic names : " + genericNames);
         //stop ArrayListing
         ArrayList<String> tradeNamesTopResults = new <String>ArrayList();
         tradeNamesTopResults = Eroshetta.topResults(s, tradeNames);
@@ -977,14 +977,14 @@ public class Eroshetta extends javax.swing.JFrame {
             Drugs nowDrug = finalResult.get(o);
 //             int existenceAndIndex = 0;
 //           if(finalResult.size()!=allDrugs.size()){
-            System.out.println("nowDrug ID" + o);
+//            System.out.println("nowDrug ID" + o);
             for (int i = finalResult.size() - 1; i > o; i--) {
                 if (finalResult.get(i).getId() == nowDrug.getId()) {
                     finalResult.remove(i);
-                    System.out.println("the index wich" + i);
+//                    System.out.println("the index wich" + i);
                 }
             }
-            System.out.println(finalResult);
+//            System.out.println(finalResult);
 //                   if(finalResult.subList(o+1, finalResult.size()).contains(nowDrug)){
 //                   finalResult.remove(nowDrug);
 //                   
@@ -1006,14 +1006,14 @@ public class Eroshetta extends javax.swing.JFrame {
 
     public static ArrayList<String> topResults(String query, ArrayList<String> field) {
         ArrayList<String> match = new ArrayList();
-        System.out.println("fild is empty??" + field.isEmpty() + "with size" + field.size() + "and attributes" + field);
+//        System.out.println("fild is empty??" + field.isEmpty() + "with size" + field.size() + "and attributes" + field);
         if (field != null) {
-            System.out.println("ew3a ;)");
+//            System.out.println("ew3a ;)");
             for (int k = 0; k < field.size(); k++) {
                 try {
                     if (query.equalsIgnoreCase(field.get(k).substring(0, query.length()))) {
 //            if(field.get(k).contains(query)){
-                        System.out.print(query);
+//                        System.out.print(query);
                         match.add(field.get(k));
                     }
                 } catch (Exception e) {
@@ -1030,7 +1030,7 @@ public class Eroshetta extends javax.swing.JFrame {
 //           }
 
         }
-        System.out.println("matched is " + match);
+//        System.out.println("matched is " + match);
         return match;
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1105,7 +1105,7 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
         Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
         int drugId = d.getId();
-        System.out.println(drugId);
+//        System.out.println(drugId);
     }//GEN-LAST:event_jList_DrugsValueChanged
 
     private void jComboBoxPatientProfileYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileYearActionPerformed
@@ -1226,6 +1226,18 @@ public class Eroshetta extends javax.swing.JFrame {
 
     }
 
+    
+    public static void getCurrentMedications(){
+        Query q = em.createNamedQuery("Patients.findById");
+        q.setParameter("id", 1);
+        List l = (List<Patients>) q.getResultList();
+        Patients p =(Patients) l.get(0);
+        List patientDrugList = (List) p.getDrugsCollection();
+        Drugs d = (Drugs) patientDrugList.get(0);
+        
+        System.out.println(d.getTradeName());
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -1275,7 +1287,9 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
 //       createPatients();
-        findAllPatients();
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        getCurrentMedications();
+//        findAllPatients();
 //        em.close();
 //        emf.close();
 
