@@ -36,6 +36,8 @@ public class DrugPresPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Drug Name"));
+        setMaximumSize(new java.awt.Dimension(267, 113));
+        setMinimumSize(new java.awt.Dimension(267, 113));
 
         jCheckBox1.setText("Before meal");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
