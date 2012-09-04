@@ -59,6 +59,11 @@ public class DrugPresPanel extends javax.swing.JPanel {
         DrugDosage.setText("jLabel3");
 
         jButton1.setText("X");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -84,8 +89,7 @@ public class DrugPresPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox2)
                         .addGap(18, 18, 18)
-                        .addComponent(jCheckBox3)
-                        .addGap(0, 54, Short.MAX_VALUE))))
+                        .addComponent(jCheckBox3))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +120,14 @@ public class DrugPresPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DrugDosage;
-    private javax.swing.JLabel DrugPrice;
+    public javax.swing.JLabel DrugDosage;
+    public javax.swing.JLabel DrugPrice;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
