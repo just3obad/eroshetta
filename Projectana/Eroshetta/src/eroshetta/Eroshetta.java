@@ -48,17 +48,18 @@ public class Eroshetta extends javax.swing.JFrame {
                 return finos.get(i);
             }
         });
-        // doctor attributes malaksh da3wa beha for prescription
-//        Query qr = em.createNamedQuery("Doctor.findAll");
-//        List <Doctor> tmpList = qr.getResultList();
-//        Doctor d = tmpList.get(0);
-//        this.DoctorName.setText("Dr."+ d.getName());
-//        this.DoctorAddresse.setText("Addresse : "+d.getAddress());
-//        this.DoctorMobileNo.setText("Mobile no : "+d.getMobileNo().toString());
-//        this.DoctorOfficeNo.setText("Office no : "+d.getOfficeNo().toString());
-//        // a5erha
-//        //for prescription
-//        this.DrugsInPrescription.setLayout(new java.awt.BorderLayout(1,100));
+        try {
+             // doctor attributes malaksh da3wa beha for prescription
+        Query qr = em.createNamedQuery("Doctor.findAll");
+        List <Doctor> tmpList = qr.getResultList();
+        Doctor d = tmpList.get(0);
+        this.DoctorName.setText("Dr."+ d.getName());
+        this.DoctorAddresse.setText("Addresse : "+d.getAddress());
+        this.DoctorMobileNo.setText("Mobile no : "+d.getMobileNo().toString());
+        this.DoctorOfficeNo.setText("Office no : "+d.getOfficeNo().toString());
+        // a5erha
+        //for prescription
+        this.DrugsInPrescription.setLayout(new java.awt.BorderLayout(1,100));
 //        final javax.swing.JPanel panel = new javax.swing.JPanel(new java.awt.GridLayout(0,1));
 //        javax.swing.JScrollPane editorScroll = new javax.swing.JScrollPane(panel);
 //        editorScroll.setPreferredSize(new java.awt.Dimension(30,100));
@@ -66,6 +67,8 @@ public class Eroshetta extends javax.swing.JFrame {
 //        editorScroll.setVisible(true);
 //        this.jPanelPrescription.add(editorScroll);
 //        javax.swing.JScrollPane sp = new javax.swing.JScrollPane(jt);
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -187,6 +190,13 @@ public class Eroshetta extends javax.swing.JFrame {
             }
         });
         jScrollPanePatientsBook.setViewportView(jListPatientsBook);
+        Query q = em.createNamedQuery("Patients.findAll");
+        patientsBookList = (List<Patients>) q.getResultList();
+        DefaultListModel model = new DefaultListModel();
+        jListPatientsBook.setModel(model);
+        for (int i = 0; i < patientsBookList.size(); i++) {
+            model.add(i, patientsBookList.get(i).getName());
+        }
 
         jTextFieldPatientsBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +241,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 468, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanelPatientProfile.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -418,7 +428,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addComponent(jLabelPatientProfileCurrentMedication)
                 .addGap(104, 104, 104)
                 .addComponent(jLabelPatientProfileDiagnosis)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -434,11 +444,10 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanelPatientOldPresc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 64, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelPatientOldPresc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1042,13 +1051,7 @@ public class Eroshetta extends javax.swing.JFrame {
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        Query q = em.createNamedQuery("Patients.findAll");
-        patientsBookList = (List<Patients>) q.getResultList();
-        DefaultListModel model = new DefaultListModel();
-        jListPatientsBook.setModel(model);
-        for (int i = 0; i < patientsBookList.size(); i++) {
-            model.add(i, patientsBookList.get(i).getName());
-        }
+       
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -1129,12 +1132,23 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
 // azon ya 3obad you will need this method for profile, me too for prescriptions
-        Patients p = (Patients)this.jListPatientsBook.getSelectedValue();
-        this.PatientName.setText(p.getName());
-        this.PatientBirthDate.setText(p.getBirthDate().toString());
-        this.PatientNextVisit.setText(p.getNextVisit().toString());
+
         //that is it
         // TODO add your handling code here:
+        int selctedID = jListPatientsBook.getSelectedIndex();
+        currentPatient = patientsBookList.get(selctedID);
+        System.out.println(currentPatient);
+            if(currentPatient.getName() != null){
+            this.PatientName.setText(currentPatient.getName());
+            }
+            if(currentPatient.getBirthDate() != null){
+            this.PatientBirthDate.setText(currentPatient.getBirthDate().toString());
+            }
+            if(currentPatient.getNextVisit() != null){
+            this.PatientNextVisit.setText(currentPatient.getNextVisit().toString());
+            }
+         
+      
     }//GEN-LAST:event_jListPatientsBookValueChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1252,7 +1266,6 @@ public class Eroshetta extends javax.swing.JFrame {
 //         System.out.println(p.getName());
 //         System.out.println(l.get(0));
 //         System.out.println(patientsBookList.toString());
-        System.out.println(patientsBookList.size());
 
     }
 
@@ -1304,7 +1317,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
 
-//        createPatients();
+//       createPatients();
         findAllPatients();
 //        em.close();
 //        emf.close();
@@ -1313,6 +1326,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
     }
     static List<Patients> patientsBookList = new ArrayList<Patients>();
+    static Patients currentPatient;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DoctorAddresse;
     private javax.swing.JLabel DoctorMobileNo;
