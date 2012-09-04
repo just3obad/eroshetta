@@ -121,6 +121,20 @@ public class Eroshetta extends javax.swing.JFrame {
         drugMinor = new javax.swing.JLabel();
         drugFoods = new javax.swing.JLabel();
         drugCustomName = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jPanelPrescription = new javax.swing.JPanel();
+        jPanelDoctorCredentials = new javax.swing.JPanel();
+        DoctorName = new javax.swing.JLabel();
+        DoctorMobileNo = new javax.swing.JLabel();
+        DoctorAddresse = new javax.swing.JLabel();
+        DoctorOfficeNo = new javax.swing.JLabel();
+        jPanelDoctorCredentials1 = new javax.swing.JPanel();
+        PatientName = new javax.swing.JLabel();
+        PatientNextVisit = new javax.swing.JLabel();
+        PatientBirthDate = new javax.swing.JLabel();
+        DoctorOfficeNo1 = new javax.swing.JLabel();
+        DoctorOfficeNo2 = new javax.swing.JLabel();
+        DoctorOfficeNo3 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         editMenu = new javax.swing.JMenu();
@@ -190,7 +204,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
         jPanelPatientOldPrescLayout.setHorizontalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 353, Short.MAX_VALUE)
+            .addGap(0, 361, Short.MAX_VALUE)
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,6 +478,8 @@ public class Eroshetta extends javax.swing.JFrame {
 
         drugCustomName.setText("jLabel24");
 
+        jButton1.setText("+");
+
         javax.swing.GroupLayout drugProfileLayout = new javax.swing.GroupLayout(drugProfile);
         drugProfile.setLayout(drugProfileLayout);
         drugProfileLayout.setHorizontalGroup(
@@ -487,7 +503,7 @@ public class Eroshetta extends javax.swing.JFrame {
             .addGroup(drugProfileLayout.createSequentialGroup()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(drugRoute, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(drugRoute, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
             .addGroup(drugProfileLayout.createSequentialGroup()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -513,7 +529,9 @@ public class Eroshetta extends javax.swing.JFrame {
             .addGroup(drugProfileLayout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(drugCustomName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(drugCustomName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         drugProfileLayout.setVerticalGroup(
             drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -521,7 +539,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel13)
-                    .addComponent(drugCustomName))
+                    .addComponent(drugCustomName)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -562,7 +581,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(drugFoods))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
@@ -589,17 +608,131 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addComponent(drugProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelPrescription.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanelPrescription.setAutoscrolls(true);
+
+        jPanelDoctorCredentials.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        DoctorName.setText("jLabel14");
+
+        DoctorMobileNo.setText("jLabel14");
+
+        DoctorAddresse.setText("jLabel14");
+
+        DoctorOfficeNo.setText("jLabel14");
+
+        javax.swing.GroupLayout jPanelDoctorCredentialsLayout = new javax.swing.GroupLayout(jPanelDoctorCredentials);
+        jPanelDoctorCredentials.setLayout(jPanelDoctorCredentialsLayout);
+        jPanelDoctorCredentialsLayout.setHorizontalGroup(
+            jPanelDoctorCredentialsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDoctorCredentialsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelDoctorCredentialsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DoctorName)
+                    .addGroup(jPanelDoctorCredentialsLayout.createSequentialGroup()
+                        .addComponent(DoctorMobileNo)
+                        .addGap(126, 126, 126)
+                        .addComponent(DoctorOfficeNo))
+                    .addComponent(DoctorAddresse))
+                .addContainerGap(162, Short.MAX_VALUE))
+        );
+        jPanelDoctorCredentialsLayout.setVerticalGroup(
+            jPanelDoctorCredentialsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDoctorCredentialsLayout.createSequentialGroup()
+                .addComponent(DoctorName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DoctorAddresse)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelDoctorCredentialsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DoctorMobileNo)
+                    .addComponent(DoctorOfficeNo))
+                .addGap(23, 23, 23))
+        );
+
+        jPanelDoctorCredentials1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        PatientName.setText("jLabel14");
+
+        PatientNextVisit.setText("jLabel14");
+
+        PatientBirthDate.setText("jLabel14");
+
+        DoctorOfficeNo1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        DoctorOfficeNo1.setText("Patient Name : ");
+
+        DoctorOfficeNo2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        DoctorOfficeNo2.setText("Birth Date : ");
+
+        DoctorOfficeNo3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        DoctorOfficeNo3.setText("Next Visit : ");
+
+        javax.swing.GroupLayout jPanelDoctorCredentials1Layout = new javax.swing.GroupLayout(jPanelDoctorCredentials1);
+        jPanelDoctorCredentials1.setLayout(jPanelDoctorCredentials1Layout);
+        jPanelDoctorCredentials1Layout.setHorizontalGroup(
+            jPanelDoctorCredentials1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDoctorCredentials1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelDoctorCredentials1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DoctorOfficeNo1)
+                    .addComponent(DoctorOfficeNo3)
+                    .addComponent(DoctorOfficeNo2))
+                .addGap(76, 76, 76)
+                .addGroup(jPanelDoctorCredentials1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PatientName)
+                    .addComponent(PatientNextVisit)
+                    .addComponent(PatientBirthDate))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelDoctorCredentials1Layout.setVerticalGroup(
+            jPanelDoctorCredentials1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDoctorCredentials1Layout.createSequentialGroup()
+                .addGroup(jPanelDoctorCredentials1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PatientName)
+                    .addComponent(DoctorOfficeNo1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelDoctorCredentials1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PatientBirthDate)
+                    .addComponent(DoctorOfficeNo2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelDoctorCredentials1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PatientNextVisit)
+                    .addComponent(DoctorOfficeNo3))
+                .addGap(23, 23, 23))
+        );
+
+        javax.swing.GroupLayout jPanelPrescriptionLayout = new javax.swing.GroupLayout(jPanelPrescription);
+        jPanelPrescription.setLayout(jPanelPrescriptionLayout);
+        jPanelPrescriptionLayout.setHorizontalGroup(
+            jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelDoctorCredentials, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelDoctorCredentials1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanelPrescriptionLayout.setVerticalGroup(
+            jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
+                .addComponent(jPanelDoctorCredentials, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelDoctorCredentials1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 416, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanelPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Panel_Drugs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("New Prescription", jPanel5);
@@ -1008,7 +1141,17 @@ public class Eroshetta extends javax.swing.JFrame {
     }
     static List<Patients> patientsBookList = new ArrayList<Patients>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DoctorAddresse;
+    private javax.swing.JLabel DoctorMobileNo;
+    private javax.swing.JLabel DoctorName;
+    private javax.swing.JLabel DoctorOfficeNo;
+    private javax.swing.JLabel DoctorOfficeNo1;
+    private javax.swing.JLabel DoctorOfficeNo2;
+    private javax.swing.JLabel DoctorOfficeNo3;
     private javax.swing.JPanel Panel_Drugs;
+    private javax.swing.JLabel PatientBirthDate;
+    private javax.swing.JLabel PatientName;
+    private javax.swing.JLabel PatientNextVisit;
     private javax.swing.JLabel dosageForm;
     private javax.swing.JLabel drugCustomName;
     private javax.swing.JLabel drugDosage;
@@ -1024,6 +1167,7 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JMenuItem editDoctorProfile;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBoxPatientProfileDay;
     private javax.swing.JComboBox jComboBoxPatientProfileGender;
     private javax.swing.JComboBox jComboBoxPatientProfileMarital;
@@ -1061,9 +1205,12 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanelDoctorCredentials;
+    private javax.swing.JPanel jPanelDoctorCredentials1;
     private javax.swing.JPanel jPanelPatientOldPresc;
     private javax.swing.JPanel jPanelPatientProfile;
     private javax.swing.JPanel jPanelPatientsBook;
+    private javax.swing.JPanel jPanelPrescription;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPanePatientsBook;
     private javax.swing.JTabbedPane jTabbedPane1;
