@@ -141,7 +141,6 @@ public class Eroshetta extends javax.swing.JFrame {
         drugMinor = new javax.swing.JLabel();
         drugFoods = new javax.swing.JLabel();
         drugCustomName = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanelPrescription = new javax.swing.JPanel();
         jPanelDoctorCredentials = new javax.swing.JPanel();
         DoctorName = new javax.swing.JLabel();
@@ -237,7 +236,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
         jPanelPatientOldPrescLayout.setHorizontalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGap(0, 395, Short.MAX_VALUE)
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,7 +427,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addComponent(jLabelPatientProfileCurrentMedication)
                 .addGap(104, 104, 104)
                 .addComponent(jLabelPatientProfileDiagnosis)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -538,19 +537,6 @@ public class Eroshetta extends javax.swing.JFrame {
 
         drugCustomName.setText("jLabel24");
 
-        jButton1.setText("+");
-        jButton1.setToolTipText("Add to prescription");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout drugProfileLayout = new javax.swing.GroupLayout(drugProfile);
         drugProfile.setLayout(drugProfileLayout);
         drugProfileLayout.setHorizontalGroup(
@@ -601,8 +587,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(drugCustomName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
         );
         drugProfileLayout.setVerticalGroup(
             drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -610,8 +595,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel13)
-                    .addComponent(drugCustomName)
-                    .addComponent(jButton1))
+                    .addComponent(drugCustomName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -652,7 +636,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(drugFoods))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
@@ -815,7 +799,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDoctorCredentials1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1150,34 +1134,7 @@ public class Eroshetta extends javax.swing.JFrame {
          
       
     }//GEN-LAST:event_jListPatientsBookValueChanged
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
     static ArrayList<DrugPresPanel> drugsPanels = new <DrugPresPanel>ArrayList();
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if(this.jList_Drugs.getSelectedIndex() != -1){
-        Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
-        DrugPresPanel DrugPanel = new DrugPresPanel();
-        drugsPanels.add(DrugPanel);
-//        DrugPanel.setToolTipText(d.getTradeName());
-        if(d.getTradeName() != null){
-        DrugPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(d.getTradeName()));
-        }
-        if(d.getPrice() != null){
-        DrugPanel.DrugPrice.setText(d.getPrice().toString());
-        }
-        if(d.getDosage() != null && d.getDosageForm() != null){
-        DrugPanel.DrugDosage.setText(d.getDosage() + " (" + d.getDosageForm() + ")");
-        }
-        DrugPanel.setVisible(true);
-        
-        this.DrugsInPrescription.add(DrugPanel);
-        this.DrugsInPrescription.revalidate();
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
-
     private void jComboBoxPatientProfileGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileGenderActionPerformed
         // TODO add your handling code here:
         this.profileGenderMaritalStatus();
@@ -1355,7 +1312,6 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JMenuItem editDoctorProfile;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBoxPatientProfileDay;
     private javax.swing.JComboBox jComboBoxPatientProfileGender;
