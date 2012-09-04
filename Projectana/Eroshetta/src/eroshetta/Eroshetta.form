@@ -202,7 +202,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="391" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="395" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -333,7 +333,7 @@
                           <Component id="jLabelPatientProfileCurrentMedication" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                           <Component id="jLabelPatientProfileDiagnosis" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="156" max="32767" attributes="0"/>
+                          <EmptySpace pref="175" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -685,7 +685,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="drugCustomName" max="32767" attributes="0"/>
+                              <Component id="drugClassName" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -696,7 +696,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="drugCustomName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="drugClassName" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -748,7 +748,7 @@
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="drugFoods" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="110" max="32767" attributes="0"/>
+                              <EmptySpace pref="113" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -759,7 +759,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="9" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Custom name:"/>
+                        <Property name="text" type="java.lang.String" value="Class name:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -846,58 +846,55 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugTradeName">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel14"/>
+                        <Property name="text" type="java.lang.String" value="                       "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugGenericNames">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel15"/>
+                        <Property name="text" type="java.lang.String" value="                 "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugDosage">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel16"/>
+                        <Property name="text" type="java.lang.String" value="                    "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="dosageForm">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel17"/>
+                        <Property name="text" type="java.lang.String" value="                 "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugRoute">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel18"/>
+                        <Property name="text" type="java.lang.String" value="               "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugPrecautions">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel19"/>
+                        <Property name="text" type="java.lang.String" value="                  "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugHalfLife">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel20"/>
+                        <Property name="text" type="java.lang.String" value="                 "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugMajor">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel21"/>
+                        <Property name="text" type="java.lang.String" value="                 "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugMinor">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel22"/>
+                        <Property name="text" type="java.lang.String" value="               "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="drugFoods">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel23"/>
+                        <Property name="text" type="java.lang.String" value="                  "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="drugCustomName">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel24"/>
-                      </Properties>
+                    <Component class="javax.swing.JLabel" name="drugClassName">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -938,7 +935,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanelDoctorCredentials1" min="-2" pref="66" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="DrugsInPrescription" pref="248" max="32767" attributes="0"/>
+                          <Component id="DrugsInPrescription" pref="249" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1128,12 +1125,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="407" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="226" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
