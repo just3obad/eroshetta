@@ -1110,7 +1110,7 @@
                     <Property name="autoscrolls" type="boolean" value="true"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jPanelDoctorCredentials.setVisisble(false);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jPanelDoctorCredentials.setVisible(false);"/>
                   </AuxValues>
 
                   <Layout>
