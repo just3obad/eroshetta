@@ -772,7 +772,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel14.setText("Notes : ");
 
-        DrugsInPrescription.setBorder(javax.swing.BorderFactory.createTitledBorder("Drug profile"));
+        DrugsInPrescription.setBorder(javax.swing.BorderFactory.createTitledBorder("Drugs"));
         DrugsInPrescription.setAutoscrolls(true);
 
         javax.swing.GroupLayout DrugsInPrescriptionLayout = new javax.swing.GroupLayout(DrugsInPrescription);
