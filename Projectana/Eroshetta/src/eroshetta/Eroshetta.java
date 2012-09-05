@@ -512,7 +512,7 @@ public class Eroshetta extends javax.swing.JFrame {
                                 .addGap(132, 132, 132)
                                 .addComponent(jToggleButton2)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -766,6 +766,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jPanelDoctorCredentials.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanelDoctorCredentials.setAutoscrolls(true);
+        jPanelDoctorCredentials.setVisisble(false);
 
         DoctorName.setText("jLabel14");
 
@@ -802,6 +803,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
 
         jPanelDoctorCredentials1.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanelDoctorCredentials1.setVisible(false);
 
         PatientName.setText("...");
 
@@ -897,7 +899,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDoctorCredentials1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
