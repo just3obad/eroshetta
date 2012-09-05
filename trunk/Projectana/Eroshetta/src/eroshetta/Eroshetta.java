@@ -1460,13 +1460,13 @@ public class Eroshetta extends javax.swing.JFrame {
         if(d.getTradeName() != null){
         DrugPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(d.getTradeName()));
         }
-        if(d.getPrice() != null){
-         DrugPanel = new DrugPresPanel();
-        DrugPanel.DrugPrice.setText(d.getPrice().toString());
-        }
-        if(d.getDosage() != null && d.getDosageForm() != null){
-        DrugPanel.DrugDosage.setText(d.getDosage() + " (" + d.getDosageForm() + ")");
-        }
+//        if(d.getPrice() != null){
+//         DrugPanel = new DrugPresPanel();
+//        DrugPanel.DrugPrice.setText(d.getPrice().toString());
+//        }
+//        if(d.getDosage() != null && d.getDosageForm() != null){
+//        DrugPanel.DrugDosage.setText(d.getDosage() + " (" + d.getDosageForm() + ")");
+//        }
         DrugPanel.setVisible(true);
         
         this.DrugsInPrescription.add(DrugPanel);
