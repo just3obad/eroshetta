@@ -357,6 +357,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jLabelPatientProfileHeightCM.setText("cm.");
 
+        jListPPDiagnosis.setEnabled(false);
         jListPPDiagnosis.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -364,6 +365,7 @@ public class Eroshetta extends javax.swing.JFrame {
         });
         jScrollPanePPDiagnosis.setViewportView(jListPPDiagnosis);
 
+        jListPPM3edication.setEnabled(false);
         jListPPM3edication.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -503,7 +505,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(jLabelPatientProfileCurrentMedication)
                     .addComponent(jLabelPPMedication))
                 .addGap(8, 8, 8)
-                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
                         .addComponent(jScrollPanePPMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
@@ -520,7 +522,8 @@ public class Eroshetta extends javax.swing.JFrame {
                                 .addComponent(jToggleButtonDiagnosis))
                             .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPanePPDiagnosisMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(jScrollPanePPDiagnosisMedication)))))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -987,7 +990,7 @@ public class Eroshetta extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelPatientsBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -1358,12 +1361,15 @@ public class Eroshetta extends javax.swing.JFrame {
             jTextFieldPPMedication.setVisible(true);
             jScrollPanePPDiagnosisMedication.setVisible(true);
             jListPPDiagnosisMedication.setVisible(true);
+            jListPPM3edication.setEnabled(true);
             //change the modelList for the medication.
             System.out.println("1st Condition");
         }
         else{
             if(jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected()==true){
                 jToggleButtonDiagnosis.setSelected(false);
+                jListPPDiagnosis.setEnabled(false);
+                jListPPM3edication.setEnabled(true);
                 System.out.println("2nd Condition");
                 //change the modelList for the medication.
             }
@@ -1373,6 +1379,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     jTextFieldPPMedication.setVisible(false);
                     jScrollPanePPDiagnosisMedication.setVisible(false);
                     jListPPDiagnosisMedication.setVisible(false);
+                    jListPPM3edication.setEnabled(false);
                     System.out.println("3rd Condition");
                 }
             }
@@ -1428,12 +1435,15 @@ public class Eroshetta extends javax.swing.JFrame {
             jTextFieldPPMedication.setVisible(true);
             jScrollPanePPDiagnosisMedication.setVisible(true);
             jListPPDiagnosisMedication.setVisible(true);
+            jListPPDiagnosis.setEnabled(true);
             //change the modelList for the medication.
             System.out.println("1st Condition");
         }
         else{
             if(jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected()==true){
                 jToggleButtonPPMedication.setSelected(false);
+                jListPPM3edication.setEnabled(false);
+                jListPPDiagnosis.setEnabled(true);
                 System.out.println("2nd Condition");
                 //change the modelList for the medication.
             }
@@ -1443,6 +1453,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     jTextFieldPPMedication.setVisible(false);
                     jScrollPanePPDiagnosisMedication.setVisible(false);
                     jListPPDiagnosisMedication.setVisible(false);
+                    jListPPDiagnosis.setEnabled(false);
                     System.out.println("3rd Condition");
                 }
             }
@@ -1672,7 +1683,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
 
-      createPatients();
+//      createPatients();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         //getCurrentMedications();
 //        findAllPatients();
