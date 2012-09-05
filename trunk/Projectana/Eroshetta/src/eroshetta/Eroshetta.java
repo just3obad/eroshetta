@@ -392,6 +392,11 @@ public class Eroshetta extends javax.swing.JFrame {
         });
 
         jToggleButtonDiagnosis.setText("Edit");
+        jToggleButtonDiagnosis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButtonDiagnosisActionPerformed(evt);
+            }
+        });
 
         jLabelPatientProfilePregnant.setText("Pregnant:");
 
@@ -417,10 +422,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPatientProfileLayout.createSequentialGroup()
                         .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
-                                .addComponent(jToggleButtonDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jToggleButtonDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jToggleButtonDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jToggleButtonPPMedication))
                         .addGap(276, 276, 276))
                     .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
@@ -1309,6 +1311,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jToggleButtonPPMedicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPPMedicationActionPerformed
         // TODO add your handling code here:
+        
         //Was not selcted but just got selected
         if(jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected()==true){
             jLabelPPMedication.setVisible(true);
@@ -1376,6 +1379,37 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jTextFieldPatientProfileNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPatientProfileNameActionPerformed
+
+    private void jToggleButtonDiagnosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonDiagnosisActionPerformed
+        // TODO add your handling code here:
+                //Was not selcted but just got selected
+        if(jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected()==false){
+            jLabelPPMedication.setVisible(true);
+            jTextFieldPPMedication.setVisible(true);
+            jScrollPanePPDiagnosisMedication.setVisible(true);
+            jListPPDiagnosisMedication.setVisible(true);
+            //change the modelList for the medication.
+            System.out.println("1st Condition");
+        }
+        else{
+            if(jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected()==true){
+                jToggleButtonPPMedication.setSelected(false);
+                System.out.println("2nd Condition");
+                //change the modelList for the medication.
+            }
+            else{
+                if(jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected()==false){
+                    jLabelPPMedication.setVisible(false);
+                    jTextFieldPPMedication.setVisible(false);
+                    jScrollPanePPDiagnosisMedication.setVisible(false);
+                    jListPPDiagnosisMedication.setVisible(false);
+                    System.out.println("3rd Condition");
+                }
+            }
+        }
+
+        
+    }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
 
     public void profileGenderMaritalStatus(){
         if(jComboBoxPatientProfileGender.getSelectedIndex() == 0){
