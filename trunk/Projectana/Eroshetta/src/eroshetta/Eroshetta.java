@@ -630,6 +630,11 @@ public class Eroshetta extends javax.swing.JFrame {
         drugFoods.setText("                  ");
 
         addToPresc.setText("Add to Prescription");
+        addToPresc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addToPrescMouseClicked(evt);
+            }
+        });
         addToPresc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addToPrescActionPerformed(evt);
@@ -765,7 +770,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -870,6 +875,8 @@ public class Eroshetta extends javax.swing.JFrame {
 
         DrugsInPrescription.setBorder(javax.swing.BorderFactory.createTitledBorder("Drugs"));
         DrugsInPrescription.setAutoscrolls(true);
+        DrugsInPrescription.setMaximumSize(new java.awt.Dimension(12, 27));
+        DrugsInPrescription.setMinimumSize(new java.awt.Dimension(12, 27));
 
         javax.swing.GroupLayout DrugsInPrescriptionLayout = new javax.swing.GroupLayout(DrugsInPrescription);
         DrugsInPrescription.setLayout(DrugsInPrescriptionLayout);
@@ -879,7 +886,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
         DrugsInPrescriptionLayout.setVerticalGroup(
             DrugsInPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jTextArea1.setColumns(20);
@@ -909,8 +916,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDoctorCredentials1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -945,7 +952,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(107, 107, 107))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("New Prescription", jPanel5);
@@ -1409,6 +1416,30 @@ public class Eroshetta extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
+
+    private void addToPrescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToPrescMouseClicked
+        if(this.jList_Drugs.getSelectedIndex() != -1){
+        Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
+        DrugPresPanel DrugPanel = new DrugPresPanel();
+        drugsPanels.add(DrugPanel);
+//        DrugPanel.setToolTipText(d.getTradeName());
+        if(d.getTradeName() != null){
+        DrugPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(d.getTradeName()));
+        }
+        if(d.getPrice() != null){
+         DrugPanel = new DrugPresPanel();
+        DrugPanel.DrugPrice.setText(d.getPrice().toString());
+        }
+        if(d.getDosage() != null && d.getDosageForm() != null){
+        DrugPanel.DrugDosage.setText(d.getDosage() + " (" + d.getDosageForm() + ")");
+        }
+        DrugPanel.setVisible(true);
+        
+        this.DrugsInPrescription.add(DrugPanel);
+        this.DrugsInPrescription.revalidate();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addToPrescMouseClicked
 
     public void profileGenderMaritalStatus(){
         if(jComboBoxPatientProfileGender.getSelectedIndex() == 0){
