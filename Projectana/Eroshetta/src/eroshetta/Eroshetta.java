@@ -121,6 +121,16 @@ public class Eroshetta extends javax.swing.JFrame {
         jTextFieldPatientProfileHeight = new javax.swing.JTextField();
         jLabelPatientProfileWeiightKG = new javax.swing.JLabel();
         jLabelPatientProfileHeightCM = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
         jPanel5 = new javax.swing.JPanel();
         Panel_Drugs = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -248,11 +258,11 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
         jPanelPatientOldPrescLayout.setHorizontalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGap(0, 377, Short.MAX_VALUE)
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanelPatientProfile.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -347,22 +357,53 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jLabelPatientProfileHeightCM.setText("cm.");
 
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jList1);
+
+        jList2.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList2);
+
+        jList3.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(jList3);
+
+        jTextField2.setText("jTextField2");
+
+        jLabel16.setText("jLabel16");
+
+        jToggleButton1.setText("Edit");
+
+        jToggleButton2.setText("Edit");
+
         javax.swing.GroupLayout jPanelPatientProfileLayout = new javax.swing.GroupLayout(jPanelPatientProfile);
         jPanelPatientProfile.setLayout(jPanelPatientProfileLayout);
         jPanelPatientProfileLayout.setHorizontalGroup(
             jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelPatientProfileBMI)
-                    .addComponent(jLabelPatientProfileWeight)
-                    .addComponent(jLabelPatientProfileMaritalStatus)
-                    .addComponent(jLabelPatientProfileGender)
-                    .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelPatientProfileCurrentMedication)
-                        .addComponent(jLabelPatientProfileName, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabelPatientProfileDiagnosis, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabelPatientProfileBirthday, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabelPatientProfileBMI)
+                        .addComponent(jLabelPatientProfileWeight)
+                        .addComponent(jLabelPatientProfileMaritalStatus)
+                        .addComponent(jLabelPatientProfileGender)
+                        .addComponent(jLabelPatientProfileCurrentMedication, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabelPatientProfileName)
+                        .addComponent(jLabelPatientProfileDiagnosis)
+                        .addComponent(jLabelPatientProfileBirthday))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldPatientProfileName)
@@ -373,7 +414,7 @@ public class Eroshetta extends javax.swing.JFrame {
                                 .addComponent(jTextFieldPatientProfileWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelPatientProfileWeiightKG)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
                                 .addComponent(jLabelPatientProfilePregnant)
@@ -396,7 +437,20 @@ public class Eroshetta extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxPatientProfileYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextFieldPatientProfileBMI, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPatientProfileLayout.createSequentialGroup()
+                        .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
+                                .addComponent(jToggleButton1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPatientProfileLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jToggleButton2)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))))
                 .addContainerGap())
         );
         jPanelPatientProfileLayout.setVerticalGroup(
@@ -436,10 +490,29 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(jLabelPatientProfileBMI)
                     .addComponent(jTextFieldPatientProfileBMI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabelPatientProfileCurrentMedication)
-                .addGap(104, 104, 104)
-                .addComponent(jLabelPatientProfileDiagnosis)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPatientProfileCurrentMedication)
+                    .addComponent(jLabel16))
+                .addGap(8, 8, 8)
+                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabelPatientProfileDiagnosis)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelPatientProfileLayout.createSequentialGroup()
+                        .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5)
+                            .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addComponent(jToggleButton2)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -683,7 +756,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -793,7 +866,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
         DrugsInPrescriptionLayout.setVerticalGroup(
             DrugsInPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 226, Short.MAX_VALUE)
+            .addGap(0, 253, Short.MAX_VALUE)
         );
 
         jButton2.setText("Preview for saving and printing");
@@ -824,7 +897,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDoctorCredentials1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addComponent(DrugsInPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -896,7 +969,7 @@ public class Eroshetta extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelPatientsBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -1454,6 +1527,7 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1474,6 +1548,9 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPatientProfilePregnant;
     private javax.swing.JLabel jLabelPatientProfileWeight;
     private javax.swing.JLabel jLabelPatientProfileWeiightKG;
+    private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
+    private javax.swing.JList jList3;
     private javax.swing.JList jListPatientsBook;
     private javax.swing.JList jList_Drugs;
     private javax.swing.JMenu jMenu3;
@@ -1488,14 +1565,20 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelPrescription;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPanePatientsBook;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldPatientProfileBMI;
     private javax.swing.JTextField jTextFieldPatientProfileHeight;
     private javax.swing.JTextField jTextFieldPatientProfileName;
     private javax.swing.JTextField jTextFieldPatientProfileWeight;
     private javax.swing.JTextField jTextFieldPatientsBook;
     private javax.swing.JTextField jTextFieldSearchDrags;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }
