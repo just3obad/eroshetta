@@ -36,6 +36,7 @@ public class DrugPresPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Drug Name"));
+        setAutoscrolls(true);
         setMaximumSize(new java.awt.Dimension(267, 113));
         setMinimumSize(new java.awt.Dimension(267, 113));
 

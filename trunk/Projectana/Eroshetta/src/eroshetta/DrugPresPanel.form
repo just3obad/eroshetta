@@ -7,6 +7,7 @@
         <TitledBorder title="Drug Name"/>
       </Border>
     </Property>
+    <Property name="autoscrolls" type="boolean" value="true"/>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[267, 113]"/>
     </Property>
