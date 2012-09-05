@@ -766,7 +766,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jPanelDoctorCredentials.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanelDoctorCredentials.setAutoscrolls(true);
-        jPanelDoctorCredentials.setVisisble(false);
+        jPanelDoctorCredentials.setVisible(false);
 
         DoctorName.setText("jLabel14");
 
