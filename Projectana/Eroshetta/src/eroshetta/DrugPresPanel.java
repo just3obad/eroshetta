@@ -16,6 +16,14 @@ public class DrugPresPanel extends javax.swing.JPanel {
     public DrugPresPanel() {
         initComponents();
     }
+     Drugs panelDrug;
+    public DrugPresPanel(Drugs d) {
+        initComponents();
+        this.panelDrug = d;
+        if(d.getTradeName() != null){
+        this.setBorder(javax.swing.BorderFactory.createTitledBorder(d.getTradeName()));
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +56,7 @@ public class DrugPresPanel extends javax.swing.JPanel {
         jCheckBox3.setText("Bed time");
 
         jButton1.setText("X");
+        jButton1.setToolTipText("Remove the Drug from List");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -64,7 +73,7 @@ public class DrugPresPanel extends javax.swing.JPanel {
                 .addComponent(jCheckBox2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
         layout.setVerticalGroup(
@@ -82,7 +91,8 @@ public class DrugPresPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       this.setVisible(false);
+
+        this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
