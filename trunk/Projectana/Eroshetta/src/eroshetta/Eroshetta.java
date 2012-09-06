@@ -779,18 +779,7 @@ public class Eroshetta extends javax.swing.JFrame {
         DrugsInPrescription.setAutoscrolls(true);
         DrugsInPrescription.setMaximumSize(new java.awt.Dimension(12, 27));
         DrugsInPrescription.setMinimumSize(new java.awt.Dimension(12, 27));
-
-        javax.swing.GroupLayout DrugsInPrescriptionLayout = new javax.swing.GroupLayout(DrugsInPrescription);
-        DrugsInPrescription.setLayout(DrugsInPrescriptionLayout);
-        DrugsInPrescriptionLayout.setHorizontalGroup(
-            DrugsInPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 393, Short.MAX_VALUE)
-        );
-        DrugsInPrescriptionLayout.setVerticalGroup(
-            DrugsInPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
-        );
-
+        DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
         jScrollPane4.setViewportView(DrugsInPrescription);
 
         javax.swing.GroupLayout jPanelPrescriptionLayout = new javax.swing.GroupLayout(jPanelPrescription);
@@ -798,7 +787,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPrescriptionLayout.setHorizontalGroup(
             jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
-                .addContainerGap(203, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(33, 33, 33))
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
@@ -836,7 +825,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(jLabel15)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 146, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
