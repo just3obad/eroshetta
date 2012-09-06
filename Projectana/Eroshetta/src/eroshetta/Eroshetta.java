@@ -1364,7 +1364,7 @@ public class Eroshetta extends javax.swing.JFrame {
         drugsPanels.add(drugPanel);
         this.DrugsInPrescription.add(drugPanel);
         if(drugsPanels.size()<4){
-            this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4,0));
+            this.DrugsInPrescription.setLayout(new java.awt.GridLayout(5,0));
         }else{
         this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(),0));
         }
