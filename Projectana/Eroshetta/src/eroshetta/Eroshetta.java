@@ -1299,15 +1299,15 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selctedID = jListPatientsBook.getSelectedIndex();
         currentPatient = patientsBookList.get(selctedID);
-        System.out.println(currentPatient);
-        System.out.println(currentPatient.getName());
-        System.out.println(currentPatient.getBirthDate());
-        System.out.println(currentPatient.getGender());
-        System.out.println(currentPatient.getIsPregnant());
-        System.out.println(currentPatient.getMaritalStatus());
-        System.out.println(currentPatient.getWeight());
-        System.out.println(currentPatient.getHeight());
-        System.out.println(currentPatient.getBmi());
+//        System.out.println(currentPatient);
+//        System.out.println(currentPatient.getName());
+//        System.out.println(currentPatient.getBirthDate());
+//        System.out.println(currentPatient.getGender());
+//        System.out.println(currentPatient.getIsPregnant());
+//        System.out.println(currentPatient.getMaritalStatus());
+//        System.out.println(currentPatient.getWeight());
+//        System.out.println(currentPatient.getHeight());
+//        System.out.println(currentPatient.getBmi());
         
             if(currentPatient.getName() != null){
             this.PatientName.setText(currentPatient.getName());
@@ -1622,6 +1622,67 @@ public class Eroshetta extends javax.swing.JFrame {
 //         System.out.println(patientsBookList.toString());
 
     }
+    
+    public static void getAllDiagnosis(){
+        Query q = em.createNamedQuery("Diagnoses.findAll");
+        List allDiagnosis = (List <Diagnoses>) q.getResultList();
+        System.out.println(allDiagnosis.size());
+    }
+    
+    public static void setOne(){
+        Query q = em.createNamedQuery("Patients.findAll");
+        List patientsList = (List <Patients>) q.getResultList();
+        Patients p = (Patients) patientsList.get(0);
+        System.out.println(p.getName());
+        
+        Query q2 = em.createNamedQuery("Diagnoses.findAll");
+        List allDiagnosis = (List <Diagnoses>) q2.getResultList();
+//        p.setDiagnosesCollection(allDiagnosis);
+        List pDiagnosis = (List <Diagnoses>) p.getDiagnosesCollection();
+        pDiagnosis.addAll(allDiagnosis);
+        p.setDiagnosesCollection(pDiagnosis);
+//        System.out.println(pDiagnosis.addAll(allDiagnosis));
+        
+    }
+    
+    public static void patientsDiagnosis(){
+        Query q = em.createNamedQuery("Patients.findAll");
+        List patientsList = (List <Patients>) q.getResultList();
+        
+        Query q2 = em.createNamedQuery("Diagnoses.findAll");
+        Collection allDiagnosis = q2.getResultList();
+        
+        System.out.println(allDiagnosis.size());
+        System.out.println("All Diagnosis wa 7raaaaaaaaaaam ");
+        
+//        for(int i=0; i<allDiagnosis.size(); i++){
+//            Diagnoses d = (Diagnoses) allDiagnosis.get(i);
+//            System.out.println(d.getName());
+//        }
+//        
+        
+        for(int i=0; i<patientsList.size(); i++){
+//            System.out.println(i);
+            Patients p = (Patients) patientsList.get(i);
+//            List diagnosisList = (List <Diagnoses>) p.getDiagnosesCollection();
+            p.setDiagnosesCollection(allDiagnosis);
+            
+//            Query q2 = em.createNamedQuery("Diagnoses.findAll");
+//            List allDiagnosis = (List <Diagnoses>) q.getResultList();   
+//            
+//            System.out.println(p.getName());
+
+//            System.out.println("Now importing to " +i);
+//            System.out.println("Now getting to " +i);
+//            for(int j=0; j<diagnosisList.size(); j++){
+//                System.out.println(j);
+//                Diagnoses diag = (Diagnoses) diagnosisList.get(j);
+//                System.out.println(diag.getName());
+//            }
+            
+        }
+        
+    }
 
 //    
 //    public static void getCurrentMedications(){
@@ -1683,8 +1744,12 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
 
-//      createPatients();
+//     createPatients();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        setOne();
+//        patientsDiagnosis();
+//        getAllDiagnosis();
+//        diagnosis();
         //getCurrentMedications();
 //        findAllPatients();
 //        em.close();

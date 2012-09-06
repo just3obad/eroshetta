@@ -161,6 +161,7 @@ public class Patients implements Serializable {
     }
 
     public void setDiagnosesCollection(Collection<Diagnoses> diagnosesCollection) {
+//        System.out.println("A&AAAAAAAAAAAAAAAAAAAAAAAA");
         this.diagnosesCollection = diagnosesCollection;
     }
 
