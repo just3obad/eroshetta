@@ -74,7 +74,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanelPatientsBook" alignment="1" max="32767" attributes="0"/>
-          <Component id="jTabbedPane1" alignment="0" pref="649" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -341,7 +341,7 @@
                               <Component id="jLabelPPMedication" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jScrollPanePPMedication" min="-2" pref="121" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -359,13 +359,14 @@
                                           <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                                           <Component id="jToggleButtonDiagnosis" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jScrollPanePPDiagnosisMedication" min="-2" pref="254" max="-2" attributes="0"/>
+                                          <Component id="jScrollPanePPDiagnosisMedication" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -544,6 +545,9 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jListPPDiagnosis.setEnabled(false);"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -566,6 +570,9 @@
                           </StringArray>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jListPPM3edication.setEnabled(false);"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
