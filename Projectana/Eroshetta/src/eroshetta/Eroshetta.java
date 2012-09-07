@@ -1176,59 +1176,68 @@ public class Eroshetta extends javax.swing.JFrame {
     }//GEN-LAST:event_jList_DrugsValueChanged
 */
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
-// azon ya 3obad you will need this method for profile, me too for prescriptions
-
-        //that is it
         // TODO add your handling code here:
-        int selctedID = jListPatientsBook.getSelectedIndex();
+        try {
+             int selctedID = jListPatientsBook.getSelectedIndex();
         currentPatient = patientsBookList.get(selctedID);
 //        System.out.println(currentPatient);
 //        System.out.println(currentPatient.getName());
 //        System.out.println(currentPatient.getBirthDate());
+
+
+
+
 //        System.out.println(currentPatient.getGender());
 //        System.out.println(currentPatient.getIsPregnant());
 //        System.out.println(currentPatient.getMaritalStatus());
 //        System.out.println(currentPatient.getWeight());
 //        System.out.println(currentPatient.getHeight());
 //        System.out.println(currentPatient.getBmi());
-        
-//            if(currentPatient.getName() != null){
-//            this.PatientName.setText(currentPatient.getName());
-//            jTextFieldPatientProfileName.setText(currentPatient.getName());
-//            }
-//            
-//            if(currentPatient.getBirthDate() != null){
-//            this.PatientBirthDate.setText(currentPatient.getBirthDate().toString());
-//            
-//            }
-//            
-//            if(currentPatient.getNextVisit() != null){
-//            this.PatientNextVisit.setText(currentPatient.getNextVisit().toString());
-//            }
+
+        if (currentPatient.getName() != null) {
+            jTextFieldPatientProfileName.setText(currentPatient.getName());
+        }
+
+        if (currentPatient.getBirthDate() != null) {
+
+            int birhtyear = (currentPatient.getBirthDate().getYear())+1900;
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            int birthDay = currentPatient.getBirthDate().getDate();
+            jComboBoxPatientProfileMonth.setSelectedIndex(currentPatient.getBirthDate().getMonth());
+            jComboBoxPatientProfileYear.setSelectedIndex(currentYear-birhtyear);
+            jComboBoxPatientProfileDay.setSelectedIndex(birthDay-1);
+        }
+
+        if (currentPatient.getGender() != null) {
+            if (currentPatient.getGender() == 'm') {
+                jComboBoxPatientProfileGender.setSelectedIndex(0);
+            } else {
+                jComboBoxPatientProfileGender.setSelectedIndex(1);
+            }
+        }
+
+        if (currentPatient.getMaritalStatus() != null) {
+            jComboBoxPatientProfileMarital.setSelectedIndex(currentPatient.getMaritalStatus());
+        }
+        if (currentPatient.getIsPregnant() != null) {
+            jComboBoxPatientProfilePregnant.setSelectedIndex(currentPatient.getIsPregnant());
+        }
+
+        if (currentPatient.getBmi() != null && currentPatient.getHeight() != null && currentPatient.getWeight() != null) {
             
-            if(currentPatient.getGender() !=null){
-                if(currentPatient.getGender()=='m'){
-                    jComboBoxPatientProfileGender.setSelectedIndex(0);
-                }
-                else{
-                    jComboBoxPatientProfileGender.setSelectedIndex(1);
-                }
-            }
+            String oldBmi = String.valueOf(currentPatient.getBmi());
+            String bmi = oldBmi.substring(0, oldBmi.length()-2);
+            jTextFieldPatientProfileBMI.setText(bmi);
             
-            if(currentPatient.getMaritalStatus() !=null){
-                jComboBoxPatientProfileMarital.setSelectedIndex(currentPatient.getMaritalStatus());
-            }
-            if(currentPatient.getIsPregnant() != null){   
-                jComboBoxPatientProfilePregnant.setSelectedIndex(currentPatient.getIsPregnant());
-            }
-            
-            if(currentPatient.getBmi()!=null && currentPatient.getHeight()!=null && currentPatient.getWeight() != null){
-                jTextFieldPatientProfileBMI.setText(String.valueOf(currentPatient.getBmi()));
-                jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
-                jTextFieldPatientProfileWeight.setText(String.valueOf(currentPatient.getWeight()));
-            }
-         
-      
+            String oldWeight = String.valueOf(currentPatient.getWeight());
+            String weight = String.valueOf(oldWeight).substring(0,oldWeight.length()-4);
+            jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
+            jTextFieldPatientProfileWeight.setText(weight);
+        }
+
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_jListPatientsBookValueChanged
     static ArrayList<DrugPresPanel> drugsPanels = new <DrugPresPanel>ArrayList();
     private void addToPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToPrescActionPerformed
@@ -1237,9 +1246,9 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jToggleButtonPPMedicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPPMedicationActionPerformed
         // TODO add your handling code here:
-        
+
         //Was not selcted but just got selected
-        if(jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected()==true){
+        if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == true) {
             jLabelPPMedication.setVisible(true);
             jTextFieldPPMedication.setVisible(true);
             jScrollPanePPDiagnosisMedication.setVisible(true);
@@ -1247,17 +1256,15 @@ public class Eroshetta extends javax.swing.JFrame {
             jListPPM3edication.setEnabled(true);
             //change the modelList for the medication.
             System.out.println("1st Condition");
-        }
-        else{
-            if(jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected()==true){
+        } else {
+            if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == true) {
                 jToggleButtonDiagnosis.setSelected(false);
                 jListPPDiagnosis.setEnabled(false);
                 jListPPM3edication.setEnabled(true);
                 System.out.println("2nd Condition");
                 //change the modelList for the medication.
-            }
-            else{
-                if(jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected()==false){
+            } else {
+                if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == false) {
                     jLabelPPMedication.setVisible(false);
                     jTextFieldPPMedication.setVisible(false);
                     jScrollPanePPDiagnosisMedication.setVisible(false);
@@ -1278,14 +1285,14 @@ public class Eroshetta extends javax.swing.JFrame {
         this.profileGenderMaritalStatus();
     }//GEN-LAST:event_jComboBoxPatientProfileMaritalActionPerformed
 
-/*
-    private void jList_DrugsValueChanged(javax.swing.event.ListSelectionEvent evt) {                                         
-        // TODO add your handling code here:
-        Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
-        int drugId = d.getId();
-//        System.out.println(drugId);
-    }                                        
-*/
+    /*
+     private void jList_DrugsValueChanged(javax.swing.event.ListSelectionEvent evt) {                                         
+     // TODO add your handling code here:
+     Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
+     int drugId = d.getId();
+     //        System.out.println(drugId);
+     }                                        
+     */
     private void jComboBoxPatientProfileYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileYearActionPerformed
         // TODO add your handling code here:
         this.leapYearModification();
@@ -1312,8 +1319,8 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jToggleButtonDiagnosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonDiagnosisActionPerformed
         // TODO add your handling code here:
-                //Was not selcted but just got selected
-        if(jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected()==false){
+        //Was not selcted but just got selected
+        if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == false) {
             jLabelPPMedication.setVisible(true);
             jTextFieldPPMedication.setVisible(true);
             jScrollPanePPDiagnosisMedication.setVisible(true);
@@ -1321,17 +1328,15 @@ public class Eroshetta extends javax.swing.JFrame {
             jListPPDiagnosis.setEnabled(true);
             //change the modelList for the medication.
             System.out.println("1st Condition");
-        }
-        else{
-            if(jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected()==true){
+        } else {
+            if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == true) {
                 jToggleButtonPPMedication.setSelected(false);
                 jListPPM3edication.setEnabled(false);
                 jListPPDiagnosis.setEnabled(true);
                 System.out.println("2nd Condition");
                 //change the modelList for the medication.
-            }
-            else{
-                if(jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected()==false){
+            } else {
+                if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == false) {
                     jLabelPPMedication.setVisible(false);
                     jTextFieldPPMedication.setVisible(false);
                     jScrollPanePPDiagnosisMedication.setVisible(false);
@@ -1342,28 +1347,28 @@ public class Eroshetta extends javax.swing.JFrame {
             }
         }
 
-        
+
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
 
     private void addToPrescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToPrescMouseClicked
-    if(this.jList_Drugs.getSelectedIndex() != -1){
-        Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
-        DrugPresPanel drugPanel = new DrugPresPanel(d);
-                for(int i = 0;i<drugsPanels.size();i++){
-        if(drugsPanels.get(i).panelDrug.getId() == d.getId()){
-            JOptionPane.showMessageDialog(this,"you already added the drug","Eroshetta", JOptionPane.INFORMATION_MESSAGE );    
-            return;
-        }
-        }
-        drugsPanels.add(drugPanel);
-        this.DrugsInPrescription.add(drugPanel);
-        if(drugsPanels.size()<4){
-            this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4,0));
-        }else{
-        this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(),0));
-        }
-        this.DrugsInPrescription.revalidate();
-        
+        if (this.jList_Drugs.getSelectedIndex() != -1) {
+            Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
+            DrugPresPanel drugPanel = new DrugPresPanel(d);
+            for (int i = 0; i < drugsPanels.size(); i++) {
+                if (drugsPanels.get(i).panelDrug.getId() == d.getId()) {
+                    JOptionPane.showMessageDialog(this, "you already added the drug", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+            }
+            drugsPanels.add(drugPanel);
+            this.DrugsInPrescription.add(drugPanel);
+            if (drugsPanels.size() < 4) {
+                this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
+            } else {
+                this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
+            }
+            this.DrugsInPrescription.revalidate();
+
         }
         // TODO add your handling code here:
 //        if(d.getPrice() != null){
@@ -1374,34 +1379,32 @@ public class Eroshetta extends javax.swing.JFrame {
 //        DrugPanel.DrugDosage.setText(d.getDosage() + " (" + d.getDosageForm() + ")");
 //        }
 //        drugPanel.setVisible(true);
-        
+
 //        this.DrugsInPrescription.add(DrugPanel);
 //        this.DrugsInPrescription.revalidate();
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_addToPrescMouseClicked
 
-    public void profileGenderMaritalStatus(){
-        if(jComboBoxPatientProfileGender.getSelectedIndex() == 0){
+    public void profileGenderMaritalStatus() {
+        if (jComboBoxPatientProfileGender.getSelectedIndex() == 0) {
             jComboBoxPatientProfilePregnant.setVisible(false);
             jLabelPatientProfilePregnant.setVisible(false);
-        }else{
-            if(jComboBoxPatientProfileGender.getSelectedIndex() == 1&&jComboBoxPatientProfileMarital.getSelectedIndex()==1){
+        } else {
+            if (jComboBoxPatientProfileGender.getSelectedIndex() == 1 && jComboBoxPatientProfileMarital.getSelectedIndex() == 1) {
                 jComboBoxPatientProfilePregnant.setVisible(true);
                 jLabelPatientProfilePregnant.setVisible(true);
-            }
-            else{
+            } else {
                 jComboBoxPatientProfilePregnant.setVisible(false);
                 jLabelPatientProfilePregnant.setVisible(false);
             }
         }
     }
-    
-    
+
     public void leapYearModification() {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int selectedYear = (Integer) jComboBoxPatientProfileYear.getSelectedItem();
-        int selectedMonth = (Integer) jComboBoxPatientProfileMonth.getSelectedIndex() + 1;
+        int selectedMonth = (Integer) jComboBoxPatientProfileMonth.getSelectedIndex();
         boolean leapYearFlag;
         DefaultComboBoxModel dayModelLeapYead = new DefaultComboBoxModel();
         jComboBoxPatientProfileDay.setModel(dayModelLeapYead);
@@ -1440,50 +1443,46 @@ public class Eroshetta extends javax.swing.JFrame {
 
             Patients p = new Patients();
             p.setName("Patient" + i);
-            
-            if(i%2==0){
+
+            if (i % 2 == 0) {
                 p.setGender('m');
-                p.setHeight(i*100);
-                int h = i*100;
-                p.setWeight(BigDecimal.valueOf((i*100)+(i*2)));
-                double w = (i*100)+(i*2);
-                double b = h/(w*w);
+                p.setHeight(i * 100);
+                int h = i * 100;
+                p.setWeight(BigDecimal.valueOf((i * 100) + (i * 2)));
+                double w = (i * 100) + (i * 2);
+                double b = h / (w * w);
                 p.setBmi(BigDecimal.valueOf(i));
-                if((1+i)%4==0){
+                if ((1 + i) % 4 == 0) {
                     p.setMaritalStatus(0);
-                }
-                else{
+                } else {
                     p.setMaritalStatus(1);
 
                 }
-            }
-            else{
+            } else {
                 p.setGender('f');
-               p.setHeight(i*100);
-                int h = i*100;
-                p.setWeight(BigDecimal.valueOf((i*100)+(i*2)));
-                double w = (i*100)+(i*2);
-                double b = h/(w*w);
+                p.setHeight(i * 100);
+                int h = i * 100;
+                p.setWeight(BigDecimal.valueOf((i * 100) + (i * 2)));
+                double w = (i * 100) + (i * 2);
+                double b = h / (w * w);
                 p.setBmi(BigDecimal.valueOf(i));
-                
-                if((i+1)%3==0){
+
+                if ((i + 1) % 3 == 0) {
                     p.setMaritalStatus(0);
-                }
-                else{
+                } else {
                     p.setMaritalStatus(1);
-                    if((i+1)%4==0){
+                    if ((i + 1) % 4 == 0) {
                         p.setIsPregnant(0);
-                    }
-                    else{
+                    } else {
                         p.setIsPregnant(1);
                     }
                 }
-                
-                
+
+
             }
-            
-            
-            Date d = new Date(1,1,1992);
+
+
+            Date d = new Date(102, 5, 23);
             p.setBirthDate(d);
             em.persist(p);
 
@@ -1492,10 +1491,10 @@ public class Eroshetta extends javax.swing.JFrame {
         em.getTransaction().commit();
 
     }
-    
-    public static void diagnosis(){
+
+    public static void diagnosis() {
         em.getTransaction().begin();
-        for(int i=0; i<25; i++){
+        for (int i = 0; i < 25; i++) {
             Diagnoses d = new Diagnoses();
             d.setId(i);
             d.setName("Diagnosis" + i);
@@ -1517,51 +1516,51 @@ public class Eroshetta extends javax.swing.JFrame {
 //         System.out.println(patientsBookList.toString());
 
     }
-    
-    public static void getAllDiagnosis(){
+
+    public static void getAllDiagnosis() {
         Query q = em.createNamedQuery("Diagnoses.findAll");
-        List allDiagnosis = (List <Diagnoses>) q.getResultList();
+        List allDiagnosis = (List<Diagnoses>) q.getResultList();
         System.out.println(allDiagnosis.size());
     }
-    
-    public static void setOne(){
+
+    public static void setOne() {
         Query q = em.createNamedQuery("Patients.findAll");
-        List patientsList = (List <Patients>) q.getResultList();
+        List patientsList = (List<Patients>) q.getResultList();
         Patients p = (Patients) patientsList.get(0);
         System.out.println(p.getName());
-        
+
         Query q2 = em.createNamedQuery("Diagnoses.findAll");
-        List allDiagnosis = (List <Diagnoses>) q2.getResultList();
+        List allDiagnosis = (List<Diagnoses>) q2.getResultList();
 //        p.setDiagnosesCollection(allDiagnosis);
-        List pDiagnosis = (List <Diagnoses>) p.getDiagnosesCollection();
+        List pDiagnosis = (List<Diagnoses>) p.getDiagnosesCollection();
         pDiagnosis.addAll(allDiagnosis);
         p.setDiagnosesCollection(pDiagnosis);
 //        System.out.println(pDiagnosis.addAll(allDiagnosis));
-        
+
     }
-    
-    public static void patientsDiagnosis(){
+
+    public static void patientsDiagnosis() {
         Query q = em.createNamedQuery("Patients.findAll");
-        List patientsList = (List <Patients>) q.getResultList();
-        
+        List patientsList = (List<Patients>) q.getResultList();
+
         Query q2 = em.createNamedQuery("Diagnoses.findAll");
         Collection allDiagnosis = q2.getResultList();
-        
+
         System.out.println(allDiagnosis.size());
         System.out.println("All Diagnosis wa 7raaaaaaaaaaam ");
-        
+
 //        for(int i=0; i<allDiagnosis.size(); i++){
 //            Diagnoses d = (Diagnoses) allDiagnosis.get(i);
 //            System.out.println(d.getName());
 //        }
 //        
-        
-        for(int i=0; i<patientsList.size(); i++){
+
+        for (int i = 0; i < patientsList.size(); i++) {
 //            System.out.println(i);
             Patients p = (Patients) patientsList.get(i);
 //            List diagnosisList = (List <Diagnoses>) p.getDiagnosesCollection();
             p.setDiagnosesCollection(allDiagnosis);
-            
+
 //            Query q2 = em.createNamedQuery("Diagnoses.findAll");
 //            List allDiagnosis = (List <Diagnoses>) q.getResultList();   
 //            
@@ -1574,9 +1573,9 @@ public class Eroshetta extends javax.swing.JFrame {
 //                Diagnoses diag = (Diagnoses) diagnosisList.get(j);
 //                System.out.println(diag.getName());
 //            }
-            
+
         }
-        
+
     }
 
 //    
@@ -1641,7 +1640,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
 //     createPatients();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        setOne();
+//        setOne();
 //        patientsDiagnosis();
 //        getAllDiagnosis();
 //        diagnosis();
@@ -1653,9 +1652,6 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
     }
-   
-    
-    
     static List<Patients> patientsBookList = new ArrayList<Patients>();
     static Patients currentPatient;
     // Variables declaration - do not modify//GEN-BEGIN:variables
