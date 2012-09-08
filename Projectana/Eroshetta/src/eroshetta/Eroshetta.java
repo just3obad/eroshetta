@@ -1437,7 +1437,7 @@ int o ;
                 
             }
               try{
-              if(d.getContraBmi() == 1 && currentPatient.getBmi().intValue() < 22.5){
+              if(d.getContraBmi() == 1 && (currentPatient.getBmi().doubleValue() < 22.5)){
                o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for under weight(BMI < 22.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
                if(o!=0){
                    return;
@@ -1447,8 +1447,8 @@ int o ;
                 
             }
               try{
-             if(d.getContraBmi() == 2 && currentPatient.getBmi().intValue() < 25.5){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for normal people(25.5 < BMI < 29.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+             if(d.getContraBmi() == 2 && (currentPatient.getBmi().doubleValue() < 29.5)){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for over weight people(25.5 < BMI < 29.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
                if(o!=0){
                    return;
                }
