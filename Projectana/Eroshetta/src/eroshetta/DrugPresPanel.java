@@ -17,9 +17,11 @@ public class DrugPresPanel extends javax.swing.JPanel {
         initComponents();
     }
      Drugs panelDrug;
-    public DrugPresPanel(Drugs d) {
+     Prescriptions  panelPrescription;
+    public DrugPresPanel(Drugs d ,Prescriptions p ) {
         initComponents();
         this.panelDrug = d;
+        this.panelPrescription = p;
         if(d.getTradeName() != null){
         this.setBorder(javax.swing.BorderFactory.createTitledBorder(d.getTradeName()));
         }
@@ -62,6 +64,11 @@ public class DrugPresPanel extends javax.swing.JPanel {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -91,10 +98,14 @@ public class DrugPresPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
+Eroshetta.removeDrug(this.panelPrescription.getDrugsCollection(), this.panelDrug);
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
