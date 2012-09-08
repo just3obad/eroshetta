@@ -1358,13 +1358,14 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
-public static void removeDrug(Collection<Drugs> c,Drugs dr){
-    c.remove(dr);
+public static void removeDrug(Drugs dr,DrugPresPanel dpp){
+    Eroshetta.drugsCollectionInPrescription.remove(dr);
+    Eroshetta.drugsPanels.remove(dpp);
 }
     boolean workingOnPrescription = false;
     static Prescriptions currentPrescription = new Prescriptions();
 //    static ArrayList<Prescriptions> currentPrescription= new <Prescriptions>ArrayList();
-   static Collection<Drugs> drugsCollectionInPrescription ;
+   static Collection<Drugs> drugsCollectionInPrescription = new ArrayList();
     
     private void addToPrescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToPrescMouseClicked
 int o ;
@@ -1478,9 +1479,10 @@ int o ;
              }catch(NullPointerException e){
                 
             }
-            DrugPresPanel drugPanel = new DrugPresPanel(d,currentPrescription);
             
-            drugsCollectionInPrescription.toArray()[0] = d;
+            
+            drugsCollectionInPrescription.add(d);
+            drugsPanels.clear();
 //            currentPrescription.getDrugsCollection().add(d);
             for (int i = 0; i < drugsPanels.size(); i++) {
                 if (drugsPanels.get(i).panelDrug.getId() == d.getId()) {
@@ -1488,13 +1490,24 @@ int o ;
                     return;
                 }
             }
-            drugsPanels.add(drugPanel);
-            this.DrugsInPrescription.add(drugPanel);
+            
+            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+                DrugPresPanel drugPanel = new DrugPresPanel(d,currentPrescription);
+                drugsPanels.add(drugPanel);
+                            
+            }
+            
+            this.DrugsInPrescription.removeAll();
             if (drugsPanels.size() < 4) {
                 this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
             } else {
                 this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
             }
+            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+                DrugPresPanel drugPanel = new DrugPresPanel(d,currentPrescription);
+                this.DrugsInPrescription.add(drugPanel);
+            }
+            
             this.DrugsInPrescription.revalidate();
             
         }else{
