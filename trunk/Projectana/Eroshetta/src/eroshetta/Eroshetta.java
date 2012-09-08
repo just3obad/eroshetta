@@ -234,6 +234,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTabbedPane1.setMaximumSize(new java.awt.Dimension(747, 618));
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MouseClicked(evt);
@@ -534,6 +535,9 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Patient Profile", jPanel3);
 
+        Panel_Drugs.setMaximumSize(new java.awt.Dimension(291, 586));
+        Panel_Drugs.setMinimumSize(new java.awt.Dimension(291, 586));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Drugs");
 
@@ -758,13 +762,15 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanelPrescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanelPrescription.setAutoscrolls(true);
+        jPanelPrescription.setMaximumSize(new java.awt.Dimension(226, 114));
+        jPanelPrescription.setMinimumSize(new java.awt.Dimension(226, 114));
 
         jButton2.setText("Preview for saving and printing");
 
@@ -779,7 +785,7 @@ public class Eroshetta extends javax.swing.JFrame {
         DrugsInPrescription.setAutoscrolls(true);
         DrugsInPrescription.setMaximumSize(new java.awt.Dimension(12, 27));
         DrugsInPrescription.setMinimumSize(new java.awt.Dimension(12, 27));
-        DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
+        DrugsInPrescription.setLayout(new java.awt.GridLayout(5, 0));
         jScrollPane4.setViewportView(DrugsInPrescription);
 
         javax.swing.GroupLayout jPanelPrescriptionLayout = new javax.swing.GroupLayout(jPanelPrescription);
@@ -787,16 +793,14 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPrescriptionLayout.setHorizontalGroup(
             jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(203, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(33, 33, 33))
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
                 .addComponent(jLabel14)
                 .addContainerGap())
             .addComponent(jScrollPane3)
-            .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane4)
         );
         jPanelPrescriptionLayout.setVerticalGroup(
             jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -826,8 +830,8 @@ public class Eroshetta extends javax.swing.JFrame {
                         .addGap(128, 128, 128)
                         .addComponent(jLabel15)
                         .addGap(0, 146, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -873,7 +877,7 @@ public class Eroshetta extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelPatientsBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -1349,11 +1353,130 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
-
+public static void removeDrug(Collection<Drugs> c,Drugs dr){
+    c.remove(dr);
+}
+    boolean workingOnPrescription = false;
+    static Prescriptions currentPrescription = new Prescriptions();
+//    static ArrayList<Prescriptions> currentPrescription= new <Prescriptions>ArrayList();
+   static Collection<Drugs> drugsCollectionInPrescription ;
+    
     private void addToPrescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToPrescMouseClicked
+int o ;
+        if(this.jListPatientsBook.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this, "Please select a patient", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         if (this.jList_Drugs.getSelectedIndex() != -1) {
+            
+      if(currentPrescription.getDrugsCollection()==null){
+        currentPrescription.setPatientId(currentPatient);
+        this.workingOnPrescription = true;
+    }
             Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
-            DrugPresPanel drugPanel = new DrugPresPanel(d);
+            int age = Calendar.YEAR - currentPatient.getBirthDate().getYear();
+            //conditions checking a drug
+            try{
+            if(d.getContraAge() == 1 && age < 6){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+            }catch(NullPointerException e){
+                
+            }
+            try{
+            if(d.getContraAge() == 2 && age < 15){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for teens , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+            }catch(NullPointerException e){
+                
+            }
+            try{
+             if(d.getContraAge() == 3 && age > 50){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for old people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+             }catch(NullPointerException e){
+                
+            }
+             try{
+             if(d.getContraAge() == 4 && age < 15){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids and babies people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+             }catch(NullPointerException e){
+                
+            }
+             try{
+             if(d.getContraAge() == 5 && age < 15 && age > 50){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids and babies people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+             }catch(NullPointerException e){
+                
+            }
+             try{
+              if(d.getContraPregnant() == 1 && currentPatient.getIsPregnant() ==1){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant womans  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+              }catch(NullPointerException e){
+                
+            }
+              try{
+              if(d.getContraBmi() == 1 && currentPatient.getBmi().intValue() < 22.5){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for under weight(BMI < 22.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+              }catch(NullPointerException e){
+                
+            }
+              try{
+             if(d.getContraBmi() == 2 && currentPatient.getBmi().intValue() < 25.5){
+               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for normal people(25.5 < BMI < 29.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               }
+            }
+             }catch(NullPointerException e){
+                
+            }
+              try{
+             Collection<Drugs> drugsContraAlreadyDrugs = d.getDrugsCollection();
+             for(int j=0;j<this.drugsCollectionInPrescription.size();j++){
+                 Drugs a = (Drugs) this.drugsCollectionInPrescription.toArray()[j];
+                 for(int k=0;k<drugsContraAlreadyDrugs.size();k++){
+                     Drugs b = (Drugs)drugsContraAlreadyDrugs.toArray()[k];
+                     if(a.getId()==b.getId()){
+                        o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with"+a.toString()+" , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               } 
+                     }
+                 }
+             }
+             }catch(NullPointerException e){
+                
+            }
+            DrugPresPanel drugPanel = new DrugPresPanel(d,currentPrescription);
+            
+            drugsCollectionInPrescription.toArray()[0] = d;
+//            currentPrescription.getDrugsCollection().add(d);
             for (int i = 0; i < drugsPanels.size(); i++) {
                 if (drugsPanels.get(i).panelDrug.getId() == d.getId()) {
                     JOptionPane.showMessageDialog(this, "you already added the drug", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
@@ -1368,7 +1491,10 @@ public class Eroshetta extends javax.swing.JFrame {
                 this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
             }
             this.DrugsInPrescription.revalidate();
-
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Please select a drug", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+            
         }
         // TODO add your handling code here:
 //        if(d.getPrice() != null){
