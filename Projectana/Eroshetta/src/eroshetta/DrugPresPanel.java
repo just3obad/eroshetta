@@ -18,10 +18,12 @@ public class DrugPresPanel extends javax.swing.JPanel {
     }
      Drugs panelDrug;
      Prescriptions  panelPrescription;
-    public DrugPresPanel(Drugs d ,Prescriptions p ) {
+     Eroshetta e;
+    public DrugPresPanel(Drugs d ,Prescriptions p , Eroshetta e) {
         initComponents();
         this.panelDrug = d;
         this.panelPrescription = p;
+        this.e =e;
         if(d.getTradeName() != null){
         this.setBorder(javax.swing.BorderFactory.createTitledBorder(d.getTradeName()));
         }
@@ -98,7 +100,7 @@ public class DrugPresPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-Eroshetta.removeDrug(this.panelDrug,this);
+this.e.removeDrug(this.panelDrug,this);
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked

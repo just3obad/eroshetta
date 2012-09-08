@@ -1358,9 +1358,29 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
-public static void removeDrug(Drugs dr,DrugPresPanel dpp){
+public void removeDrug(Drugs dr,DrugPresPanel dpp){
     Eroshetta.drugsCollectionInPrescription.remove(dr);
     Eroshetta.drugsPanels.remove(dpp);
+                for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+                Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
+                DrugPresPanel drugPanel = new DrugPresPanel(drugruga,currentPrescription,this);
+                drugsPanels.add(drugPanel);
+                            
+            }
+            this.DrugsInPrescription.removeAll();
+            if (drugsPanels.size() < 4) {
+                this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
+            } else {
+                this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
+            }
+            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+                Drugs drugrug = (Drugs) drugsCollectionInPrescription.toArray()[i];
+                DrugPresPanel drugPanel = new DrugPresPanel(drugrug,currentPrescription,this);
+                this.DrugsInPrescription.add(drugPanel);
+            }
+            
+            this.DrugsInPrescription.revalidate(); 
+                
 }
     boolean workingOnPrescription = false;
     static Prescriptions currentPrescription = new Prescriptions();
@@ -1482,7 +1502,7 @@ int o ;
             
             
             drugsCollectionInPrescription.add(d);
-            drugsPanels.clear();
+            
 //            currentPrescription.getDrugsCollection().add(d);
             for (int i = 0; i < drugsPanels.size(); i++) {
                 if (drugsPanels.get(i).panelDrug.getId() == d.getId()) {
@@ -1490,9 +1510,10 @@ int o ;
                     return;
                 }
             }
-            
+            drugsPanels.clear();
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-                DrugPresPanel drugPanel = new DrugPresPanel(d,currentPrescription);
+                Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
+                DrugPresPanel drugPanel = new DrugPresPanel(drugruga,currentPrescription,this);
                 drugsPanels.add(drugPanel);
                             
             }
@@ -1504,7 +1525,8 @@ int o ;
                 this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
             }
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-                DrugPresPanel drugPanel = new DrugPresPanel(d,currentPrescription);
+                Drugs drugrug = (Drugs) drugsCollectionInPrescription.toArray()[i];
+                DrugPresPanel drugPanel = new DrugPresPanel(drugrug,currentPrescription,this);
                 this.DrugsInPrescription.add(drugPanel);
             }
             
