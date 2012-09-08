@@ -162,7 +162,7 @@ public class Eroshetta extends javax.swing.JFrame {
         drugClassName = new javax.swing.JLabel();
         addToPresc = new javax.swing.JButton();
         jPanelPrescription = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        savePreview = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -762,7 +762,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -772,7 +772,12 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPrescription.setMaximumSize(new java.awt.Dimension(226, 114));
         jPanelPrescription.setMinimumSize(new java.awt.Dimension(226, 114));
 
-        jButton2.setText("Preview for saving and printing");
+        savePreview.setText("Preview for saving and printing");
+        savePreview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savePreviewActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel14.setText("Notes : ");
@@ -794,7 +799,7 @@ public class Eroshetta extends javax.swing.JFrame {
             jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
                 .addContainerGap(203, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(savePreview)
                 .addGap(33, 33, 33))
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
                 .addComponent(jLabel14)
@@ -811,7 +816,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(jButton2))
+                .addComponent(savePreview))
         );
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -1160,11 +1165,11 @@ public class Eroshetta extends javax.swing.JFrame {
         }); // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSearchDragsKeyReleased
 
+    //Kareem
     private void editDoctorProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDoctorProfileActionPerformed
         // TODO add your handling code here:
         DoctorInfo info = new DoctorInfo();
         info.setVisible(true);
-        info.setDefaultCloseOperation(info.EXIT_ON_CLOSE);
     }//GEN-LAST:event_editDoctorProfileActionPerformed
 
     private void jTextFieldSearchDragsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchDragsActionPerformed
@@ -1512,6 +1517,18 @@ int o ;
         // TODO add your handling code here:
     }//GEN-LAST:event_addToPrescMouseClicked
 
+    // Kareem
+    private void savePreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePreviewActionPerformed
+        // TODO add your handling code here:
+        javax.persistence.Query q =em.createNamedQuery("Prescriptions.findById");
+        q.setParameter("id", 1);
+        Prescriptions p = (Prescriptions)q.getSingleResult();
+        PrescriptionView prescView = new PrescriptionView(p);
+        //PrescriptionFrame prescFrame =new PrescriptionFrame(prescView);
+        //prescFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        new PrescriptionFrame(prescView).setVisible(true);
+    }//GEN-LAST:event_savePreviewActionPerformed
+
     public void profileGenderMaritalStatus() {
         if (jComboBoxPatientProfileGender.getSelectedIndex() == 0) {
             jComboBoxPatientProfilePregnant.setVisible(false);
@@ -1750,10 +1767,34 @@ int o ;
         /*
          * Create and display the form
          */
+        //Kareem 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Eroshetta e = new Eroshetta();
-                e.setVisible(true);
+                boolean flag = true;
+                try{
+                    javax.persistence.Query q =em.createNamedQuery("Doctor.findAll");
+                    Doctor doc = (Doctor) q.getSingleResult();
+                   }
+                catch(NoResultException e)
+                   {
+                     flag =false;     
+                   }
+                
+                
+                if(flag)
+                   {
+                eroshetta.setVisible(true);
+                   }
+                else
+                   {
+                 DoctorInfo docInfo = new DoctorInfo();
+                 docInfo.setVisible(true);
+                   }
+                
+                
+            
+                
+            
 //                e.setExtendedState(Frame.MAXIMIZED_BOTH);
 
             }
@@ -1780,6 +1821,8 @@ int o ;
     }
     static List<Patients> patientsBookList = new ArrayList<Patients>();
     static Patients currentPatient;
+    static Eroshetta eroshetta = new Eroshetta();
+            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
@@ -1799,7 +1842,6 @@ int o ;
     private javax.swing.JMenuItem editDoctorProfile;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBoxPatientProfileDay;
     private javax.swing.JComboBox jComboBoxPatientProfileGender;
     private javax.swing.JComboBox jComboBoxPatientProfileMarital;
@@ -1866,5 +1908,6 @@ int o ;
     private javax.swing.JTextField jTextFieldSearchDrags;
     private javax.swing.JToggleButton jToggleButtonDiagnosis;
     private javax.swing.JToggleButton jToggleButtonPPMedication;
+    private javax.swing.JButton savePreview;
     // End of variables declaration//GEN-END:variables
 }
