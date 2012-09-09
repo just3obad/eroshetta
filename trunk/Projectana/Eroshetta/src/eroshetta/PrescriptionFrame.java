@@ -82,8 +82,14 @@ public class PrescriptionFrame extends javax.swing.JFrame {
         });
 
         cancelPresc.setText("Cancel");
+        cancelPresc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelPrescActionPerformed(evt);
+            }
+        });
 
         prescContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        prescContainer.setPreferredSize(new java.awt.Dimension(620, 880));
 
         javax.swing.GroupLayout prescContainerLayout = new javax.swing.GroupLayout(prescContainer);
         prescContainer.setLayout(prescContainerLayout);
@@ -93,7 +99,7 @@ public class PrescriptionFrame extends javax.swing.JFrame {
         );
         prescContainerLayout.setVerticalGroup(
             prescContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 549, Short.MAX_VALUE)
+            .addGap(0, 686, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,14 +115,14 @@ public class PrescriptionFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(printPresc, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelPresc, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE)
+                        .addComponent(cancelPresc, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                         .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(prescContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(prescContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(printPresc)
@@ -152,61 +158,67 @@ public class PrescriptionFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_printPrescActionPerformed
 
+    private void cancelPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPrescActionPerformed
+        // TODO add your handling code here:
+        this.setDefaultCloseOperation(this.HIDE_ON_CLOSE);
+        this.setVisible(false);
+    }//GEN-LAST:event_cancelPrescActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
     
-//    public static void main(String args[]) {
-//        /*
-//         * Set the Nimbus look and feel
-//         */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /*
-//         * If Nimbus (introduced in Java SE 6) is not available, stay with the
-//         * default look and feel. For details see
-//         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /*
-//         * Create and display the form
-//         */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//        
-//        
-//
-//            public void run() {
-//                javax.persistence.Query q =em.createNamedQuery("Prescriptions.findById");
-//                q.setParameter("id", 1);
-//                Prescriptions p = (Prescriptions)q.getSingleResult();
-//                
-//                PrescriptionView prescView = new PrescriptionView(p);
-////                PrescriptionFrame prescFrame =new PrescriptionFrame(prescView);
-////                prescFrame.setDefaultCloseOperation(prescFrame.EXIT_ON_CLOSE); 
-//                new PrescriptionFrame(prescView).setVisible(true);
-//               // prescFrame.setVisible(true);
-//                
-//                
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /*
+         * Set the Nimbus look and feel
+         */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PrescriptionFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /*
+         * Create and display the form
+         */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+        
+        
+
+            public void run() {
+                javax.persistence.Query q =em.createNamedQuery("Prescriptions.findById");
+                q.setParameter("id", 1);
+                Prescriptions p = (Prescriptions)q.getSingleResult();
+                
+                PrescriptionView prescView = new PrescriptionView(p);
+//                PrescriptionFrame prescFrame =new PrescriptionFrame(prescView);
+//                prescFrame.setDefaultCloseOperation(prescFrame.EXIT_ON_CLOSE); 
+                new PrescriptionFrame(prescView).setVisible(true);
+               // prescFrame.setVisible(true);
+                
+                
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelPresc;
