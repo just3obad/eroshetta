@@ -1361,6 +1361,8 @@ public class Eroshetta extends javax.swing.JFrame {
 public void removeDrug(Drugs dr,DrugPresPanel dpp){
     Eroshetta.drugsCollectionInPrescription.remove(dr);
     Eroshetta.drugsPanels.remove(dpp);
+    this.DrugsInPrescription.removeAll();
+//    this.DrugsInPrescription.setLayout(new java.awt.BorderLayout());
                 for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
                 Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
                 DrugPresPanel drugPanel = new DrugPresPanel(drugruga,currentPrescription,this);
@@ -1859,7 +1861,7 @@ int o ;
     static Eroshetta eroshetta = new Eroshetta();
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel DrugsInPrescription;
+    public javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
     private javax.swing.JButton addToPresc;
     private javax.swing.JLabel dosageForm;
