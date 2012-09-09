@@ -5,10 +5,10 @@
 package eroshetta;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.math.BigDecimal;
 import java.util.*;
 import javax.persistence.*;
@@ -95,7 +95,6 @@ public class Eroshetta extends javax.swing.JFrame {
         jTextFieldPatientsBook = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jPanelPatientOldPresc = new javax.swing.JPanel();
         jPanelPatientProfile = new javax.swing.JPanel();
         jLabelPatientProfileName = new javax.swing.JLabel();
         jLabelPatientProfileGender = new javax.swing.JLabel();
@@ -129,6 +128,8 @@ public class Eroshetta extends javax.swing.JFrame {
         jToggleButtonPPMedication = new javax.swing.JToggleButton();
         jToggleButtonDiagnosis = new javax.swing.JToggleButton();
         jLabelPatientProfilePregnant = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jPanelPatientOldPresc = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         Panel_Drugs = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -240,19 +241,6 @@ public class Eroshetta extends javax.swing.JFrame {
                 jTabbedPane1MouseClicked(evt);
             }
         });
-
-        jPanelPatientOldPresc.setBorder(javax.swing.BorderFactory.createTitledBorder("Old Prescriptions"));
-
-        javax.swing.GroupLayout jPanelPatientOldPrescLayout = new javax.swing.GroupLayout(jPanelPatientOldPresc);
-        jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
-        jPanelPatientOldPrescLayout.setHorizontalGroup(
-            jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
-        );
-        jPanelPatientOldPrescLayout.setVerticalGroup(
-            jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         jPanelPatientProfile.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -513,6 +501,21 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanelPatientOldPresc.setBorder(javax.swing.BorderFactory.createTitledBorder("Old Prescriptions"));
+
+        javax.swing.GroupLayout jPanelPatientOldPrescLayout = new javax.swing.GroupLayout(jPanelPatientOldPresc);
+        jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
+        jPanelPatientOldPrescLayout.setHorizontalGroup(
+            jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 348, Short.MAX_VALUE)
+        );
+        jPanelPatientOldPrescLayout.setVerticalGroup(
+            jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 561, Short.MAX_VALUE)
+        );
+
+        jScrollPane5.setViewportView(jPanelPatientOldPresc);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -520,8 +523,8 @@ public class Eroshetta extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelPatientOldPresc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -530,7 +533,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanelPatientOldPresc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Patient Profile", jPanel3);
@@ -888,6 +891,29 @@ public class Eroshetta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //Kareem
+    public void oldPrescriptions()
+    {
+        jPanelPatientOldPresc.removeAll();
+        jPanelPatientOldPresc.setLayout(new java.awt.GridLayout(10, 0));
+        JButton  oldP;
+        for(int i=0; i<currentPatient.getPrescriptionsCollection().size(); i++)
+        {
+            final Prescriptions p = (Prescriptions) currentPatient.getPrescriptionsCollection().toArray()[i];
+            oldP = new JButton(p.getDate()+"");
+            oldP.addActionListener(new ActionListener(){  
+            public void actionPerformed(ActionEvent e)
+            {
+              PrescriptionView prescView = new PrescriptionView(p);
+              new PrescriptionFrame(prescView).setVisible(true);  
+            }});
+            oldP.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY, i,true));
+            jPanelPatientOldPresc.add(oldP);
+           
+        }
+    }
+            
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
@@ -1187,6 +1213,7 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
         // TODO add your handling code here:
         try {
+            
              int selctedID = jListPatientsBook.getSelectedIndex();
         currentPatient = patientsBookList.get(selctedID);
 //        System.out.println(currentPatient);
@@ -1243,10 +1270,12 @@ public class Eroshetta extends javax.swing.JFrame {
             jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
             jTextFieldPatientProfileWeight.setText(weight);
         }
+        this.oldPrescriptions();
+        
 
         } catch (Exception e) {
         }
-
+            
     }//GEN-LAST:event_jListPatientsBookValueChanged
     static ArrayList<DrugPresPanel> drugsPanels = new <DrugPresPanel>ArrayList();
     private void addToPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToPrescActionPerformed
@@ -1930,6 +1959,7 @@ int o ;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPanePPDiagnosis;
     private javax.swing.JScrollPane jScrollPanePPDiagnosisMedication;
     private javax.swing.JScrollPane jScrollPanePPMedication;

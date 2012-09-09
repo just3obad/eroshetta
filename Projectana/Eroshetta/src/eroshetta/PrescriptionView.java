@@ -48,11 +48,11 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
     private void initComponents() {
 
         setBackground(new java.awt.Color(153, 255, 102));
-        setMaximumSize(new java.awt.Dimension(440, 487));
-        setMinimumSize(new java.awt.Dimension(440, 487));
+        setMaximumSize(new java.awt.Dimension(400, 688));
+        setMinimumSize(new java.awt.Dimension(400, 688));
         setName("");
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(440, 487));
+        setPreferredSize(new java.awt.Dimension(400, 688));
         setRequestFocusEnabled(false);
         setLayout(new java.awt.BorderLayout());
     }// </editor-fold>//GEN-END:initComponents
@@ -81,6 +81,9 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       javax.persistence.Query q =em.createNamedQuery("Doctor.findAll");
       Doctor d =  (Doctor)q.getSingleResult();
       
+     
+
+      
 //      javax.persistence.Query q1 =em.createNamedQuery("Prescriptions.findById");
 //      q1.setParameter("id", 1);
 //      Prescriptions p = (Prescriptions) q1.getSingleResult();
@@ -90,11 +93,15 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       
       Image img1;
       Image img2;
+      Image img3;
       MediaTracker mt = new MediaTracker(this);
       img1 = Toolkit.getDefaultToolkit().getImage("t.gif");
       img2 = Toolkit.getDefaultToolkit().getImage("m.gif");
+      img3 = Toolkit.getDefaultToolkit().getImage("a.gif");
+      
       mt.addImage(img1,0);
       mt.addImage(img2, 0);
+      mt.addImage(img3,0);
       
       Font font1 = new Font("Book Antiqua", Font.PLAIN, 30);
       Font font2 = new Font("Monotype Corsiva", Font.PLAIN, 20);
@@ -106,9 +113,27 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       g.drawImage(img2,5,55,25,25,this);
       g.drawString("0"+d.getMobileNo(),35,80);
       g.drawString("Name: "+presc.getPatientId().getName(),35 ,115);
+      g.drawString("Date: "+presc.getDate(),320,115);
       g.drawLine(50, 130, 570, 130);
       g.drawLine(50, 133, 570, 133);
+      int h = 0;
+      for(int i=0; i<presc.getDrugsCollection().size() ; i++)
+      {
+          Drugs drug  = (Drugs)presc.getDrugsCollection().toArray()[i];
+          g.drawString(i+". "+drug.getTradeName(),10,170+h);
+          h = h+30;
+       
+      }
       
+      
+
+      
+      
+      g.drawLine(50,600,570,600);
+      g.drawLine(50,603,570,603);
+      g.drawImage(img3,5,618,25,25, this);
+      g.drawString(d.getAddress(),35,643);
+
       
       
       
