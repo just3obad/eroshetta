@@ -100,7 +100,11 @@ public class DrugPresPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-this.e.removeDrug(this.panelDrug,this);
+this.e.DrugsInPrescription.removeAll();
+this.e.DrugsInPrescription.setVisible(false);
+this.e.DrugsInPrescription.setVisible(true);
+        this.e.removeDrug(this.panelDrug,this);
+
         this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
