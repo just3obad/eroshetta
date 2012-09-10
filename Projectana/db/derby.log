@@ -1,13 +1,11 @@
-Sun Sep 09 01:02:29 GMT+02:00 2012 : Apache Derby Network Server - 10.8.1.2 - (1095077) started and ready to accept connections on port 1527
+Mon Sep 10 22:16:35 GMT+02:00 2012 : Apache Derby Network Server - 10.8.1.2 - (1095077) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Sun Sep 09 01:02:32 GMT+02:00 2012:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0139-a81e-a4e9-fffff71fda6d 
-on database directory C:\Users\Mouaz\Desktop\eroshetta\Projectana\db\eroshetta  with class loader sun.misc.Launcher$AppClassLoader@558fe7c3 
+Mon Sep 10 22:16:36 GMT+02:00 2012:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0139-b1d3-8ef6-fffff71fda6d 
+on database directory C:\Users\Mouaz\Desktop\eroshetta\Projectana\db\eroshetta  with class loader sun.misc.Launcher$AppClassLoader@37b90b39 
 Loaded from file:/C:/Program%20Files/glassfish-3.1.2/javadb/lib/derby.jar
 java.vendor=Sun Microsystems Inc.
 java.runtime.version=1.6.0_27-b07
 user.dir=C:\Program Files\glassfish-3.1.2\javadb
 derby.system.home=C:\Users\Mouaz\Desktop\eroshetta\Projectana\db
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Sun Sep 09 02:36:04 GMT+02:00 2012: Shutting down Derby engine

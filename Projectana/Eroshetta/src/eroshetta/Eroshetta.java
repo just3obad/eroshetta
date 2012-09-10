@@ -896,7 +896,7 @@ public class Eroshetta extends javax.swing.JFrame {
               PrescriptionView prescView = new PrescriptionView(p);
               new PrescriptionFrame(prescView).setVisible(true);  
             }});
-            oldP.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY, i,true));
+//            oldP.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY, i,true));
             jPanelPatientOldPresc.add(oldP);
            
         }
