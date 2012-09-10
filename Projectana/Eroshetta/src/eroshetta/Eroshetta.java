@@ -602,7 +602,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jLabel11.setText("Minor side effects:");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
-        jLabel12.setText("Interactive foods:");
+        jLabel12.setText("Food Interactions:");
 
         drugTradeName.setText("                       ");
 
