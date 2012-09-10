@@ -196,6 +196,11 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jListPatientsBook.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
         jListPatientsBook.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jListPatientsBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListPatientsBookMouseClicked(evt);
+            }
+        });
         jListPatientsBook.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jListPatientsBookValueChanged(evt);
@@ -1224,7 +1229,13 @@ public class Eroshetta extends javax.swing.JFrame {
 //        System.out.println(drugId);
     }//GEN-LAST:event_jList_DrugsValueChanged
 */
+    static int workingPatientIndex = -1;
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
+
+        // ma3lesh ya 3obad shwaya mn nefsi
+
+        
+        //sososos 
         // TODO add your handling code here:
         try {
                     
@@ -1482,7 +1493,8 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
    static Collection<Drugs> drugsCollectionInPrescription = new ArrayList();
     
     private void addToPrescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToPrescMouseClicked
-int o ;
+
+        int o ;
         if(this.jListPatientsBook.getSelectedIndex() == -1){
             JOptionPane.showMessageDialog(this, "Please select a patient", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -1605,6 +1617,8 @@ int o ;
                     return;
                 }
             }
+            this.workingOnPrescription = true;
+            this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
             drugsCollectionInPrescription.add(d);
             drugsPanels.clear();
             drugsPanels.removeAll(drugsPanels);
@@ -1660,6 +1674,24 @@ int o ;
         //prescFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         new PrescriptionFrame(prescView).setVisible(true);
     }//GEN-LAST:event_savePreviewActionPerformed
+
+    private void jListPatientsBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPatientsBookMouseClicked
+        if(this.workingOnPrescription){
+        int o = JOptionPane.showConfirmDialog(new JButton("parent"), "Prescription Progress will be lost , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
+                   return;
+               }else{
+                   this.DrugsInPrescription.removeAll();
+                   this.DrugsInPrescription.revalidate();
+                   this.DrugsInPrescription.repaint();
+                   this.drugsPanels.clear();
+                   this.drugsCollectionInPrescription.clear();
+               }
+        }        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jListPatientsBookMouseClicked
 
     public void profileGenderMaritalStatus() {
         if (jComboBoxPatientProfileGender.getSelectedIndex() == 0) {
