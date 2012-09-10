@@ -52,7 +52,7 @@ public class Patients implements Serializable {
     private Date nextVisit;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "WEIGHT")
-    private BigDecimal weight;
+    private Integer weight;
     @Column(name = "HEIGHT")
     private Integer height;
     @Column(name = "BMI")
@@ -123,11 +123,11 @@ public class Patients implements Serializable {
         this.nextVisit = nextVisit;
     }
 
-    public BigDecimal getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(BigDecimal weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 

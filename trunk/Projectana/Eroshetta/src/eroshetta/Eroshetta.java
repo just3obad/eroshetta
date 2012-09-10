@@ -28,6 +28,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
     public Eroshetta() {
         initComponents();
+        
         this.setLocation(200, 50);
         
 //        JScrollPane scrollBar = new JScrollPane(drugProfile);
@@ -334,19 +335,9 @@ public class Eroshetta extends javax.swing.JFrame {
         jLabelPatientProfileHeightCM.setText("cm.");
 
         jListPPDiagnosis.setEnabled(false);
-        jListPPDiagnosis.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPanePPDiagnosis.setViewportView(jListPPDiagnosis);
 
         jListPPM3edication.setEnabled(false);
-        jListPPM3edication.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPanePPMedication.setViewportView(jListPPM3edication);
 
         jScrollPanePPDiagnosisMedication.setVisible(false);
@@ -399,46 +390,43 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(jScrollPanePPDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPanePPMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
-                        .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxPatientProfileGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
-                                .addComponent(jComboBoxPatientProfileDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxPatientProfileMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxPatientProfileYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextFieldPatientProfileBMI, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
-                                .addComponent(jComboBoxPatientProfileMarital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelPatientProfilePregnant)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxPatientProfilePregnant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
-                                .addComponent(jTextFieldPatientProfileWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelPatientProfileWeiightKG)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabelPatientProfileHeight)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldPatientProfileHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelPatientProfileHeightCM))
-                            .addComponent(jTextFieldPatientProfileName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
-                                .addComponent(jToggleButtonPPMedication)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldPPMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(jToggleButtonPPMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldPPMedication))
+                    .addComponent(jComboBoxPatientProfileGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
-                        .addComponent(jToggleButtonDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxPatientProfileDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxPatientProfileMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxPatientProfileYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldPatientProfileBMI, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
+                        .addComponent(jComboBoxPatientProfileMarital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jLabelPatientProfilePregnant)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxPatientProfilePregnant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
+                        .addComponent(jTextFieldPatientProfileWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPatientProfileWeiightKG)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelPatientProfileHeight)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldPatientProfileHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPatientProfileHeightCM))
+                    .addComponent(jTextFieldPatientProfileName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelPatientProfileLayout.createSequentialGroup()
+                        .addComponent(jToggleButtonDiagnosis, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPanePPDiagnosisMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelPPMedication))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabelPPMedication)
+                            .addComponent(jScrollPanePPDiagnosisMedication, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPatientProfileLayout.setVerticalGroup(
             jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,11 +496,11 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPatientOldPresc.setLayout(jPanelPatientOldPrescLayout);
         jPanelPatientOldPrescLayout.setHorizontalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
+            .addGap(0, 384, Short.MAX_VALUE)
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
 
         jScrollPane5.setViewportView(jPanelPatientOldPresc);
@@ -523,10 +511,10 @@ public class Eroshetta extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -763,7 +751,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -933,11 +921,11 @@ public class Eroshetta extends javax.swing.JFrame {
 
         //inserting all names in ArrayLists to search with piriority
 //        em.getTransaction().begin();
-        Drugs example = new Drugs();
-        example.setClassName("class Name");
-        example.setClassName("trade Name");
-        example.setClassName("generic Name");
-        em.persist(example);
+//        Drugs example = new Drugs();
+//        example.setClassName("class Name");
+//        example.setClassName("trade Name");
+//        example.setClassName("generic Name");
+//        em.persist(example);
         ArrayList<String> tradeNames = new ArrayList();
         ArrayList<String> genericNames = new ArrayList();
         ArrayList<String> classNames = new ArrayList();
@@ -1154,7 +1142,7 @@ public class Eroshetta extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
        
-
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void jTextFieldPatientsBookKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientsBookKeyReleased
@@ -1232,7 +1220,21 @@ public class Eroshetta extends javax.swing.JFrame {
 //        System.out.println(currentPatient.getHeight());
 //        System.out.println(currentPatient.getBmi());
 
-        if (currentPatient.getName() != null) {
+     
+        this.currentProfileInfo();
+        this.currentMedications();
+        this.currentDiagnoses();
+        this.oldPrescriptions();
+        
+
+        } catch (Exception e) {
+        }
+            
+    }//GEN-LAST:event_jListPatientsBookValueChanged
+    
+    public void currentProfileInfo(){
+        try {
+               if (currentPatient.getName() != null) {
             jTextFieldPatientProfileName.setText(currentPatient.getName());
         }
 
@@ -1272,13 +1274,32 @@ public class Eroshetta extends javax.swing.JFrame {
             jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
             jTextFieldPatientProfileWeight.setText(weight);
         }
-        this.oldPrescriptions();
         
-
         } catch (Exception e) {
         }
-            
-    }//GEN-LAST:event_jListPatientsBookValueChanged
+    }
+    
+    public void currentDiagnoses(){
+      DefaultListModel modelPPDiangnoses = new DefaultListModel();
+      jListPPDiagnosis.setModel(modelPPDiangnoses);
+      List currentpatientDiagnoses = (List) currentPatient.getDiagnosesCollection();
+      for(int i=0; i<currentpatientDiagnoses.size();i++){
+          Diagnoses d = (Diagnoses) currentpatientDiagnoses.get(i);
+          modelPPDiangnoses.add(i, d.getName());
+      }
+    }
+    
+    public void currentMedications() {
+        DefaultListModel modelPPMedicaion = new DefaultListModel();
+        jListPPM3edication.setModel(modelPPMedicaion);
+        List currentPatientMedication = (List) currentPatient.getDrugsCollection();
+        for (int i = 0; i < currentPatient.getDrugsCollection().size(); i++) {
+            Drugs d = (Drugs) currentPatientMedication.get(i);
+            modelPPMedicaion.add(i, d.getClassName());
+        }
+    }
+    
+    
     static ArrayList<DrugPresPanel> drugsPanels = new <DrugPresPanel>ArrayList();
     private void addToPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToPrescActionPerformed
         // TODO add your handling code here:
@@ -1659,7 +1680,7 @@ int o ;
                 p.setGender('m');
                 p.setHeight(i * 100);
                 int h = i * 100;
-                p.setWeight(BigDecimal.valueOf((i * 100) + (i * 2)));
+                p.setWeight(((i * 100) + (i * 2)));
                 double w = (i * 100) + (i * 2);
                 double b = h / (w * w);
                 p.setBmi(BigDecimal.valueOf(i));
@@ -1673,7 +1694,7 @@ int o ;
                 p.setGender('f');
                 p.setHeight(i * 100);
                 int h = i * 100;
-                p.setWeight(BigDecimal.valueOf((i * 100) + (i * 2)));
+                p.setWeight(((i * 100) + (i * 2)));
                 double w = (i * 100) + (i * 2);
                 double b = h / (w * w);
                 p.setBmi(BigDecimal.valueOf(i));
@@ -1789,18 +1810,18 @@ int o ;
 
     }
 
-//    
-//    public static void getCurrentMedications(){
-//        Query q = em.createNamedQuery("Patients.findById");
-//        q.setParameter("id", 1);
-//        List l = (List<Patients>) q.getResultList();
-//        Patients p =(Patients) l.get(0);
-//        List patientDrugList = (List) p.getDrugsCollection();
-//        Drugs d = (Drugs) patientDrugList.get(0);
-//        
-//        System.out.println(d.getTradeName());
-//        
-//    }
+    
+    public static void getCurrentMedications(){
+        Query q = em.createNamedQuery("Patients.findById");
+        q.setParameter("id", 1);
+        List l = (List<Patients>) q.getResultList();
+        Patients p =(Patients) l.get(0);
+        List patientDrugList = (List) p.getDrugsCollection();
+        Drugs d = (Drugs) patientDrugList.get(0);
+        
+        System.out.println(d.getTradeName());
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -1835,7 +1856,7 @@ int o ;
         /*
          * Create and display the form
          */
-        //Kareem 
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 boolean flag = true;
@@ -1875,11 +1896,14 @@ int o ;
 
 //     createPatients();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        
+        
+        
 //        setOne();
 //        patientsDiagnosis();
 //        getAllDiagnosis();
 //        diagnosis();
-        //getCurrentMedications();
+//        getCurrentMedications();
 //        findAllPatients();
 //        em.close();
 //        emf.close();
