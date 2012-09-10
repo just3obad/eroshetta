@@ -23,6 +23,7 @@ public class DoctorInfo extends javax.swing.JFrame {
      */
     public DoctorInfo() {
         initComponents();
+        this.setLocation(400, 50);
     }
     
   public static boolean isNumeric(String str)  
