@@ -895,7 +895,9 @@ public class Eroshetta extends javax.swing.JFrame {
     //Kareem
     public void oldPrescriptions()
     {
+        
         jPanelPatientOldPresc.removeAll();
+        jPanelPatientOldPresc.repaint();
         jPanelPatientOldPresc.setLayout(new java.awt.GridLayout(10, 0));
         JButton  oldP;
         for(int i=0; i<currentPatient.getPrescriptionsCollection().size(); i++)
@@ -1213,10 +1215,12 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
         // TODO add your handling code here:
         try {
+                    
             
-             int selctedID = jListPatientsBook.getSelectedIndex();
-        currentPatient = patientsBookList.get(selctedID);
-//        System.out.println(currentPatient);
+            
+            int selctedID = jListPatientsBook.getSelectedIndex();
+            currentPatient = patientsBookList.get(selctedID);
+//          System.out.println(currentPatient);
 //        System.out.println(currentPatient.getName());
 //        System.out.println(currentPatient.getBirthDate());
 
