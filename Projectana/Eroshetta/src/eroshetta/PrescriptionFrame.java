@@ -42,7 +42,7 @@ public class PrescriptionFrame extends javax.swing.JFrame {
         
 //        this.setPreferredSize(new Dimension(300,370));
 //        this.setMinimumSize(new Dimension(300,370));
-        
+        this.setLocation(400,50);
         presc = pView;
        // presc.setPreferredSize(new Dimension(380,450));
        // presc.setMinimumSize(new Dimension(380,450));
