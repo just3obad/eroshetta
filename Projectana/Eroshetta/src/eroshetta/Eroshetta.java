@@ -1412,7 +1412,9 @@ public class Eroshetta extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
 public void removeDrug(Drugs dr,DrugPresPanel dpp){
     Eroshetta.drugsCollectionInPrescription.remove(dr);
-    Eroshetta.drugsPanels.remove(dpp);
+    Collection c = new ArrayList();
+    c.add(dpp);
+    Eroshetta.drugsPanels.removeAll(c);
     this.DrugsInPrescription.removeAll();
 //    this.DrugsInPrescription.setLayout(new java.awt.BorderLayout());
                 for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
@@ -1565,6 +1567,7 @@ int o ;
                 }
             }
             drugsPanels.clear();
+            drugsPanels.removeAll(drugsPanels);
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
                 Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
                 DrugPresPanel drugPanel = new DrugPresPanel(drugruga,currentPrescription,this);
