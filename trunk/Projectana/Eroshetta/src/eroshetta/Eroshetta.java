@@ -28,6 +28,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
     public Eroshetta() {
         initComponents();
+        this.setLocation(200, 50);
         
 //        JScrollPane scrollBar = new JScrollPane(drugProfile);
 //        this.add(scrollBar);
