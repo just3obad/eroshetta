@@ -804,6 +804,11 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextArea1KeyPressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTextArea1);
 
         DrugsInPrescription.setBorder(javax.swing.BorderFactory.createTitledBorder("Drugs"));
@@ -1233,8 +1238,10 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
 
         // ma3lesh ya 3obad shwaya mn nefsi
-
-        
+if(this.workingOnPrescription){
+                   this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
+                   return;
+}
         //sososos 
         // TODO add your handling code here:
         try {
@@ -1506,9 +1513,11 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
         this.workingOnPrescription = true;
     }
             Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
-            int age = Calendar.YEAR - currentPatient.getBirthDate().getYear();
             //conditions checking a drug
+            int age = 0;
             try{
+                
+             age = Calendar.YEAR - currentPatient.getBirthDate().getYear();
             if(d.getContraAge() == 1 && age < 6){
                o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
                if(o!=0){
@@ -1687,11 +1696,19 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
                    this.DrugsInPrescription.repaint();
                    this.drugsPanels.clear();
                    this.drugsCollectionInPrescription.clear();
+                   this.workingOnPrescription = false;
+                   this.jTextArea1.setText(null);
                }
         }        
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jListPatientsBookMouseClicked
+
+    private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyPressed
+this.workingOnPrescription = true;        // TODO add your handling code here:
+            this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
+
+    }//GEN-LAST:event_jTextArea1KeyPressed
 
     public void profileGenderMaritalStatus() {
         if (jComboBoxPatientProfileGender.getSelectedIndex() == 0) {
