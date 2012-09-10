@@ -1614,7 +1614,25 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
              }catch(NullPointerException e){
                 
             }
-            
+            try{
+             Collection<Diagnoses> drugsContraAlreadyDiagnosis = d.getDiagnosesCollection();
+             Query qr = em.createNamedQuery("Diagnoses.findAll");
+               List <Diagnoses> tmpList = qr.getResultList();
+             for(int j=0;j<drugsContraAlreadyDiagnosis.size();j++){
+                 Diagnoses a = (Diagnoses) drugsContraAlreadyDiagnosis.toArray()[j];
+                 for(int k=0;k<tmpList.size();k++){
+                     Diagnoses b = (Diagnoses)tmpList.toArray()[k];
+                     if(a.getId()==b.getId()){
+                        o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with "+a.getName()+" , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+               if(o!=0){
+                   return;
+               } 
+                     }
+                 }
+             }
+             }catch(NullPointerException e){
+                
+            }
             
             
             System.out.println("tooooooo is 1 " +this.drugsPanels.size());
