@@ -28,7 +28,9 @@ public class Eroshetta extends javax.swing.JFrame {
 
     public Eroshetta() {
         initComponents();
-        
+         this.checkBoxTrade.setSelected(true);
+         this.checkBoxClass.setSelected(true);
+         this.checkBoxGeneric.setSelected(true);
         this.setLocation(200, 50);
         
 //        JScrollPane scrollBar = new JScrollPane(drugProfile);
@@ -164,9 +166,9 @@ public class Eroshetta extends javax.swing.JFrame {
         drugFoods = new javax.swing.JLabel();
         drugClassName = new javax.swing.JLabel();
         addToPresc = new javax.swing.JButton();
-        CheckBoxTrade = new javax.swing.JCheckBox();
-        CheckBoxClass = new javax.swing.JCheckBox();
-        CheckBoxGeneric = new javax.swing.JCheckBox();
+        checkBoxTrade = new javax.swing.JCheckBox();
+        checkBoxClass = new javax.swing.JCheckBox();
+        checkBoxGeneric = new javax.swing.JCheckBox();
         jPanelPrescription = new javax.swing.JPanel();
         savePreview = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
@@ -525,7 +527,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 620, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Patient Profile", jPanel3);
@@ -735,11 +737,14 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(drugProfile);
 
-        CheckBoxTrade.setText("Trade Name");
+        checkBoxTrade.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        checkBoxTrade.setText("Trade Name");
 
-        CheckBoxClass.setText("Class Name");
+        checkBoxClass.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        checkBoxClass.setText("Class Name");
 
-        CheckBoxGeneric.setText("Generic Name");
+        checkBoxGeneric.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        checkBoxGeneric.setText("Generic Name");
 
         javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
         Panel_Drugs.setLayout(Panel_DrugsLayout);
@@ -753,11 +758,11 @@ public class Eroshetta extends javax.swing.JFrame {
             .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Panel_DrugsLayout.createSequentialGroup()
-                .addComponent(CheckBoxTrade)
+                .addComponent(checkBoxTrade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CheckBoxClass)
+                .addComponent(checkBoxClass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CheckBoxGeneric)
+                .addComponent(checkBoxGeneric)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         Panel_DrugsLayout.setVerticalGroup(
@@ -768,11 +773,11 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel_DrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CheckBoxTrade)
-                    .addComponent(CheckBoxClass)
-                    .addComponent(CheckBoxGeneric))
+                    .addComponent(checkBoxTrade)
+                    .addComponent(checkBoxClass)
+                    .addComponent(checkBoxGeneric))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -982,20 +987,20 @@ public class Eroshetta extends javax.swing.JFrame {
         ArrayList<Drugs> drugsTopWithGenericNames = new <Drugs>ArrayList();
         ArrayList<GenericNames> drugsWithCertainGeneric = new <Drugs>ArrayList();
 
-        if (tradeNamesTopResults != null) {
+        if (tradeNamesTopResults != null && Eroshetta.checkBoxTrade.isSelected()) {
             for (int b = 0; b < tradeNamesTopResults.size(); b++) {
                 q = em.createNamedQuery("Drugs.findByTradeName").setParameter("tradeName", tradeNamesTopResults.get(b));
 //            ArrayList<Drugs> resultSet = q.getResultArrayList();
                 drugsTopWithTradeName.addAll(q.getResultList());
             }
         }
-        if (classNamesTopResults != null) {
+        if (classNamesTopResults != null  && Eroshetta.checkBoxClass.isSelected()) {
             for (int b = 0; b < classNamesTopResults.size(); b++) {
                 q = em.createNamedQuery("Drugs.findByClassName").setParameter("className", classNamesTopResults.get(b));
                 drugsTopWithClassName.addAll(q.getResultList());
             }
         }
-        if (genericNamesTopResults != null) {
+        if (genericNamesTopResults != null  && Eroshetta.checkBoxGeneric.isSelected()  ) {
             for (int b = 0; b < genericNamesTopResults.size(); b++) {
                 q = em.createNamedQuery("GenericNames.findByGenericName").setParameter("genericName", genericNamesTopResults.get(b));
                 List<GenericNames> drugsWithCertainGenericList = q.getResultList();
@@ -1954,12 +1959,12 @@ int o ;
     static Eroshetta eroshetta = new Eroshetta();
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox CheckBoxClass;
-    private javax.swing.JCheckBox CheckBoxGeneric;
-    private javax.swing.JCheckBox CheckBoxTrade;
     public javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
     private javax.swing.JButton addToPresc;
+    private static javax.swing.JCheckBox checkBoxClass;
+    private static javax.swing.JCheckBox checkBoxGeneric;
+    private static javax.swing.JCheckBox checkBoxTrade;
     private javax.swing.JLabel dosageForm;
     private javax.swing.JLabel drugClassName;
     private javax.swing.JLabel drugDosage;
