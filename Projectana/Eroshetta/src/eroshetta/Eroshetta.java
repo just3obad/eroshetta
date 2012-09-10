@@ -793,6 +793,11 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPrescription.setMinimumSize(new java.awt.Dimension(226, 114));
 
         savePreview.setText("Preview for saving and printing");
+        savePreview.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                savePreviewMouseClicked(evt);
+            }
+        });
         savePreview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 savePreviewActionPerformed(evt);
@@ -1727,6 +1732,66 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
             this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
 
     }//GEN-LAST:event_jTextArea1KeyPressed
+
+    private void savePreviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savePreviewMouseClicked
+        currentPrescription = new Prescriptions();
+        currentPrescription.setPatientId(currentPatient);
+        currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
+        Collection<DrugTime> times = new ArrayList();
+        for(int i =0;i<drugsCollectionInPrescription.size();i++){
+            if(drugsPanels.get(i).jCheckBox1.isSelected()){
+                DrugTime time = new DrugTime();
+                time.setDrugs(drugsPanels.get(i).panelDrug);
+                time.setPatients(currentPatient);
+                time.setPrescriptions(currentPrescription);
+                time.setDrugTime(drugsPanels.get(i).jCheckBox1.getText());
+                times.add(time);
+            }
+            if(drugsPanels.get(i).jCheckBox2.isSelected()){
+                DrugTime time = new DrugTime();
+                time.setDrugs(drugsPanels.get(i).panelDrug);
+                time.setPatients(currentPatient);
+                time.setPrescriptions(currentPrescription);
+                time.setDrugTime(drugsPanels.get(i).jCheckBox2.getText());
+                times.add(time);
+            }
+            if(drugsPanels.get(i).jCheckBox3.isSelected()){
+                DrugTime time = new DrugTime();
+                time.setDrugs(drugsPanels.get(i).panelDrug);
+                time.setPatients(currentPatient);
+                time.setPrescriptions(currentPrescription);
+                time.setDrugTime(drugsPanels.get(i).jCheckBox3.getText());
+                times.add(time);
+            }
+            if(drugsPanels.get(i).jCheckBox4.isSelected()){
+                DrugTime time = new DrugTime();
+                time.setDrugs(drugsPanels.get(i).panelDrug);
+                time.setPatients(currentPatient);
+                time.setPrescriptions(currentPrescription);
+                time.setDrugTime(drugsPanels.get(i).jCheckBox4.getText());
+                times.add(time);
+            }
+            if(drugsPanels.get(i).jCheckBox5.isSelected()){
+                DrugTime time = new DrugTime();
+                time.setDrugs(drugsPanels.get(i).panelDrug);
+                time.setPatients(currentPatient);
+                time.setPrescriptions(currentPrescription);
+                time.setDrugTime(drugsPanels.get(i).jCheckBox5.getText());
+                times.add(time);
+            }
+            if(drugsPanels.get(i).jCheckBox6.isSelected()){
+                DrugTime time = new DrugTime();
+                time.setDrugs(drugsPanels.get(i).panelDrug);
+                time.setPatients(currentPatient);
+                time.setPrescriptions(currentPrescription);
+                time.setDrugTime(drugsPanels.get(i).jCheckBox6.getText());
+                times.add(time);
+            }
+        }
+        currentPrescription.setDrugTimeCollection(times);
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_savePreviewMouseClicked
 
     public void profileGenderMaritalStatus() {
         if (jComboBoxPatientProfileGender.getSelectedIndex() == 0) {
