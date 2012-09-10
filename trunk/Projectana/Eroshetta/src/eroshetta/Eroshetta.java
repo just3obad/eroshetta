@@ -164,6 +164,9 @@ public class Eroshetta extends javax.swing.JFrame {
         drugFoods = new javax.swing.JLabel();
         drugClassName = new javax.swing.JLabel();
         addToPresc = new javax.swing.JButton();
+        CheckBoxTrade = new javax.swing.JCheckBox();
+        CheckBoxClass = new javax.swing.JCheckBox();
+        CheckBoxGeneric = new javax.swing.JCheckBox();
         jPanelPrescription = new javax.swing.JPanel();
         savePreview = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
@@ -732,6 +735,12 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(drugProfile);
 
+        CheckBoxTrade.setText("Trade Name");
+
+        CheckBoxClass.setText("Class Name");
+
+        CheckBoxGeneric.setText("Generic Name");
+
         javax.swing.GroupLayout Panel_DrugsLayout = new javax.swing.GroupLayout(Panel_Drugs);
         Panel_Drugs.setLayout(Panel_DrugsLayout);
         Panel_DrugsLayout.setHorizontalGroup(
@@ -743,6 +752,13 @@ public class Eroshetta extends javax.swing.JFrame {
             .addComponent(jScrollPane1)
             .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(Panel_DrugsLayout.createSequentialGroup()
+                .addComponent(CheckBoxTrade)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CheckBoxClass)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CheckBoxGeneric)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         Panel_DrugsLayout.setVerticalGroup(
             Panel_DrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -751,8 +767,13 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                .addGap(6, 6, 6)
+                .addGroup(Panel_DrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CheckBoxTrade)
+                    .addComponent(CheckBoxClass)
+                    .addComponent(CheckBoxGeneric))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1411,19 +1432,31 @@ public class Eroshetta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
 public void removeDrug(Drugs dr,DrugPresPanel dpp){
-    Eroshetta.drugsCollectionInPrescription.remove(dr);
-    Collection c = new ArrayList();
-    c.add(dpp);
-    Eroshetta.drugsPanels.removeAll(c);
+    this.drugsCollectionInPrescription.remove(dr);
+    this.drugsPanels.remove(dpp);
+    this.drugsPanels.clear();
+    int idPanel = dr.getId();
+    System.out.println("tooooooo is 2 " +this.drugsPanels.size());
     this.DrugsInPrescription.removeAll();
+    this.DrugsInPrescription.repaint();
 //    this.DrugsInPrescription.setLayout(new java.awt.BorderLayout());
+//    Collection drugsCollectionInPrescription1 = this.drugsCollectionInPrescription;
+//    this.drugsCollectionInPrescription.clear();
+//    for (int i = 0; i < drugsCollectionInPrescription1.size(); i++) {
+//        Drugs drugruga = (Drugs) drugsCollectionInPrescription1.toArray()[i];
+//        if(idPanel != drugruga.getId()){
+//        this.drugsCollectionInPrescription.add(drugruga);
+//        }
+//    }
                 for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
                 Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
                 DrugPresPanel drugPanel = new DrugPresPanel(drugruga,currentPrescription,this);
+                if(idPanel != drugruga.getId()){
                 drugsPanels.add(drugPanel);
+                }
                             
             }
-            this.DrugsInPrescription.removeAll();
+//            this.DrugsInPrescription.removeAll();
             if (drugsPanels.size() < 4) {
                 this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
             } else {
@@ -1557,15 +1590,17 @@ int o ;
             }
             
             
-            drugsCollectionInPrescription.add(d);
             
+            System.out.println("tooooooo is 1 " +this.drugsPanels.size());
 //            currentPrescription.getDrugsCollection().add(d);
-            for (int i = 0; i < drugsPanels.size(); i++) {
-                if (drugsPanels.get(i).panelDrug.getId() == d.getId()) {
+            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+                Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
+                if (drugruga.getId() == d.getId()) {
                     JOptionPane.showMessageDialog(this, "you already added the drug", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
             }
+            drugsCollectionInPrescription.add(d);
             drugsPanels.clear();
             drugsPanels.removeAll(drugsPanels);
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
@@ -1919,6 +1954,9 @@ int o ;
     static Eroshetta eroshetta = new Eroshetta();
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox CheckBoxClass;
+    private javax.swing.JCheckBox CheckBoxGeneric;
+    private javax.swing.JCheckBox CheckBoxTrade;
     public javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
     private javax.swing.JButton addToPresc;

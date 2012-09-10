@@ -696,6 +696,14 @@
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Component id="jTextFieldSearchDrags" alignment="1" max="32767" attributes="0"/>
                       <Component id="jScrollPane2" alignment="0" min="-2" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="CheckBoxTrade" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="CheckBoxClass" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="CheckBoxGeneric" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -705,8 +713,14 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextFieldSearchDrags" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="248" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="CheckBoxTrade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="CheckBoxClass" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="CheckBoxGeneric" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="227" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1055,6 +1069,21 @@
                     </Container>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JCheckBox" name="CheckBoxTrade">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Trade Name"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="CheckBoxClass">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Class Name"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="CheckBoxGeneric">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Generic Name"/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanelPrescription">
