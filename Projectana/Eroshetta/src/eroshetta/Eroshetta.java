@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.sound.midi.SysexMessage;
 
 /**
  *
@@ -33,8 +34,23 @@ public class Eroshetta extends javax.swing.JFrame {
     static EntityManager em = emf.createEntityManager();
     public static  DefaultListModel modelallDiagnoses;
     public static DefaultListModel modelAllDrugs;
+    public static String host = "jdbc:derby://localhost:1527/eroshetta";
+    public static String usrN = "APP";
+    public static String usrP = "APP";
+    public static int counter = 0;
+    public static List<Drugs> allDrugs = new ArrayList<Drugs>();
+    public static List<Diagnoses> allDiagnoses = new ArrayList<Diagnoses>();
+    public static int whichEdit = 0;
 
     public Eroshetta() {
+        
+        
+        Query q2 = em.createNamedQuery("Diagnoses.findAll");
+        allDiagnoses = (List<Diagnoses>) q2.getResultList();
+        
+        Query q3 = em.createNamedQuery("Drugs.findAll");
+        allDrugs = (List<Drugs>) q3.getResultList();
+        
         this.modelallDiagnoses = new DefaultListModel();
         this.modelAllDrugs = new DefaultListModel();
         initComponents();
@@ -365,13 +381,12 @@ public class Eroshetta extends javax.swing.JFrame {
         jScrollPanePPDiagnosisMedication.setVisible(false);
 
         jListPPDiagnosisMedication.setVisible(false);
+        jListPPDiagnosisMedication.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListPPDiagnosisMedicationValueChanged(evt);
+            }
+        });
         jScrollPanePPDiagnosisMedication.setViewportView(jListPPDiagnosisMedication);
-        Query q2 = em.createNamedQuery("Diagnoses.findAll");
-        allDiagnoses = (List<Diagnoses>) q2.getResultList();
-
-        Query q3 = em.createNamedQuery("Drugs.findAll");
-        allDrugs = (List<Drugs>) q3.getResultList();
-
         for(int i=0; i<allDiagnoses.size();i++){
             Diagnoses d = allDiagnoses.get(i);
             modelallDiagnoses.add(i, d.getName());
@@ -1365,6 +1380,7 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jToggleButtonPPMedicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPPMedicationActionPerformed
         // TODO add your handling code here:
 
+        whichEdit=1;
         //Was not selcted but just got selected
         if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == true) {
             jLabelPPMedication.setVisible(true);
@@ -1391,6 +1407,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     jListPPDiagnosisMedication.setVisible(false);
                     jListPPM3edication.setEnabled(false);
                     System.out.println("3rd Condition");
+                    whichEdit=0;
                 }
             }
         }
@@ -1440,6 +1457,7 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jToggleButtonDiagnosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonDiagnosisActionPerformed
         // TODO add your handling code here:
         //Was not selcted but just got selected
+        whichEdit = 2;
         if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == false) {
             jLabelPPMedication.setVisible(true);
             jTextFieldPPMedication.setVisible(true);
@@ -1466,6 +1484,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     jListPPDiagnosisMedication.setVisible(false);
                     jListPPDiagnosis.setEnabled(false);
                     System.out.println("3rd Condition");
+                    whichEdit=0;
                 }
             }
         }
@@ -1797,8 +1816,70 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_savePreviewMouseClicked
 
-    public void deleteMedication() {
+    private void jListPPDiagnosisMedicationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPDiagnosisMedicationValueChanged
+        // TODO add your handling code here:
         try {
+            if(counter%2==0){
+                if(whichEdit ==1){
+                    //drugs added to the patient
+                    
+                    int selectedDrugIndex = jListPPDiagnosisMedication.getSelectedIndex();
+                    System.out.println("Selcted drug index is "+selectedDrugIndex);
+//                    System.out.println("Selcted drug  is "+jListPPDiagnosisMedication.getSelectedValue());
+                    Drugs selectedDrug = allDrugs.get(selectedDrugIndex);
+//                    System.out.println("Slected drug name is "+ selectedDrug.getClassName());
+//                    System.out.println(allDrugs.size());
+//                    System.out.println(allDrugs.get(selectedDrugIndex).getClassName());
+//                    System.out.println(allDrugs.get(selectedDrugIndex).getId());
+                    
+                    if(!this.checkExistDrug(selectedDrug)){
+                        DefaultListModel model = (DefaultListModel) jListPPM3edication.getModel();
+                        model.addElement(selectedDrug.getClassName());
+                        jListPPM3edication.setModel(model);
+                    }
+                    else{
+                       JOptionPane.showMessageDialog(this, "This Drug is already added", "Eroshetta", JOptionPane.INFORMATION_MESSAGE); 
+                    }
+                }
+                else{
+                    //diagnosis added to the patient
+                    int selectedDiagnosisIndex = jListPPDiagnosisMedication.getSelectedIndex();
+//                    System.out.println("Selected diagnosis index is "+selectedDiagnosisIndex);
+//                    System.out.println("Selcted diagnosis  is "+jListPPDiagnosisMedication.getSelectedValue());
+                    
+                    Diagnoses selectedDiagnosis = allDiagnoses.get(selectedDiagnosisIndex);
+//                    System.out.println(selectedDiagnosis.getName());
+//                    System.out.println(allDiagnoses.size());
+//                    System.out.println(allDiagnoses.get(selectedDiagnosisIndex).getName());
+//                    System.out.println(allDiagnoses.get(selectedDiagnosisIndex).getId());
+                    
+                   if(!this.checkExistDiagnosis(selectedDiagnosis)){
+                       DefaultListModel model = (DefaultListModel) jListPPDiagnosis.getModel();
+                       model.addElement(selectedDiagnosis.getName());
+                       jListPPDiagnosis.setModel(model);
+                   }
+                   else{
+                       JOptionPane.showMessageDialog(this, "This Diagnosis is already added", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+                   }
+                }
+            }
+            counter++;
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jListPPDiagnosisMedicationValueChanged
+
+    
+    public boolean checkExistDrug(Drugs test){
+        
+        return false;
+    }
+    
+    public boolean checkExistDiagnosis(Diagnoses test){
+        return false;
+    }
+    
+    public void deleteMedication() {
+//        try {
 
             int selectedDrugIndex = jListPPM3edication.getSelectedIndex();
             Drugs deletedDrug = currentPatienMedications.get(selectedDrugIndex);
@@ -1819,8 +1900,8 @@ public class Eroshetta extends javax.swing.JFrame {
             this.deleteDrugDB(deletedDrug.getId());
 
 
-        } catch (Exception e) {
-        }
+//        } catch (Exception e) {
+//        }
     }
 
     public void deleteDrugDB(int drugID) {
@@ -2180,12 +2261,6 @@ public class Eroshetta extends javax.swing.JFrame {
     static List<Drugs> currentPatienMedications = new ArrayList<Drugs>();
     static List<Diagnoses> currentPatienDiagnoses = new ArrayList<Diagnoses>();
     static Eroshetta eroshetta = new Eroshetta();
-    static String host = "jdbc:derby://localhost:1527/eroshetta";
-    static String usrN = "APP";
-    static String usrP = "APP";
-    static int counter = 0;
-    static List<Drugs> allDrugs = new ArrayList<Drugs>();
-    static List<Diagnoses> allDiagnoses = new ArrayList<Diagnoses>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
