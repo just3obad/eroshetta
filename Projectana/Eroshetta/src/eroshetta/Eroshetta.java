@@ -31,13 +31,18 @@ public class Eroshetta extends javax.swing.JFrame {
      */
     final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
     static EntityManager em = emf.createEntityManager();
+    public static  DefaultListModel modelallDiagnoses;
+    public static DefaultListModel modelAllDrugs;
 
     public Eroshetta() {
+        this.modelallDiagnoses = new DefaultListModel();
+        this.modelAllDrugs = new DefaultListModel();
         initComponents();
-         this.checkBoxTrade.setSelected(true);
-         this.checkBoxClass.setSelected(true);
-         this.checkBoxGeneric.setSelected(true);
+        this.checkBoxTrade.setSelected(true);
+        this.checkBoxClass.setSelected(true);
+        this.checkBoxGeneric.setSelected(true);
         this.setLocation(200, 50);
+        
         
 //        JScrollPane scrollBar = new JScrollPane(drugProfile);
 //        this.add(scrollBar);
@@ -77,6 +82,7 @@ public class Eroshetta extends javax.swing.JFrame {
         // a5erha
         //for prescription
         this.DrugsInPrescription.setLayout(new java.awt.BorderLayout(1,100));
+        
 //        final javax.swing.JPanel panel = new javax.swing.JPanel(new java.awt.GridLayout(0,1));
 //        javax.swing.JScrollPane editorScroll = new javax.swing.JScrollPane(panel);
 //        editorScroll.setPreferredSize(new java.awt.Dimension(30,100));
@@ -87,7 +93,7 @@ public class Eroshetta extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -351,31 +357,30 @@ public class Eroshetta extends javax.swing.JFrame {
         jLabelPatientProfileHeightCM.setText("cm.");
 
         jListPPDiagnosis.setEnabled(false);
-        jListPPDiagnosis.setToolTipText("Click to delete.");
-        jListPPDiagnosis.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListPPDiagnosisValueChanged(evt);
-            }
-        });
         jScrollPanePPDiagnosis.setViewportView(jListPPDiagnosis);
 
         jListPPM3edication.setEnabled(false);
-        jListPPM3edication.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListPPM3edicationValueChanged(evt);
-            }
-        });
         jScrollPanePPMedication.setViewportView(jListPPM3edication);
 
         jScrollPanePPDiagnosisMedication.setVisible(false);
 
         jListPPDiagnosisMedication.setVisible(false);
-        jListPPDiagnosisMedication.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPanePPDiagnosisMedication.setViewportView(jListPPDiagnosisMedication);
+        Query q2 = em.createNamedQuery("Diagnoses.findAll");
+        allDiagnoses = (List<Diagnoses>) q2.getResultList();
+
+        Query q3 = em.createNamedQuery("Drugs.findAll");
+        allDrugs = (List<Drugs>) q3.getResultList();
+
+        for(int i=0; i<allDiagnoses.size();i++){
+            Diagnoses d = allDiagnoses.get(i);
+            modelallDiagnoses.add(i, d.getName());
+        }
+
+        for(int i=0; i<allDrugs.size();i++){
+            Drugs d = allDrugs.get(i);
+            modelAllDrugs.add(i, d.getClassName());
+        }
 
         jTextFieldPPMedication.setVisible(false);
 
@@ -1285,64 +1290,64 @@ public class Eroshetta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jListPatientsBookValueChanged
-    
-    public void currentProfileInfo(){
+
+    public void currentProfileInfo() {
         try {
-               if (currentPatient.getName() != null) {
-            jTextFieldPatientProfileName.setText(currentPatient.getName());
-        }
-
-        if (currentPatient.getBirthDate() != null) {
-
-            int birhtyear = (currentPatient.getBirthDate().getYear())+1900;
-            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-            int birthDay = currentPatient.getBirthDate().getDate();
-            jComboBoxPatientProfileMonth.setSelectedIndex(currentPatient.getBirthDate().getMonth());
-            jComboBoxPatientProfileYear.setSelectedIndex(currentYear-birhtyear);
-            jComboBoxPatientProfileDay.setSelectedIndex(birthDay-1);
-        }
-
-        if (currentPatient.getGender() != null) {
-            if (currentPatient.getGender() == 'm') {
-                jComboBoxPatientProfileGender.setSelectedIndex(0);
-            } else {
-                jComboBoxPatientProfileGender.setSelectedIndex(1);
+            if (currentPatient.getName() != null) {
+                jTextFieldPatientProfileName.setText(currentPatient.getName());
             }
-        }
 
-        if (currentPatient.getMaritalStatus() != null) {
-            jComboBoxPatientProfileMarital.setSelectedIndex(currentPatient.getMaritalStatus());
-        }
-        if (currentPatient.getIsPregnant() != null) {
-            jComboBoxPatientProfilePregnant.setSelectedIndex(currentPatient.getIsPregnant());
-        }
+            if (currentPatient.getBirthDate() != null) {
 
-        if (currentPatient.getBmi() != null && currentPatient.getHeight() != null && currentPatient.getWeight() != null) {
-            
-            String oldBmi = String.valueOf(currentPatient.getBmi());
-            String bmi = oldBmi.substring(0, oldBmi.length()-2);
-            jTextFieldPatientProfileBMI.setText(bmi);
-            
-            String oldWeight = String.valueOf(currentPatient.getWeight());
-            String weight = String.valueOf(oldWeight).substring(0,oldWeight.length()-4);
-            jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
-            jTextFieldPatientProfileWeight.setText(weight);
-        }
-        
+                int birhtyear = (currentPatient.getBirthDate().getYear()) + 1900;
+                int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+                int birthDay = currentPatient.getBirthDate().getDate();
+                jComboBoxPatientProfileMonth.setSelectedIndex(currentPatient.getBirthDate().getMonth());
+                jComboBoxPatientProfileYear.setSelectedIndex(currentYear - birhtyear);
+                jComboBoxPatientProfileDay.setSelectedIndex(birthDay - 1);
+            }
+
+            if (currentPatient.getGender() != null) {
+                if (currentPatient.getGender() == 'm') {
+                    jComboBoxPatientProfileGender.setSelectedIndex(0);
+                } else {
+                    jComboBoxPatientProfileGender.setSelectedIndex(1);
+                }
+            }
+
+            if (currentPatient.getMaritalStatus() != null) {
+                jComboBoxPatientProfileMarital.setSelectedIndex(currentPatient.getMaritalStatus());
+            }
+            if (currentPatient.getIsPregnant() != null) {
+                jComboBoxPatientProfilePregnant.setSelectedIndex(currentPatient.getIsPregnant());
+            }
+
+            if (currentPatient.getBmi() != null && currentPatient.getHeight() != null && currentPatient.getWeight() != null) {
+
+                String oldBmi = String.valueOf(currentPatient.getBmi());
+                String bmi = oldBmi.substring(0, oldBmi.length() - 2);
+                jTextFieldPatientProfileBMI.setText(bmi);
+
+                String oldWeight = String.valueOf(currentPatient.getWeight());
+                String weight = String.valueOf(oldWeight).substring(0, oldWeight.length() - 4);
+                jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
+                jTextFieldPatientProfileWeight.setText(weight);
+            }
+
         } catch (Exception e) {
         }
     }
-    
-    public void currentDiagnoses(){
-      DefaultListModel modelPPDiangnoses = new DefaultListModel();
-      jListPPDiagnosis.setModel(modelPPDiangnoses);
-      List currentpatientDiagnoses = (List) currentPatient.getDiagnosesCollection();
-      for(int i=0; i<currentpatientDiagnoses.size();i++){
-          Diagnoses d = (Diagnoses) currentpatientDiagnoses.get(i);
-          modelPPDiangnoses.add(i, d.getName());
-      }
+
+    public void currentDiagnoses() {
+        DefaultListModel modelPPDiangnoses = new DefaultListModel();
+        jListPPDiagnosis.setModel(modelPPDiangnoses);
+        List currentpatientDiagnoses = (List) currentPatient.getDiagnosesCollection();
+        for (int i = 0; i < currentpatientDiagnoses.size(); i++) {
+            Diagnoses d = (Diagnoses) currentpatientDiagnoses.get(i);
+            modelPPDiangnoses.add(i, d.getName());
+        }
     }
-    
+
     public void currentMedications() {
         DefaultListModel modelPPMedicaion = new DefaultListModel();
         jListPPM3edication.setModel(modelPPMedicaion);
@@ -1352,8 +1357,6 @@ public class Eroshetta extends javax.swing.JFrame {
             modelPPMedicaion.add(i, d.getClassName());
         }
     }
-    
-    
     static ArrayList<DrugPresPanel> drugsPanels = new <DrugPresPanel>ArrayList();
     private void addToPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToPrescActionPerformed
         // TODO add your handling code here:
@@ -1370,6 +1373,7 @@ public class Eroshetta extends javax.swing.JFrame {
             jListPPDiagnosisMedication.setVisible(true);
             jListPPM3edication.setEnabled(true);
             //change the modelList for the medication.
+            jListPPDiagnosisMedication.setModel(modelAllDrugs);
             System.out.println("1st Condition");
         } else {
             if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == true) {
@@ -1378,6 +1382,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 jListPPM3edication.setEnabled(true);
                 System.out.println("2nd Condition");
                 //change the modelList for the medication.
+                jListPPDiagnosisMedication.setModel(modelAllDrugs);
             } else {
                 if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == false) {
                     jLabelPPMedication.setVisible(false);
@@ -1441,7 +1446,9 @@ public class Eroshetta extends javax.swing.JFrame {
             jScrollPanePPDiagnosisMedication.setVisible(true);
             jListPPDiagnosisMedication.setVisible(true);
             jListPPDiagnosis.setEnabled(true);
-            //change the modelList for the medication.
+            jListPPDiagnosisMedication.setModel(modelallDiagnoses);
+            //change the modelList for the diagnosis.
+
             System.out.println("1st Condition");
         } else {
             if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == true) {
@@ -1449,7 +1456,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 jListPPM3edication.setEnabled(false);
                 jListPPDiagnosis.setEnabled(true);
                 System.out.println("2nd Condition");
-                //change the modelList for the medication.
+                //change the modelList for the diagnosis
+                jListPPDiagnosisMedication.setModel(modelallDiagnoses);
             } else {
                 if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == false) {
                     jLabelPPMedication.setVisible(false);
@@ -1464,14 +1472,15 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jToggleButtonDiagnosisActionPerformed
-public void removeDrug(Drugs dr,DrugPresPanel dpp){
-    this.drugsCollectionInPrescription.remove(dr);
-    this.drugsPanels.remove(dpp);
-    this.drugsPanels.clear();
-    int idPanel = dr.getId();
-    System.out.println("tooooooo is 2 " +this.drugsPanels.size());
-    this.DrugsInPrescription.removeAll();
-    this.DrugsInPrescription.repaint();
+
+    public void removeDrug(Drugs dr, DrugPresPanel dpp) {
+        this.drugsCollectionInPrescription.remove(dr);
+        this.drugsPanels.remove(dpp);
+        this.drugsPanels.clear();
+        int idPanel = dr.getId();
+        System.out.println("tooooooo is 2 " + this.drugsPanels.size());
+        this.DrugsInPrescription.removeAll();
+        this.DrugsInPrescription.repaint();
 //    this.DrugsInPrescription.setLayout(new java.awt.BorderLayout());
 //    Collection drugsCollectionInPrescription1 = this.drugsCollectionInPrescription;
 //    this.drugsCollectionInPrescription.clear();
@@ -1481,171 +1490,161 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
 //        this.drugsCollectionInPrescription.add(drugruga);
 //        }
 //    }
-                for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-                Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
-                DrugPresPanel drugPanel = new DrugPresPanel(drugruga,currentPrescription,this);
-                if(idPanel != drugruga.getId()){
+        for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+            Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
+            DrugPresPanel drugPanel = new DrugPresPanel(drugruga, currentPrescription, this);
+            if (idPanel != drugruga.getId()) {
                 drugsPanels.add(drugPanel);
-                }
-                            
             }
+
+        }
 //            this.DrugsInPrescription.removeAll();
-            if (drugsPanels.size() < 4) {
-                this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
-            } else {
-                this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
-            }
-            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-                Drugs drugrug = (Drugs) drugsCollectionInPrescription.toArray()[i];
-                DrugPresPanel drugPanel = new DrugPresPanel(drugrug,currentPrescription,this);
-                this.DrugsInPrescription.add(drugPanel);
-            }
-            
-            this.DrugsInPrescription.revalidate(); 
-                
-}
+        if (drugsPanels.size() < 4) {
+            this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
+        } else {
+            this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
+        }
+        for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+            Drugs drugrug = (Drugs) drugsCollectionInPrescription.toArray()[i];
+            DrugPresPanel drugPanel = new DrugPresPanel(drugrug, currentPrescription, this);
+            this.DrugsInPrescription.add(drugPanel);
+        }
+
+        this.DrugsInPrescription.revalidate();
+
+    }
     boolean workingOnPrescription = false;
     static Prescriptions currentPrescription = new Prescriptions();
 //    static ArrayList<Prescriptions> currentPrescription= new <Prescriptions>ArrayList();
-   static Collection<Drugs> drugsCollectionInPrescription = new ArrayList();
-    
+    static Collection<Drugs> drugsCollectionInPrescription = new ArrayList();
+
     private void addToPrescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToPrescMouseClicked
 
-        int o ;
-        if(this.jListPatientsBook.getSelectedIndex() == -1){
+        int o;
+        if (this.jListPatientsBook.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Please select a patient", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (this.jList_Drugs.getSelectedIndex() != -1) {
-            
-      if(currentPrescription.getDrugsCollection()==null){
-        currentPrescription.setPatientId(currentPatient);
-        this.workingOnPrescription = true;
-    }
+
+            if (currentPrescription.getDrugsCollection() == null) {
+                currentPrescription.setPatientId(currentPatient);
+                this.workingOnPrescription = true;
+            }
             Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
             //conditions checking a drug
             int age = 0;
-            try{
-                
-             age = Calendar.YEAR - currentPatient.getBirthDate().getYear();
-            if(d.getContraAge() == 1 && age < 6){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
+            try {
+
+                age = Calendar.YEAR - currentPatient.getBirthDate().getYear();
+                if (d.getContraAge() == 1 && age < 6) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-            }catch(NullPointerException e){
-                
+            try {
+                if (d.getContraAge() == 2 && age < 15) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for teens , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-            try{
-            if(d.getContraAge() == 2 && age < 15){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for teens , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
+            try {
+                if (d.getContraAge() == 3 && age > 50) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for old people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-            }catch(NullPointerException e){
-                
+            try {
+                if (d.getContraAge() == 4 && age < 15) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids and babies people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-            try{
-             if(d.getContraAge() == 3 && age > 50){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for old people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
+            try {
+                if (d.getContraAge() == 5 && age < 15 && age > 50) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids and babies people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-             }catch(NullPointerException e){
-                
+            try {
+                if (d.getContraPregnant() == 1 && currentPatient.getIsPregnant() == 1) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant womans  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-             try{
-             if(d.getContraAge() == 4 && age < 15){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids and babies people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
+            try {
+                if (d.getContraBmi() == 1 && (currentPatient.getBmi().doubleValue() < 22.5)) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for under weight(BMI < 22.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-             }catch(NullPointerException e){
-                
+            try {
+                if (d.getContraBmi() == 2 && (currentPatient.getBmi().doubleValue() < 29.5)) {
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for over weight people(25.5 < BMI < 29.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    if (o != 0) {
+                        return;
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-             try{
-             if(d.getContraAge() == 5 && age < 15 && age > 50){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for kids and babies people , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
+            try {
+                Collection<Drugs> drugsContraAlreadyDrugs = d.getDrugsCollection();
+                for (int j = 0; j < this.drugsCollectionInPrescription.size(); j++) {
+                    Drugs a = (Drugs) this.drugsCollectionInPrescription.toArray()[j];
+                    for (int k = 0; k < drugsContraAlreadyDrugs.size(); k++) {
+                        Drugs b = (Drugs) drugsContraAlreadyDrugs.toArray()[k];
+                        if (a.getId() == b.getId()) {
+                            o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with" + a.toString() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                            if (o != 0) {
+                                return;
+                            }
+                        }
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-             }catch(NullPointerException e){
-                
+            try {
+                Collection<Diagnoses> drugsContraAlreadyDiagnosis = d.getDiagnosesCollection();
+                Query qr = em.createNamedQuery("Diagnoses.findAll");
+                List<Diagnoses> tmpList = qr.getResultList();
+                for (int j = 0; j < drugsContraAlreadyDiagnosis.size(); j++) {
+                    Diagnoses a = (Diagnoses) drugsContraAlreadyDiagnosis.toArray()[j];
+                    for (int k = 0; k < tmpList.size(); k++) {
+                        Diagnoses b = (Diagnoses) tmpList.toArray()[k];
+                        if (a.getId() == b.getId()) {
+                            o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with " + a.getName() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                            if (o != 0) {
+                                return;
+                            }
+                        }
+                    }
+                }
+            } catch (NullPointerException e) {
             }
-             try{
-              if(d.getContraPregnant() == 1 && currentPatient.getIsPregnant() ==1){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant womans  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
-            }
-              }catch(NullPointerException e){
-                
-            }
-              try{
-              if(d.getContraBmi() == 1 && (currentPatient.getBmi().doubleValue() < 22.5)){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for under weight(BMI < 22.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
-            }
-              }catch(NullPointerException e){
-                
-            }
-              try{
-             if(d.getContraBmi() == 2 && (currentPatient.getBmi().doubleValue() < 29.5)){
-               o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for over weight people(25.5 < BMI < 29.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               }
-            }
-             }catch(NullPointerException e){
-                
-            }
-              try{
-             Collection<Drugs> drugsContraAlreadyDrugs = d.getDrugsCollection();
-             for(int j=0;j<this.drugsCollectionInPrescription.size();j++){
-                 Drugs a = (Drugs) this.drugsCollectionInPrescription.toArray()[j];
-                 for(int k=0;k<drugsContraAlreadyDrugs.size();k++){
-                     Drugs b = (Drugs)drugsContraAlreadyDrugs.toArray()[k];
-                     if(a.getId()==b.getId()){
-                        o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with"+a.toString()+" , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               } 
-                     }
-                 }
-             }
-             }catch(NullPointerException e){
-                
-            }
-            try{
-             Collection<Diagnoses> drugsContraAlreadyDiagnosis = d.getDiagnosesCollection();
-             Query qr = em.createNamedQuery("Diagnoses.findAll");
-               List <Diagnoses> tmpList = qr.getResultList();
-             for(int j=0;j<drugsContraAlreadyDiagnosis.size();j++){
-                 Diagnoses a = (Diagnoses) drugsContraAlreadyDiagnosis.toArray()[j];
-                 for(int k=0;k<tmpList.size();k++){
-                     Diagnoses b = (Diagnoses)tmpList.toArray()[k];
-                     if(a.getId()==b.getId()){
-                        o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with "+a.getName()+" , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   return;
-               } 
-                     }
-                 }
-             }
-             }catch(NullPointerException e){
-                
-            }
-            
-            
-            System.out.println("tooooooo is 1 " +this.drugsPanels.size());
+
+
+            System.out.println("tooooooo is 1 " + this.drugsPanels.size());
 //            currentPrescription.getDrugsCollection().add(d);
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
                 Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
@@ -1661,11 +1660,11 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
             drugsPanels.removeAll(drugsPanels);
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
                 Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
-                DrugPresPanel drugPanel = new DrugPresPanel(drugruga,currentPrescription,this);
+                DrugPresPanel drugPanel = new DrugPresPanel(drugruga, currentPrescription, this);
                 drugsPanels.add(drugPanel);
-                            
+
             }
-            
+
             this.DrugsInPrescription.removeAll();
             if (drugsPanels.size() < 4) {
                 this.DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
@@ -1674,15 +1673,15 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
             }
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
                 Drugs drugrug = (Drugs) drugsCollectionInPrescription.toArray()[i];
-                DrugPresPanel drugPanel = new DrugPresPanel(drugrug,currentPrescription,this);
+                DrugPresPanel drugPanel = new DrugPresPanel(drugrug, currentPrescription, this);
                 this.DrugsInPrescription.add(drugPanel);
             }
-            
+
             this.DrugsInPrescription.revalidate();
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(this, "Please select a drug", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
-            
+
         }
         // TODO add your handling code here:
 //        if(d.getPrice() != null){
@@ -1703,9 +1702,9 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
     // Kareem
     private void savePreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePreviewActionPerformed
         // TODO add your handling code here:
-        javax.persistence.Query q =em.createNamedQuery("Prescriptions.findById");
+        javax.persistence.Query q = em.createNamedQuery("Prescriptions.findById");
         q.setParameter("id", 1);
-        Prescriptions p = (Prescriptions)q.getSingleResult();
+        Prescriptions p = (Prescriptions) q.getSingleResult();
         PrescriptionView prescView = new PrescriptionView(p);
         //PrescriptionFrame prescFrame =new PrescriptionFrame(prescView);
         //prescFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1713,28 +1712,28 @@ public void removeDrug(Drugs dr,DrugPresPanel dpp){
     }//GEN-LAST:event_savePreviewActionPerformed
 
     private void jListPatientsBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPatientsBookMouseClicked
-        if(this.workingOnPrescription){
-        int o = JOptionPane.showConfirmDialog(new JButton("parent"), "Prescription Progress will be lost , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-               if(o!=0){
-                   this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
-                   return;
-               }else{
-                   this.DrugsInPrescription.removeAll();
-                   this.DrugsInPrescription.revalidate();
-                   this.DrugsInPrescription.repaint();
-                   this.drugsPanels.clear();
-                   this.drugsCollectionInPrescription.clear();
-                   this.workingOnPrescription = false;
-                   this.jTextArea1.setText(null);
-               }
-        }        
-        
+        if (this.workingOnPrescription) {
+            int o = JOptionPane.showConfirmDialog(new JButton("parent"), "Prescription Progress will be lost , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+            if (o != 0) {
+                this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
+                return;
+            } else {
+                this.DrugsInPrescription.removeAll();
+                this.DrugsInPrescription.revalidate();
+                this.DrugsInPrescription.repaint();
+                this.drugsPanels.clear();
+                this.drugsCollectionInPrescription.clear();
+                this.workingOnPrescription = false;
+                this.jTextArea1.setText(null);
+            }
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jListPatientsBookMouseClicked
 
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyPressed
-this.workingOnPrescription = true;        // TODO add your handling code here:
-            this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
+        this.workingOnPrescription = true;        // TODO add your handling code here:
+        this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
 
     }//GEN-LAST:event_jTextArea1KeyPressed
 
@@ -1743,8 +1742,8 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
         currentPrescription.setPatientId(currentPatient);
         currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
         Collection<DrugTime> times = new ArrayList();
-        for(int i =0;i<drugsCollectionInPrescription.size();i++){
-            if(drugsPanels.get(i).jCheckBox1.isSelected()){
+        for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+            if (drugsPanels.get(i).jCheckBox1.isSelected()) {
                 DrugTime time = new DrugTime();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPatients(currentPatient);
@@ -1752,7 +1751,7 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
                 time.setDrugTime(drugsPanels.get(i).jCheckBox1.getText());
                 times.add(time);
             }
-            if(drugsPanels.get(i).jCheckBox2.isSelected()){
+            if (drugsPanels.get(i).jCheckBox2.isSelected()) {
                 DrugTime time = new DrugTime();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPatients(currentPatient);
@@ -1760,7 +1759,7 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
                 time.setDrugTime(drugsPanels.get(i).jCheckBox2.getText());
                 times.add(time);
             }
-            if(drugsPanels.get(i).jCheckBox3.isSelected()){
+            if (drugsPanels.get(i).jCheckBox3.isSelected()) {
                 DrugTime time = new DrugTime();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPatients(currentPatient);
@@ -1768,7 +1767,7 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
                 time.setDrugTime(drugsPanels.get(i).jCheckBox3.getText());
                 times.add(time);
             }
-            if(drugsPanels.get(i).jCheckBox4.isSelected()){
+            if (drugsPanels.get(i).jCheckBox4.isSelected()) {
                 DrugTime time = new DrugTime();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPatients(currentPatient);
@@ -1776,7 +1775,7 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
                 time.setDrugTime(drugsPanels.get(i).jCheckBox4.getText());
                 times.add(time);
             }
-            if(drugsPanels.get(i).jCheckBox5.isSelected()){
+            if (drugsPanels.get(i).jCheckBox5.isSelected()) {
                 DrugTime time = new DrugTime();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPatients(currentPatient);
@@ -1784,7 +1783,7 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
                 time.setDrugTime(drugsPanels.get(i).jCheckBox5.getText());
                 times.add(time);
             }
-            if(drugsPanels.get(i).jCheckBox6.isSelected()){
+            if (drugsPanels.get(i).jCheckBox6.isSelected()) {
                 DrugTime time = new DrugTime();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPatients(currentPatient);
@@ -1794,34 +1793,13 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
             }
         }
         currentPrescription.setDrugTimeCollection(times);
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_savePreviewMouseClicked
 
-    private void jListPPDiagnosisValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPDiagnosisValueChanged
-        // TODO add your handling code here:
-        if(counter%2==0){
-        this.deleteDiagnosis();
-       }
-       
-        counter++;
-        
-        
-    }//GEN-LAST:event_jListPPDiagnosisValueChanged
-
-    private void jListPPM3edicationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPM3edicationValueChanged
-        // TODO add your handling code here:
-        if(counter%2==0){
-        this.deleteMedication();
-       }
-       
-        counter++;
-    }//GEN-LAST:event_jListPPM3edicationValueChanged
-
-    
-    public void deleteMedication(){
+    public void deleteMedication() {
         try {
-            
+
             int selectedDrugIndex = jListPPM3edication.getSelectedIndex();
             Drugs deletedDrug = currentPatienMedications.get(selectedDrugIndex);
 
@@ -1839,15 +1817,15 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
             System.out.println("COME HERE AGAIN");
 
             this.deleteDrugDB(deletedDrug.getId());
-            
-            
+
+
         } catch (Exception e) {
         }
     }
-    
-    public void deleteDrugDB(int drugID){
-        
-         try {
+
+    public void deleteDrugDB(int drugID) {
+
+        try {
             Connection con = DriverManager.getConnection(host, usrN, usrP);
             Statement stmt = con.createStatement();
             String SQL = "DELETE FROM PATIENT_CURRENT_MEDICATION WHERE PATIENT_ID =" + currentPatient.getId() + "AND DRUG_ID =" + drugID + "";
@@ -1861,12 +1839,12 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
-    }
-    
-    public void deleteDiagnosis(){
 
-              
+    }
+
+    public void deleteDiagnosis() {
+
+
         try {
 
             int selectedDiagnosisIndex = jListPPDiagnosis.getSelectedIndex();
@@ -1891,8 +1869,8 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
         }
 
     }
-    
-    public void deleteDiagnosisDB(int diagnosisID){
+
+    public void deleteDiagnosisDB(int diagnosisID) {
         try {
             Connection con = DriverManager.getConnection(host, usrN, usrP);
             Statement stmt = con.createStatement();
@@ -1908,8 +1886,7 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
             System.out.println(e.getMessage());
         }
     }
-    
-    
+
     public void profileGenderMaritalStatus() {
         if (jComboBoxPatientProfileGender.getSelectedIndex() == 0) {
             jComboBoxPatientProfilePregnant.setVisible(false);
@@ -1961,10 +1938,6 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
         }
     }
 
-    
-    
-    
-    
     public static void createPatients() {
         em.getTransaction().begin();
         for (int i = 0; i < 25; i++) {
@@ -2106,18 +2079,18 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
 
     }
 
-    
-    public static void getCurrentMedications(){
+    public static void getCurrentMedications() {
         Query q = em.createNamedQuery("Patients.findById");
         q.setParameter("id", 1);
         List l = (List<Patients>) q.getResultList();
-        Patients p =(Patients) l.get(0);
+        Patients p = (Patients) l.get(0);
         List patientDrugList = (List) p.getDrugsCollection();
         Drugs d = (Drugs) patientDrugList.get(0);
-        
+
         System.out.println(d.getTradeName());
-        
+
     }
+
     /**
      * @param args the command line arguments
      */
@@ -2152,34 +2125,29 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
         /*
          * Create and display the form
          */
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 boolean flag = true;
-                try{
-                    javax.persistence.Query q =em.createNamedQuery("Doctor.findAll");
+                try {
+                    javax.persistence.Query q = em.createNamedQuery("Doctor.findAll");
                     Doctor doc = (Doctor) q.getSingleResult();
-                   }
-                catch(NoResultException e)
-                   {
-                     flag =false;     
-                   }
-                
-                
-                if(flag)
-                   {
-                eroshetta.setVisible(true);
-                   }
-                else
-                   {
-                 DoctorInfo docInfo = new DoctorInfo();
-                 docInfo.setVisible(true);
-                   }
-                
-                
-            
-                
-            
+                } catch (NoResultException e) {
+                    flag = false;
+                }
+
+
+                if (flag) {
+                    eroshetta.setVisible(true);
+                } else {
+                    DoctorInfo docInfo = new DoctorInfo();
+                    docInfo.setVisible(true);
+                }
+
+
+
+
+
 //                e.setExtendedState(Frame.MAXIMIZED_BOTH);
 
             }
@@ -2192,9 +2160,9 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
 
 //     createPatients();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        
-        
-        
+
+
+
 //        setOne();
 //        patientsDiagnosis();
 //        getAllDiagnosis();
@@ -2216,7 +2184,8 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
     static String usrN = "APP";
     static String usrP = "APP";
     static int counter = 0;
-            
+    static List<Drugs> allDrugs = new ArrayList<Drugs>();
+    static List<Diagnoses> allDiagnoses = new ArrayList<Diagnoses>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
