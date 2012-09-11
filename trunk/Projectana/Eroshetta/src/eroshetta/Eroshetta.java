@@ -4,6 +4,7 @@
  */
 package eroshetta;
 
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,6 +14,11 @@ import java.math.BigDecimal;
 import java.util.*;
 import javax.persistence.*;
 import javax.swing.*;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -345,9 +351,20 @@ public class Eroshetta extends javax.swing.JFrame {
         jLabelPatientProfileHeightCM.setText("cm.");
 
         jListPPDiagnosis.setEnabled(false);
+        jListPPDiagnosis.setToolTipText("Click to delete.");
+        jListPPDiagnosis.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListPPDiagnosisValueChanged(evt);
+            }
+        });
         jScrollPanePPDiagnosis.setViewportView(jListPPDiagnosis);
 
         jListPPM3edication.setEnabled(false);
+        jListPPM3edication.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListPPM3edicationValueChanged(evt);
+            }
+        });
         jScrollPanePPMedication.setViewportView(jListPPM3edication);
 
         jScrollPanePPDiagnosisMedication.setVisible(false);
@@ -782,7 +799,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(checkBoxClass)
                     .addComponent(checkBoxGeneric))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1243,42 +1260,30 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
 
         // ma3lesh ya 3obad shwaya mn nefsi
-if(this.workingOnPrescription){
-                   this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
-                   return;
-}
-        //sososos 
+        //Yb2a 7oto gwa l try wl catch ya zft wa 2yaak 2shofak hna tany :P
         // TODO add your handling code here:
         try {
-                    
-            
-            
+
+            if (this.workingOnPrescription) {
+                this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
+                return;
+            }
+
             int selctedID = jListPatientsBook.getSelectedIndex();
             currentPatient = patientsBookList.get(selctedID);
-//          System.out.println(currentPatient);
-//        System.out.println(currentPatient.getName());
-//        System.out.println(currentPatient.getBirthDate());
+            currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
+            currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
 
 
+            this.currentProfileInfo();
+            this.currentMedications();
+            this.currentDiagnoses();
+            this.oldPrescriptions();
 
-
-//        System.out.println(currentPatient.getGender());
-//        System.out.println(currentPatient.getIsPregnant());
-//        System.out.println(currentPatient.getMaritalStatus());
-//        System.out.println(currentPatient.getWeight());
-//        System.out.println(currentPatient.getHeight());
-//        System.out.println(currentPatient.getBmi());
-
-     
-        this.currentProfileInfo();
-        this.currentMedications();
-        this.currentDiagnoses();
-        this.oldPrescriptions();
-        
 
         } catch (Exception e) {
         }
-            
+
     }//GEN-LAST:event_jListPatientsBookValueChanged
     
     public void currentProfileInfo(){
@@ -1793,6 +1798,118 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
         // TODO add your handling code here:
     }//GEN-LAST:event_savePreviewMouseClicked
 
+    private void jListPPDiagnosisValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPDiagnosisValueChanged
+        // TODO add your handling code here:
+        if(counter%2==0){
+        this.deleteDiagnosis();
+       }
+       
+        counter++;
+        
+        
+    }//GEN-LAST:event_jListPPDiagnosisValueChanged
+
+    private void jListPPM3edicationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPM3edicationValueChanged
+        // TODO add your handling code here:
+        if(counter%2==0){
+        this.deleteMedication();
+       }
+       
+        counter++;
+    }//GEN-LAST:event_jListPPM3edicationValueChanged
+
+    
+    public void deleteMedication(){
+        try {
+            
+            int selectedDrugIndex = jListPPM3edication.getSelectedIndex();
+            Drugs deletedDrug = currentPatienMedications.get(selectedDrugIndex);
+
+            DefaultListModel model = (DefaultListModel) jListPPM3edication.getModel();
+            model.remove(selectedDrugIndex);
+            jListPPM3edication.setModel(model);
+
+            System.out.println("COME HERE");
+
+            List newDrugsList = currentPatienMedications;
+            newDrugsList.remove(selectedDrugIndex);
+            currentPatient.setDrugsCollection(newDrugsList);
+            currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
+
+            System.out.println("COME HERE AGAIN");
+
+            this.deleteDrugDB(deletedDrug.getId());
+            
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    public void deleteDrugDB(int drugID){
+        
+         try {
+            Connection con = DriverManager.getConnection(host, usrN, usrP);
+            Statement stmt = con.createStatement();
+            String SQL = "DELETE FROM PATIENT_CURRENT_MEDICATION WHERE PATIENT_ID =" + currentPatient.getId() + "AND DRUG_ID =" + drugID + "";
+            int delete = stmt.executeUpdate(SQL);
+            System.out.println(delete);
+            if (delete == 1) {
+                System.out.println("Row is deleted.");
+            } else {
+                System.out.println("Row is not deleted.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
+    public void deleteDiagnosis(){
+
+              
+        try {
+
+            int selectedDiagnosisIndex = jListPPDiagnosis.getSelectedIndex();
+            Diagnoses deletedDiagnoses = currentPatienDiagnoses.get(selectedDiagnosisIndex);
+
+            DefaultListModel model = (DefaultListModel) jListPPDiagnosis.getModel();
+            model.remove(selectedDiagnosisIndex);
+            jListPPDiagnosis.setModel(model);
+
+            System.out.println("COME HERE");
+
+            List newDiagnosisList = currentPatienDiagnoses;
+            newDiagnosisList.remove(selectedDiagnosisIndex);
+            currentPatient.setDiagnosesCollection(newDiagnosisList);
+            currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
+
+            System.out.println("COME HERE AGAIN");
+
+            this.deleteDiagnosisDB(deletedDiagnoses.getId());
+
+        } catch (Exception e) {
+        }
+
+    }
+    
+    public void deleteDiagnosisDB(int diagnosisID){
+        try {
+            Connection con = DriverManager.getConnection(host, usrN, usrP);
+            Statement stmt = con.createStatement();
+            String SQL = "DELETE FROM PATIENT_HAS_DIAGNOSIS WHERE PATIENT_ID =" + currentPatient.getId() + "AND DIAGNOSIS_ID =" + diagnosisID + "";
+            int delete = stmt.executeUpdate(SQL);
+            System.out.println(delete);
+            if (delete == 1) {
+                System.out.println("Row is deleted.");
+            } else {
+                System.out.println("Row is not deleted.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
     public void profileGenderMaritalStatus() {
         if (jComboBoxPatientProfileGender.getSelectedIndex() == 0) {
             jComboBoxPatientProfilePregnant.setVisible(false);
@@ -1844,6 +1961,10 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
         }
     }
 
+    
+    
+    
+    
     public static void createPatients() {
         em.getTransaction().begin();
         for (int i = 0; i < 25; i++) {
@@ -2088,7 +2209,13 @@ this.workingOnPrescription = true;        // TODO add your handling code here:
     }
     static List<Patients> patientsBookList = new ArrayList<Patients>();
     static Patients currentPatient;
+    static List<Drugs> currentPatienMedications = new ArrayList<Drugs>();
+    static List<Diagnoses> currentPatienDiagnoses = new ArrayList<Diagnoses>();
     static Eroshetta eroshetta = new Eroshetta();
+    static String host = "jdbc:derby://localhost:1527/eroshetta";
+    static String usrN = "APP";
+    static String usrP = "APP";
+    static int counter = 0;
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DrugsInPrescription;
