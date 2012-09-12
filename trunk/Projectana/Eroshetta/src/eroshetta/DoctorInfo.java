@@ -266,8 +266,8 @@ public class DoctorInfo extends javax.swing.JFrame {
             doc.setDrTitle(title);
             doc.setName(name);
             doc.setAddress(address);
-            doc.setOfficeNo(Integer.parseInt(office));
-            doc.setMobileNo(Integer.parseInt(mobile));
+            doc.setOfficeNo(office);
+            doc.setMobileNo(mobile);
             em.persist(doc);
             em.getTransaction().commit();
             saved = true;
@@ -282,8 +282,8 @@ public class DoctorInfo extends javax.swing.JFrame {
              d.setDrTitle(title);
              d.setName(name);
              d.setAddress(address);
-             d.setOfficeNo(Integer.parseInt(office));
-             d.setMobileNo(Integer.parseInt(mobile));
+             d.setOfficeNo(office);
+             d.setMobileNo(mobile);
              em.persist(d);
              em.getTransaction().commit();
              saved = true;

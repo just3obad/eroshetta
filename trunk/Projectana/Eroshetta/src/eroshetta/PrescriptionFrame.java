@@ -210,10 +210,7 @@ public class PrescriptionFrame extends javax.swing.JFrame {
                 Prescriptions p = (Prescriptions)q.getSingleResult();
                 
                 PrescriptionView prescView = new PrescriptionView(p);
-//                PrescriptionFrame prescFrame =new PrescriptionFrame(prescView);
-//                prescFrame.setDefaultCloseOperation(prescFrame.EXIT_ON_CLOSE); 
                 new PrescriptionFrame(prescView).setVisible(true);
-               // prescFrame.setVisible(true);
                 
                 
             }

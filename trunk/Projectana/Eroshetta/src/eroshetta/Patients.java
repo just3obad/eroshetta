@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Mouaz
+ * @author Administrator
  */
 @Entity
 @Table(name = "PATIENTS")
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Patients.findAll", query = "SELECT p FROM Patients p"),
     @NamedQuery(name = "Patients.findById", query = "SELECT p FROM Patients p WHERE p.id = :id"),
-    @NamedQuery(name = "Patients.findByName", query = "SELECT p FROM Patients p WHERE p.name LIKE :pName"),
+    @NamedQuery(name = "Patients.findByName", query = "SELECT p FROM Patients p WHERE p.name = :name"),
     @NamedQuery(name = "Patients.findByBirthDate", query = "SELECT p FROM Patients p WHERE p.birthDate = :birthDate"),
     @NamedQuery(name = "Patients.findByIsPregnant", query = "SELECT p FROM Patients p WHERE p.isPregnant = :isPregnant"),
     @NamedQuery(name = "Patients.findByMaritalStatus", query = "SELECT p FROM Patients p WHERE p.maritalStatus = :maritalStatus"),
@@ -50,11 +50,11 @@ public class Patients implements Serializable {
     @Column(name = "NEXT_VISIT")
     @Temporal(TemporalType.TIMESTAMP)
     private Date nextVisit;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "WEIGHT")
     private Integer weight;
     @Column(name = "HEIGHT")
     private Integer height;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "BMI")
     private BigDecimal bmi;
     @Column(name = "GENDER")
@@ -63,8 +63,6 @@ public class Patients implements Serializable {
     private Collection<Diagnoses> diagnosesCollection;
     @ManyToMany(mappedBy = "patientsCollection")
     private Collection<Drugs> drugsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patients")
-    private Collection<DrugTime> drugTimeCollection;
     @OneToMany(mappedBy = "patientId")
     private Collection<Prescriptions> prescriptionsCollection;
 
@@ -161,7 +159,6 @@ public class Patients implements Serializable {
     }
 
     public void setDiagnosesCollection(Collection<Diagnoses> diagnosesCollection) {
-//        System.out.println("A&AAAAAAAAAAAAAAAAAAAAAAAA");
         this.diagnosesCollection = diagnosesCollection;
     }
 
@@ -172,15 +169,6 @@ public class Patients implements Serializable {
 
     public void setDrugsCollection(Collection<Drugs> drugsCollection) {
         this.drugsCollection = drugsCollection;
-    }
-
-    @XmlTransient
-    public Collection<DrugTime> getDrugTimeCollection() {
-        return drugTimeCollection;
-    }
-
-    public void setDrugTimeCollection(Collection<DrugTime> drugTimeCollection) {
-        this.drugTimeCollection = drugTimeCollection;
     }
 
     @XmlTransient

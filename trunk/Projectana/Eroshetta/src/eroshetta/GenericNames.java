@@ -10,51 +10,43 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Mouaz
+ * @author Administrator
  */
 @Entity
 @Table(name = "GENERIC_NAMES")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GenericNames.findAll", query = "SELECT g FROM GenericNames g"),
-    @NamedQuery(name = "GenericNames.findByDrugId", query = "SELECT g FROM GenericNames g WHERE g.drugId = :drugId"),
-    @NamedQuery(name = "GenericNames.findByGenericName", query = "SELECT g FROM GenericNames g WHERE g.genericName = :genericName"),
+    @NamedQuery(name = "GenericNames.findByDrugId", query = "SELECT g FROM GenericNames g WHERE g.genericNamesPK.drugId = :drugId"),
+    @NamedQuery(name = "GenericNames.findByGenericName", query = "SELECT g FROM GenericNames g WHERE g.genericNamesPK.genericName = :genericName"),
     @NamedQuery(name = "GenericNames.findByConcentration", query = "SELECT g FROM GenericNames g WHERE g.concentration = :concentration")})
 public class GenericNames implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "DRUG_ID")
-    private Integer drugId;
-    @Column(name = "GENERIC_NAME")
-    private String genericName;
+    @EmbeddedId
+    protected GenericNamesPK genericNamesPK;
     @Column(name = "CONCENTRATION")
     private String concentration;
     @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Drugs drugs;
 
     public GenericNames() {
     }
 
-    public GenericNames(Integer drugId) {
-        this.drugId = drugId;
+    public GenericNames(GenericNamesPK genericNamesPK) {
+        this.genericNamesPK = genericNamesPK;
     }
 
-    public Integer getDrugId() {
-        return drugId;
+    public GenericNames(int drugId, String genericName) {
+        this.genericNamesPK = new GenericNamesPK(drugId, genericName);
     }
 
-    public void setDrugId(Integer drugId) {
-        this.drugId = drugId;
+    public GenericNamesPK getGenericNamesPK() {
+        return genericNamesPK;
     }
 
-    public String getGenericName() {
-        return genericName;
-    }
-
-    public void setGenericName(String genericName) {
-        this.genericName = genericName;
+    public void setGenericNamesPK(GenericNamesPK genericNamesPK) {
+        this.genericNamesPK = genericNamesPK;
     }
 
     public String getConcentration() {
@@ -76,7 +68,7 @@ public class GenericNames implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (drugId != null ? drugId.hashCode() : 0);
+        hash += (genericNamesPK != null ? genericNamesPK.hashCode() : 0);
         return hash;
     }
 
@@ -87,7 +79,7 @@ public class GenericNames implements Serializable {
             return false;
         }
         GenericNames other = (GenericNames) object;
-        if ((this.drugId == null && other.drugId != null) || (this.drugId != null && !this.drugId.equals(other.drugId))) {
+        if ((this.genericNamesPK == null && other.genericNamesPK != null) || (this.genericNamesPK != null && !this.genericNamesPK.equals(other.genericNamesPK))) {
             return false;
         }
         return true;
@@ -95,7 +87,7 @@ public class GenericNames implements Serializable {
 
     @Override
     public String toString() {
-        return "eroshetta.GenericNames[ drugId=" + drugId + " ]";
+        return "eroshetta.GenericNames[ genericNamesPK=" + genericNamesPK + " ]";
     }
     
 }
