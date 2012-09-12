@@ -1276,13 +1276,12 @@ public class Eroshetta extends javax.swing.JFrame {
                 this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
                 return;
             }
-            /*
-            Query q = em.createNamedQuery("Patients.findAll");
-            patientsBookList = (List<Patients>) q.getResultList();
-            System.out.println(jListPatientsBook.size());
-            System.out.println(patientsBookList.toString())
-            * 
-            */
+            
+//            Query q = em.createNamedQuery("Patients.findAll");
+//            patientsBookList = (List<Patients>) q.getResultList();
+//            System.out.println(jListPatientsBook.size());
+//            System.out.println(patientsBookList.toString());
+            
             int selctedID = jListPatientsBook.getSelectedIndex();
             currentPatient = patientsBookList.get(selctedID);
             currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
@@ -1602,13 +1601,15 @@ public class Eroshetta extends javax.swing.JFrame {
             * 
             */
             try {
+                System.out.println("drug contra" +d.getContraPregnant() + "patient " +currentPatient.getIsPregnant());
                 if (d.getContraPregnant() == 1 && currentPatient.getIsPregnant() == 1) {
-                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant womans  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant women  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
                     if (o != 0) {
                         return;
                     }
                 }
             } catch (NullPointerException e) {
+                System.out.println("patien is null");
             }/*
             try {
                 if (d.getContraBmi() == 1 && (currentPatient.getBmi().doubleValue() < 22.5)) {
@@ -1637,7 +1638,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     for (int k = 0; k < drugsContraAlreadyDrugs.size(); k++) {
                         Drugs b = (Drugs) drugsContraAlreadyDrugs.toArray()[k];
                         if (a.getId() == b.getId()) {
-                            o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with" + a.toString() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                            o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with " + a.toString() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
                             if (o != 0) {
                                 return;
                             }
