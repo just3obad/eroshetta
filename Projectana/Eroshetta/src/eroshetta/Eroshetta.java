@@ -41,10 +41,11 @@ public class Eroshetta extends javax.swing.JFrame {
     public static List<Drugs> allDrugs = new ArrayList<Drugs>();
     public static List<Diagnoses> allDiagnoses = new ArrayList<Diagnoses>();
     public static int whichEdit = 0;
+    static Eroshetta eroshetta = new Eroshetta();
 
     public Eroshetta() {
         
-        
+        initComponents();
         Query q2 = em.createNamedQuery("Diagnoses.findAll");
         allDiagnoses = (List<Diagnoses>) q2.getResultList();
         
@@ -53,7 +54,7 @@ public class Eroshetta extends javax.swing.JFrame {
         
         this.modelallDiagnoses = new DefaultListModel();
         this.modelAllDrugs = new DefaultListModel();
-        initComponents();
+        
         this.checkBoxTrade.setSelected(true);
         this.checkBoxClass.setSelected(true);
         this.checkBoxGeneric.setSelected(true);
@@ -819,7 +820,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(checkBoxClass)
                     .addComponent(checkBoxGeneric))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -833,11 +834,6 @@ public class Eroshetta extends javax.swing.JFrame {
         savePreview.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 savePreviewMouseClicked(evt);
-            }
-        });
-        savePreview.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                savePreviewActionPerformed(evt);
             }
         });
 
@@ -1021,7 +1017,7 @@ public class Eroshetta extends javax.swing.JFrame {
             tmp.addAll(tmpList);
 //        g = l.get(i).getGenericNames();
             for (int j = 0; j < tmp.size(); j++) {
-                genericNames.add(tmp.get(j).getGenericName());
+                genericNames.add(tmp.get(j).getGenericNamesPK().getGenericName());
             }
         }
 //        System.out.println("trade names : " + tradeNames);
@@ -1058,7 +1054,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 List<GenericNames> drugsWithCertainGenericList = q.getResultList();
                 drugsWithCertainGeneric.addAll(drugsWithCertainGenericList);
                 for (int e = 0; e < drugsWithCertainGeneric.size(); e++) {
-                    Drugs d = em.find(Drugs.class, drugsWithCertainGeneric.get(e).getDrugId());
+                    Drugs d = em.find(Drugs.class, drugsWithCertainGeneric.get(e).getGenericNamesPK().getDrugId());
                     drugsTopWithGenericNames.add(d);
                 }
             }
@@ -1149,7 +1145,7 @@ public class Eroshetta extends javax.swing.JFrame {
         for(int i=0;i<generics.size();i++)
         {
             generic = (GenericNames) generics.get(i);
-            genericNames = genericNames  + generic.getGenericName() + " " + generic.getConcentration() +", ";
+            genericNames = genericNames  + generic.getGenericNamesPK().getGenericName() + " " + generic.getConcentration() +", ";
         }
         
         Collection<SideEffects> sEffects = selectedDrug.getSideEffectsCollection();
@@ -1169,14 +1165,6 @@ public class Eroshetta extends javax.swing.JFrame {
            }    
         }
         
-        Collection<Foods> foods = selectedDrug.getFoodsCollection();
-        Foods food;
-        String drugFood = "";
-        for(int k=0; k<foods.size();k++)
-        {
-            food = (Foods)foods.toArray()[k];
-            drugFood = drugFood  + food.getName() + ", ";
-        }
         
         drugClassName.setText(selectedDrug.getClassName());
         drugClassName.setToolTipText(selectedDrug.getClassName());
@@ -1211,8 +1199,8 @@ public class Eroshetta extends javax.swing.JFrame {
         drugMinor.setText(minorEffects);
         drugMinor.setToolTipText(minorEffects);
 
-        drugFoods.setText(drugFood);
-        drugFoods.setToolTipText(drugFood);
+        drugFoods.setText(selectedDrug.getFoodInteractions());
+        drugFoods.setToolTipText(selectedDrug.getFoodInteractions());
 
         drugProfile.revalidate();
        
@@ -1552,6 +1540,11 @@ public class Eroshetta extends javax.swing.JFrame {
             }
             Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
             //conditions checking a drug
+            
+             
+            
+            //DB Change kareem 
+            /*
             int age = 0;
             try {
 
@@ -1627,6 +1620,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 }
             } catch (NullPointerException e) {
             }
+            * 
+            */
             try {
                 Collection<Drugs> drugsContraAlreadyDrugs = d.getDrugsCollection();
                 for (int j = 0; j < this.drugsCollectionInPrescription.size(); j++) {
@@ -1718,18 +1713,6 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addToPrescMouseClicked
 
-    // Kareem
-    private void savePreviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePreviewActionPerformed
-        // TODO add your handling code here:
-        javax.persistence.Query q = em.createNamedQuery("Prescriptions.findById");
-        q.setParameter("id", 1);
-        Prescriptions p = (Prescriptions) q.getSingleResult();
-        PrescriptionView prescView = new PrescriptionView(p);
-        //PrescriptionFrame prescFrame =new PrescriptionFrame(prescView);
-        //prescFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        new PrescriptionFrame(prescView).setVisible(true);
-    }//GEN-LAST:event_savePreviewActionPerformed
-
     private void jListPatientsBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPatientsBookMouseClicked
         if (this.workingOnPrescription) {
             int o = JOptionPane.showConfirmDialog(new JButton("parent"), "Prescription Progress will be lost , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
@@ -1758,60 +1741,60 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void savePreviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savePreviewMouseClicked
         currentPrescription = new Prescriptions();
+        System.out.println(currentPatient.getName());
         currentPrescription.setPatientId(currentPatient);
         currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
-        Collection<DrugTime> times = new ArrayList();
+        Collection<PrescriptionHasDrug> times = new ArrayList();
         for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
             if (drugsPanels.get(i).jCheckBox1.isSelected()) {
-                DrugTime time = new DrugTime();
+                PrescriptionHasDrug time = new PrescriptionHasDrug();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPatients(currentPatient);
                 time.setPrescriptions(currentPrescription);
                 time.setDrugTime(drugsPanels.get(i).jCheckBox1.getText());
                 times.add(time);
             }
             if (drugsPanels.get(i).jCheckBox2.isSelected()) {
-                DrugTime time = new DrugTime();
+                PrescriptionHasDrug time = new PrescriptionHasDrug();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPatients(currentPatient);
                 time.setPrescriptions(currentPrescription);
                 time.setDrugTime(drugsPanels.get(i).jCheckBox2.getText());
                 times.add(time);
             }
             if (drugsPanels.get(i).jCheckBox3.isSelected()) {
-                DrugTime time = new DrugTime();
+                PrescriptionHasDrug time = new PrescriptionHasDrug();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPatients(currentPatient);
                 time.setPrescriptions(currentPrescription);
                 time.setDrugTime(drugsPanels.get(i).jCheckBox3.getText());
                 times.add(time);
             }
             if (drugsPanels.get(i).jCheckBox4.isSelected()) {
-                DrugTime time = new DrugTime();
+                PrescriptionHasDrug time = new PrescriptionHasDrug();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPatients(currentPatient);
                 time.setPrescriptions(currentPrescription);
                 time.setDrugTime(drugsPanels.get(i).jCheckBox4.getText());
                 times.add(time);
             }
             if (drugsPanels.get(i).jCheckBox5.isSelected()) {
-                DrugTime time = new DrugTime();
+                PrescriptionHasDrug time = new PrescriptionHasDrug();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPatients(currentPatient);
                 time.setPrescriptions(currentPrescription);
                 time.setDrugTime(drugsPanels.get(i).jCheckBox5.getText());
                 times.add(time);
             }
             if (drugsPanels.get(i).jCheckBox6.isSelected()) {
-                DrugTime time = new DrugTime();
+                PrescriptionHasDrug time = new PrescriptionHasDrug();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPatients(currentPatient);
                 time.setPrescriptions(currentPrescription);
                 time.setDrugTime(drugsPanels.get(i).jCheckBox6.getText());
                 times.add(time);
             }
         }
-        currentPrescription.setDrugTimeCollection(times);
+        currentPrescription.setPrescriptionHasDrugCollection(times);
+        
+        //Kareem
+        
+        PrescriptionView prescView = new PrescriptionView(currentPrescription); 
+        new PrescriptionFrame(prescView).setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_savePreviewMouseClicked
@@ -2260,7 +2243,6 @@ public class Eroshetta extends javax.swing.JFrame {
     static Patients currentPatient;
     static List<Drugs> currentPatienMedications = new ArrayList<Drugs>();
     static List<Diagnoses> currentPatienDiagnoses = new ArrayList<Diagnoses>();
-    static Eroshetta eroshetta = new Eroshetta();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;

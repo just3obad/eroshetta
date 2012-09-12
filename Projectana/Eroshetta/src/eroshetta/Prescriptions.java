@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Mouaz
+ * @author Administrator
  */
 @Entity
 @Table(name = "PRESCRIPTIONS")
@@ -35,13 +35,17 @@ public class Prescriptions implements Serializable {
     private Date date;
     @Column(name = "NOTES")
     private String notes;
-    @ManyToMany(mappedBy = "prescriptionsCollection")
-    private Collection<Drugs> drugsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptions")
-    private Collection<DrugTime> drugTimeCollection;
+    private Collection<PrescriptionHasDrug> prescriptionHasDrugCollection;
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID")
     @ManyToOne
     private Patients patientId;
+    
+     @JoinTable(name = "PRESCRIPTION_HAS_DRUG", joinColumns = {
+        @JoinColumn(name = "PRESCRIPTION_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID")})
+    @ManyToMany
+    private Collection<Drugs> DrugsCollection;
 
     public Prescriptions() {
     }
@@ -75,21 +79,12 @@ public class Prescriptions implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Drugs> getDrugsCollection() {
-        return drugsCollection;
+    public Collection<PrescriptionHasDrug> getPrescriptionHasDrugCollection() {
+        return prescriptionHasDrugCollection;
     }
 
-    public void setDrugsCollection(Collection<Drugs> drugsCollection) {
-        this.drugsCollection = drugsCollection;
-    }
-
-    @XmlTransient
-    public Collection<DrugTime> getDrugTimeCollection() {
-        return drugTimeCollection;
-    }
-
-    public void setDrugTimeCollection(Collection<DrugTime> drugTimeCollection) {
-        this.drugTimeCollection = drugTimeCollection;
+    public void setPrescriptionHasDrugCollection(Collection<PrescriptionHasDrug> prescriptionHasDrugCollection) {
+        this.prescriptionHasDrugCollection = prescriptionHasDrugCollection;
     }
 
     public Patients getPatientId() {
@@ -98,6 +93,14 @@ public class Prescriptions implements Serializable {
 
     public void setPatientId(Patients patientId) {
         this.patientId = patientId;
+    }
+    public  Collection<Drugs> getDrugsCollection()
+    {
+        return this.DrugsCollection;
+    }
+    public void setDrugsCollection(Collection<Drugs> drugs)
+    {
+        this.DrugsCollection = drugs;
     }
 
     @Override

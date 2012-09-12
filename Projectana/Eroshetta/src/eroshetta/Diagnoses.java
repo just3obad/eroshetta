@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Mouaz
+ * @author Administrator
  */
 @Entity
 @Table(name = "DIAGNOSES")
@@ -37,7 +37,7 @@ public class Diagnoses implements Serializable {
         @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Patients> patientsCollection;
-    @JoinTable(name = "DRUG_CONTRADICT_DIAGNOSIS", joinColumns = {
+    @JoinTable(name = "CONTRAINDICATIONS", joinColumns = {
         @JoinColumn(name = "DIAGNOSIS_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID")})
     @ManyToMany

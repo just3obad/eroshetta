@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Mouaz
+ * @author Administrator
  */
 @Entity
 @Table(name = "SIDE_EFFECTS")
