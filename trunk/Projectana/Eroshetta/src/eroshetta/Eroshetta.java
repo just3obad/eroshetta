@@ -1276,7 +1276,13 @@ public class Eroshetta extends javax.swing.JFrame {
                 this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
                 return;
             }
-
+            /*
+            Query q = em.createNamedQuery("Patients.findAll");
+            patientsBookList = (List<Patients>) q.getResultList();
+            System.out.println(jListPatientsBook.size());
+            System.out.println(patientsBookList.toString())
+            * 
+            */
             int selctedID = jListPatientsBook.getSelectedIndex();
             currentPatient = patientsBookList.get(selctedID);
             currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
@@ -1746,48 +1752,29 @@ public class Eroshetta extends javax.swing.JFrame {
         currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
         Collection<PrescriptionHasDrug> times = new ArrayList();
         for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-            if (drugsPanels.get(i).jCheckBox1.isSelected()) {
-                PrescriptionHasDrug time = new PrescriptionHasDrug();
+            PrescriptionHasDrug time = new PrescriptionHasDrug();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPrescriptions(currentPrescription);
+                time.setDrugTime("");
+            if (drugsPanels.get(i).jCheckBox1.isSelected()) {
                 time.setDrugTime(drugsPanels.get(i).jCheckBox1.getText());
-                times.add(time);
             }
             if (drugsPanels.get(i).jCheckBox2.isSelected()) {
-                PrescriptionHasDrug time = new PrescriptionHasDrug();
-                time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPrescriptions(currentPrescription);
-                time.setDrugTime(drugsPanels.get(i).jCheckBox2.getText());
-                times.add(time);
+                time.setDrugTime(time.getDrugTime() +"," +drugsPanels.get(i).jCheckBox2.getText());
             }
             if (drugsPanels.get(i).jCheckBox3.isSelected()) {
-                PrescriptionHasDrug time = new PrescriptionHasDrug();
-                time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPrescriptions(currentPrescription);
-                time.setDrugTime(drugsPanels.get(i).jCheckBox3.getText());
-                times.add(time);
+                time.setDrugTime(time.getDrugTime() +"," +drugsPanels.get(i).jCheckBox3.getText());
             }
             if (drugsPanels.get(i).jCheckBox4.isSelected()) {
-                PrescriptionHasDrug time = new PrescriptionHasDrug();
-                time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPrescriptions(currentPrescription);
-                time.setDrugTime(drugsPanels.get(i).jCheckBox4.getText());
-                times.add(time);
+                time.setDrugTime(time.getDrugTime() +"," +drugsPanels.get(i).jCheckBox4.getText());
             }
             if (drugsPanels.get(i).jCheckBox5.isSelected()) {
-                PrescriptionHasDrug time = new PrescriptionHasDrug();
-                time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPrescriptions(currentPrescription);
-                time.setDrugTime(drugsPanels.get(i).jCheckBox5.getText());
-                times.add(time);
+                time.setDrugTime(time.getDrugTime() +"," +drugsPanels.get(i).jCheckBox5.getText());
             }
             if (drugsPanels.get(i).jCheckBox6.isSelected()) {
-                PrescriptionHasDrug time = new PrescriptionHasDrug();
-                time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPrescriptions(currentPrescription);
-                time.setDrugTime(drugsPanels.get(i).jCheckBox6.getText());
-                times.add(time);
+                time.setDrugTime(time.getDrugTime() +"," +drugsPanels.get(i).jCheckBox6.getText());
             }
+            times.add(time);
         }
         currentPrescription.setPrescriptionHasDrugCollection(times);
         
