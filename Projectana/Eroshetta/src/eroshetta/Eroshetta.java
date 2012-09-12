@@ -1599,6 +1599,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 }
             } catch (NullPointerException e) {
             }
+            * 
+            */
             try {
                 if (d.getContraPregnant() == 1 && currentPatient.getIsPregnant() == 1) {
                     o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant womans  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
@@ -1607,7 +1609,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     }
                 }
             } catch (NullPointerException e) {
-            }
+            }/*
             try {
                 if (d.getContraBmi() == 1 && (currentPatient.getBmi().doubleValue() < 22.5)) {
                     o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for under weight(BMI < 22.5) , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
