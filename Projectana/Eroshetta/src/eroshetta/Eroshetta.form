@@ -414,7 +414,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelPatientProfileDiagnosis">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Diagnosis:"/>
+                    <Property name="text" type="java.lang.String" value="Current Conditions:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldPatientProfileName">
@@ -601,6 +601,9 @@
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JTextField" name="jTextFieldPPMedication">
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldPPMedicationKeyReleased"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextFieldPPMedication.setVisible(false);"/>
                   </AuxValues>

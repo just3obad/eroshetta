@@ -329,7 +329,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jLabelPatientProfileCurrentMedication.setText("Current Medications:");
 
-        jLabelPatientProfileDiagnosis.setText("Diagnosis:");
+        jLabelPatientProfileDiagnosis.setText("Current Conditions:");
 
         jTextFieldPatientProfileName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -464,6 +464,11 @@ public class Eroshetta extends javax.swing.JFrame {
         }
 
         jTextFieldPPMedication.setVisible(false);
+        jTextFieldPPMedication.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPPMedicationKeyReleased(evt);
+            }
+        });
 
         jLabelPPMedication.setVisible(false);
         jLabelPPMedication.setText("Search:");
@@ -2308,6 +2313,28 @@ public class Eroshetta extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jTextFieldPPMedicationKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPPMedicationKeyReleased
+        // TODO add your handling code here:
+        if(whichEdit==1){
+            //Drugs Search
+            
+        }
+        else{
+            //Diagnosis Search
+            Query q5 = em.createNamedQuery("Diagnoses.findByName");
+            q5.setParameter("name", jTextFieldPPMedication.getText()+"%");
+
+            allDiagnoses = (List<Diagnoses>) q5.getResultList();
+            DefaultListModel modelDiagnosisSearch = new DefaultListModel();
+            jListPPDiagnosisMedication.setModel(modelDiagnosisSearch);
+            for (int i = 0; i < allDiagnoses.size(); i++) {
+                modelDiagnosisSearch.add(i, allDiagnoses.get(i).getName());
+            }
+            
+            
+        }
+    }//GEN-LAST:event_jTextFieldPPMedicationKeyReleased
+
     public void saveProfilePatient(){
         em.getTransaction().begin();
         
@@ -2677,7 +2704,7 @@ public class Eroshetta extends javax.swing.JFrame {
     public static void findAllPatients() {
 
         Query q = em.createNamedQuery("Patients.findByName");
-        q.setParameter("pName", "P%");
+        q.setParameter("pName", "%");
 
         patientsBookList = (List<Patients>) q.getResultList();
 //         System.out.println();
