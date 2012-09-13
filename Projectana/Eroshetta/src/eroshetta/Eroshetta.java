@@ -43,11 +43,15 @@ public class Eroshetta extends javax.swing.JFrame {
     public static List<Drugs> currentPatienMedications;
     public static List<Diagnoses> currentPatienDiagnoses;
     public static DefaultListModel modelAllPatients;
+    public static boolean saveFlag;
+    public static int dayHazard;
 
     
     
 
     public Eroshetta() {
+        
+        saveFlag=true;
         
         Query q = em.createNamedQuery("Patients.findAll");
         patientsBookList = (List<Patients>) q.getResultList();
@@ -58,9 +62,9 @@ public class Eroshetta extends javax.swing.JFrame {
         Query q3 = em.createNamedQuery("Drugs.findAll");
         allDrugs = (List<Drugs>) q3.getResultList();
         
-        System.out.println(patientsBookList.size());
-        System.out.println(allDrugs.size());
-        System.out.println(allDiagnoses.size());
+//        System.out.println(patientsBookList.size());
+//        System.out.println(allDrugs.size());
+//        System.out.println(allDiagnoses.size());
         
         Eroshetta.modelAllPatients = new DefaultListModel();
         Eroshetta.modelallDiagnoses = new DefaultListModel();
@@ -68,9 +72,13 @@ public class Eroshetta extends javax.swing.JFrame {
         
         
         currentPatient=patientsBookList.get(0);
+        dayHazard=currentPatient.getBirthDate().getDate();
         
         initComponents();
+        
+        
        
+        this.disableProfilePatient();
         jListPatientsBook.setSelectedIndex(0);
         
         Eroshetta.checkBoxTrade.setSelected(true);
@@ -347,6 +355,11 @@ public class Eroshetta extends javax.swing.JFrame {
                 jComboBoxPatientProfileDayMouseClicked(evt);
             }
         });
+        jComboBoxPatientProfileDay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPatientProfileDayActionPerformed(evt);
+            }
+        });
 
         jComboBoxPatientProfileMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         jComboBoxPatientProfileMonth.addActionListener(new java.awt.event.ActionListener() {
@@ -380,11 +393,33 @@ public class Eroshetta extends javax.swing.JFrame {
         pregnantComboModel.addElement("No");
         jComboBoxPatientProfilePregnant.setVisible(false);
         jLabelPatientProfilePregnant.setVisible(false);
+        jComboBoxPatientProfilePregnant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPatientProfilePregnantActionPerformed(evt);
+            }
+        });
 
         jTextFieldPatientProfileBMI.setEditable(false);
         jTextFieldPatientProfileBMI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPatientProfileBMIActionPerformed(evt);
+            }
+        });
+
+        jTextFieldPatientProfileWeight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPatientProfileWeightActionPerformed(evt);
+            }
+        });
+        jTextFieldPatientProfileWeight.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPatientProfileWeightKeyReleased(evt);
+            }
+        });
+
+        jTextFieldPatientProfileHeight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPatientProfileHeightActionPerformed(evt);
             }
         });
 
@@ -451,9 +486,19 @@ public class Eroshetta extends javax.swing.JFrame {
         jButton1.setText("New");
 
         jButton2.setText("Edit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Save");
         jButton3.setEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPatientProfileLayout = new javax.swing.GroupLayout(jPanelPatientProfile);
         jPanelPatientProfile.setLayout(jPanelPatientProfileLayout);
@@ -1268,18 +1313,60 @@ public class Eroshetta extends javax.swing.JFrame {
             Query q4 = em.createNamedQuery("Patients.findByName");
             q4.setParameter("pName", jTextFieldPatientsBook.getText() + "%");
             patientsBookList = (List<Patients>) q4.getResultList();
-//            currentPatient=patientsBookList.get(0);
+            
+            
+//            System.out.println(patientsBookList.size());
+            
+//            if(patientsBookList.isEmpty()){
+////                this.clearProfilePatient();
+//                DefaultListModel tempModel = new DefaultListModel();
+//                jListPatientsBook.setModel(tempModel);
+//                tempModel.addElement("Sorry, No match");
+//                currentPatient=null;
+//            }
+//            else{
+                
+//            jPanelPatientProfile.setVisible(true);
+            
             DefaultListModel modelPatientSearch = new DefaultListModel();
             jListPatientsBook.setModel(modelPatientSearch);
             for (int i = 0; i < patientsBookList.size(); i++) {
                 modelPatientSearch.add(i, patientsBookList.get(i).getName());
             }
+            currentPatient=patientsBookList.get(0);
             jListPatientsBook.setSelectedIndex(0);
-        } catch (Exception e) {
+}
+//        } 
+        catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_jTextFieldPatientsBookKeyReleased
 
+    
+    public void clearProfilePatient(){
+        try {
+//            jTextFieldPatientProfileName.setText("No One");
+//            jTextFieldPatientProfileHeight.setText("");
+//            jTextFieldPatientProfileWeight.setText("");
+//            jTextFieldPatientProfileBMI.setText("");
+//            jComboBoxPatientProfileDay.setSelectedIndex(0);
+//            jComboBoxPatientProfileGender.setSelectedIndex(0);
+//            jComboBoxPatientProfileMarital.setSelectedIndex(0);
+//            jComboBoxPatientProfileMonth.setSelectedIndex(0);
+//            jComboBoxPatientProfilePregnant.setSelectedIndex(0);
+//            jComboBoxPatientProfileYear.setSelectedIndex(0);
+            
+            jPanelPatientProfile.setVisible(false);
+            
+//            System.out.println("a7aaaaaaaaaaa");
+            
+        } catch (Exception e) {
+            
+            System.out.println(e.getMessage());
+            System.out.println("Error clearing the components upon an empty search results");
+        }
+    }
+    
     private void jTextFieldSearchDragsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchDragsKeyReleased
         String query = this.jTextFieldSearchDrags.getText();
         final ArrayList<Drugs> finos = Eroshetta.drug_search(query);
@@ -1325,7 +1412,12 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
 
         // TODO add your handling code here:
+        
         if(counterPatients%2==0){
+        System.out.println("The save flaag is "+ saveFlag);    
+            this.disableProfilePatient();
+            
+            
             
             try {
                 int selctedID = jListPatientsBook.getSelectedIndex();
@@ -1536,7 +1628,9 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jComboBoxPatientProfileMaritalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileMaritalActionPerformed
         // TODO add your handling code here:
+        
         this.profileGenderMaritalStatus();
+//        saveFlag=false;
     }//GEN-LAST:event_jComboBoxPatientProfileMaritalActionPerformed
 
     /*
@@ -1550,12 +1644,13 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jComboBoxPatientProfileYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileYearActionPerformed
         // TODO add your handling code here:
         this.leapYearModification();
-
+//        saveFlag=false;
     }//GEN-LAST:event_jComboBoxPatientProfileYearActionPerformed
 
     private void jComboBoxPatientProfileMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileMonthActionPerformed
         // TODO add your handling code here:
         this.leapYearModification();
+//        saveFlag=false;
     }//GEN-LAST:event_jComboBoxPatientProfileMonthActionPerformed
 
     private void jComboBoxPatientProfileDayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileDayMouseClicked
@@ -1564,11 +1659,14 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jComboBoxPatientProfileGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileGenderActionPerformed
         // TODO add your handling code here:
+        
         this.profileGenderMaritalStatus();
+//        saveFlag=false;
     }//GEN-LAST:event_jComboBoxPatientProfileGenderActionPerformed
 
     private void jTextFieldPatientProfileNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileNameActionPerformed
         // TODO add your handling code here:
+//        saveFlag=false;
     }//GEN-LAST:event_jTextFieldPatientProfileNameActionPerformed
 
     private void jToggleButtonDiagnosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonDiagnosisActionPerformed
@@ -1935,14 +2033,14 @@ public class Eroshetta extends javax.swing.JFrame {
                         model.addElement(selectedDrug.getClassName());
                         jListPPM3edication.setModel(model);
                         
-                        System.out.println("Hello");
+//                        System.out.println("Hello");
                         
                         List newDrugsList = currentPatienMedications;
                         newDrugsList.add(selectedDrug);
                         currentPatient.setDrugsCollection(newDrugsList);
                         currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
                         
-                        System.out.println("Hello Again");
+//                        System.out.println("Hello Again");
 
                         this.addDrugDB(selectedDrug.getId());
                     }
@@ -1968,14 +2066,14 @@ public class Eroshetta extends javax.swing.JFrame {
                        jListPPDiagnosis.setModel(model);
 //                       
 //                       
-                        System.out.println("Hello");
+//                        System.out.println("Hello");
 
                         List newDiagnosisList = currentPatienDiagnoses;
                         newDiagnosisList.add(selectedDiagnosis);
                         currentPatient.setDiagnosesCollection(newDiagnosisList);
                         currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
                         
-                        System.out.println("Hello Again");
+//                        System.out.println("Hello Again");
 
                         this.addDiagnosisDB(selectedDiagnosis.getId());
                         
@@ -2042,13 +2140,195 @@ public class Eroshetta extends javax.swing.JFrame {
         counterDiagnosis++;
     }//GEN-LAST:event_jListPPDiagnosisValueChanged
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:        
+         try {
+            if(jTextFieldPatientProfileName.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Please enter the patient`s name", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                
+                
+            this.saveProfilePatient();
+    
+            this.disableProfilePatient();
+            jButton3.setEnabled(false);
+            int x = jListPatientsBook.getSelectedIndex();
+            Query qRefresh = em.createNamedQuery("Patients.findAll"); 
+            patientsBookList=qRefresh.getResultList(); 
+            DefaultListModel refreshModel = new DefaultListModel();
+            jListPatientsBook.setModel(refreshModel);
+           
+            for(int i=0; i<patientsBookList.size();i++){
+                refreshModel.add(i, patientsBookList.get(i).getName());
+            }
+            
+            jListPatientsBook.setSelectedIndex(x);
+            currentPatient=patientsBookList.get(x);
+            saveFlag=true;
+            }
+            
+            
+            
+        } catch (Exception e) {
+        }
+        
+      
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jButton3.setEnabled(true);
+        this.enableProfilePatient();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBoxPatientProfileDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileDayActionPerformed
+        // TODO add your handling code here:
+        dayHazard=Integer.parseInt(String.valueOf(jComboBoxPatientProfileDay.getSelectedItem()));
+//        saveFlag=false;
+    }//GEN-LAST:event_jComboBoxPatientProfileDayActionPerformed
+
+    private void jComboBoxPatientProfilePregnantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfilePregnantActionPerformed
+        // TODO add your handling code here:
+//        saveFlag=false;
+    }//GEN-LAST:event_jComboBoxPatientProfilePregnantActionPerformed
+
+    private void jTextFieldPatientProfileWeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileWeightActionPerformed
+        // TODO add your handling code here:
+//        saveFlag=false;
+    }//GEN-LAST:event_jTextFieldPatientProfileWeightActionPerformed
+
+    private void jTextFieldPatientProfileHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileHeightActionPerformed
+        // TODO add your handling code here:
+//        saveFlag=false;
+    }//GEN-LAST:event_jTextFieldPatientProfileHeightActionPerformed
+
+    private void jTextFieldPatientProfileWeightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileWeightKeyReleased
+        // TODO add your handling code here:
+
+        try {
+
+            int weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
+            int height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/100;
+
+            currentPatient.setWeight(weight);
+            currentPatient.setHeight(height);
+            BigDecimal calc = BigDecimal.valueOf((height)/(weight*weight));
+            currentPatient.setBmi(calc);
+            jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
+        } catch (Exception e) {
+
+            jTextFieldPatientProfileBMI.setText(String.valueOf(0.0));
+            System.out.println("Error in the weight instatnt calc");
+            //            JOptionPane.showMessageDialog(this, "Please enter a valid weight", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+
+    }//GEN-LAST:event_jTextFieldPatientProfileWeightKeyReleased
+
+    public void saveProfilePatient(){
+        em.getTransaction().begin();
+        
+        
+        try {
+           
+                currentPatient.setName(jTextFieldPatientProfileName.getText());
+            
+        } catch (Exception e) {
+            System.out.println("Error updating the name");
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            
+            if(jComboBoxPatientProfileGender.getSelectedIndex()==0){
+                currentPatient.setGender('m');
+            }
+            else{
+                currentPatient.setGender('f');
+            }
+            
+        } catch (Exception e) {
+            
+            System.out.println("Error updating gender");
+            
+        }
+        
+        try {
+            
+            currentPatient.setMaritalStatus(jComboBoxPatientProfileMarital.getSelectedIndex());
+            
+        } catch (Exception e) {
+            
+            System.out.println("Error updating marital status");
+            
+        }
+        
+        try {
+            
+            currentPatient.setIsPregnant(jComboBoxPatientProfilePregnant.getSelectedIndex());
+            
+        } catch (Exception e) {
+            
+            System.out.println("Error updating pregnancy");
+        }
+        
+        try {
+            
+            int weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
+            int height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/100;
+            currentPatient.setWeight(weight);
+            currentPatient.setHeight(height*100);
+            BigDecimal calc = BigDecimal.valueOf((weight)/(height*height));
+            currentPatient.setBmi(calc);
+            jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
+            
+
+            
+        } catch (Exception e) {
+            
+            
+//            System.out.println("Error updating weight or height or bmi");
+            System.out.println(e.getMessage());
+//            JOptionPane.showMessageDialog(this, "Please select a p", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+
+        try {
+            
+            Date d = new Date();
+            d.setDate(Integer.parseInt(String.valueOf(jComboBoxPatientProfileDay.getSelectedItem())));
+            d.setMonth(jComboBoxPatientProfileMonth.getSelectedIndex());
+            d.setYear(Integer.parseInt(String.valueOf(jComboBoxPatientProfileYear.getSelectedItem()))-1900);
+            currentPatient.setBirthDate(d);
+            
+        } catch (Exception e) {
+            
+            System.out.println(e.getMessage());
+            System.out.println("Error updating birthday");
+            
+        }
+        
+        em.persist(currentPatient);
+        em.getTransaction().commit();
+    }
     
     public boolean checkExistDrug(Drugs test){
-        
+        for(int i=0; i<currentPatienMedications.size(); i++){
+            if(test.getId()==currentPatienMedications.get(i).getId()){
+                return true;
+            }
+        }
         return false;
     }
     
     public boolean checkExistDiagnosis(Diagnoses test){
+        for(int i=0; i<currentPatienDiagnoses.size();i++){
+            if(test.getId()==currentPatienDiagnoses.get(i).getId()){
+                return true;
+            }
+        }
         return false;
     }
     
@@ -2069,14 +2349,14 @@ public class Eroshetta extends javax.swing.JFrame {
             modelDeleteMedication.remove(selectedDrugIndex);
             jListPPM3edication.setModel(modelDeleteMedication);
 
-            System.out.println("COME HERE");
+//            System.out.println("COME HERE");
 
             List newDrugsList = currentPatienMedications;
             newDrugsList.remove(selectedDrugIndex);
             currentPatient.setDrugsCollection(newDrugsList);
             currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
 
-            System.out.println("COME HERE AGAIN");
+//            System.out.println("COME HERE AGAIN");
 
             this.deleteDrugDB(deletedDrug.getId());
 
@@ -2116,14 +2396,14 @@ public class Eroshetta extends javax.swing.JFrame {
             modelDeleteDiagnosis.remove(selectedDiagnosisIndex);
             jListPPDiagnosis.setModel(modelDeleteDiagnosis);
 
-            System.out.println("COME HERE");
+//            System.out.println("COME HERE");
 
             List newDiagnosisList = currentPatienDiagnoses;
             newDiagnosisList.remove(selectedDiagnosisIndex);
             currentPatient.setDiagnosesCollection(newDiagnosisList);
             currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
 
-            System.out.println("COME HERE AGAIN");
+//            System.out.println("COME HERE AGAIN");
 
             this.deleteDiagnosisDB(deletedDiagnoses.getId());
 
@@ -2165,6 +2445,8 @@ public class Eroshetta extends javax.swing.JFrame {
     }
 
     public void leapYearModification() {
+        
+        int x = dayHazard;
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int selectedYear = (Integer) jComboBoxPatientProfileYear.getSelectedItem();
         int selectedMonth = (Integer) jComboBoxPatientProfileMonth.getSelectedIndex();
@@ -2180,91 +2462,136 @@ public class Eroshetta extends javax.swing.JFrame {
         if (selectedMonth == 1 || selectedMonth == 3 || selectedMonth == 5 || selectedMonth == 7 || selectedMonth == 8 || selectedMonth == 10 || selectedMonth == 12) {
             for (int i = 1; i < 32; i++) {
                 dayModelLeapYead.addElement(i);
+                
             }
+            jComboBoxPatientProfileDay.setSelectedIndex(x-1);
         } else {
             if (selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9 || selectedMonth == 11) {
                 for (int i = 1; i < 31; i++) {
                     dayModelLeapYead.addElement(i);
                 }
+                jComboBoxPatientProfileDay.setSelectedIndex(x-1);
             } else {
                 if (selectedMonth == 2 && leapYearFlag) {
                     for (int i = 1; i < 30; i++) {
                         dayModelLeapYead.addElement(i);
                     }
+                    jComboBoxPatientProfileDay.setSelectedIndex(x-1);
                 } else {
                     for (int i = 1; i < 29; i++) {
                         dayModelLeapYead.addElement(i);
                     }
+                    jComboBoxPatientProfileDay.setSelectedIndex(x-1);
                 }
             }
         }
     }
 
-    public static void createPatients() {
-        em.getTransaction().begin();
-        for (int i = 0; i < 25; i++) {
-
-            Patients p = new Patients();
-            p.setName("Patient" + i);
-
-            if (i % 2 == 0) {
-                p.setGender('m');
-                p.setHeight(i * 100);
-                int h = i * 100;
-                p.setWeight(((i * 100) + (i * 2)));
-                double w = (i * 100) + (i * 2);
-                double b = h / (w * w);
-                p.setBmi(BigDecimal.valueOf(i));
-                if ((1 + i) % 4 == 0) {
-                    p.setMaritalStatus(0);
-                } else {
-                    p.setMaritalStatus(1);
-
-                }
-            } else {
-                p.setGender('f');
-                p.setHeight(i * 100);
-                int h = i * 100;
-                p.setWeight(((i * 100) + (i * 2)));
-                double w = (i * 100) + (i * 2);
-                double b = h / (w * w);
-                p.setBmi(BigDecimal.valueOf(i));
-
-                if ((i + 1) % 3 == 0) {
-                    p.setMaritalStatus(0);
-                } else {
-                    p.setMaritalStatus(1);
-                    if ((i + 1) % 4 == 0) {
-                        p.setIsPregnant(0);
-                    } else {
-                        p.setIsPregnant(1);
-                    }
-                }
-
-
-            }
-
-
-            Date d = new Date(102, 5, 23);
-            p.setBirthDate(d);
-            em.persist(p);
-
-        }
-
-        em.getTransaction().commit();
-
+    public void disableProfilePatient(){
+        jTextFieldPatientProfileName.setEnabled(false);
+        jTextFieldPatientProfileHeight.setEnabled(false);
+        jTextFieldPatientProfileWeight.setEnabled(false);
+        jTextFieldPPMedication.setEnabled(false);
+        jTextFieldPatientProfileName.setEnabled(false);
+        
+        jComboBoxPatientProfileDay.setEnabled(false);
+        jComboBoxPatientProfileGender.setEnabled(false);
+        jComboBoxPatientProfileMarital.setEnabled(false);
+        jComboBoxPatientProfileMonth.setEnabled(false);
+        jComboBoxPatientProfilePregnant.setEnabled(false);
+        jComboBoxPatientProfileYear.setEnabled(false);
+        
+        jToggleButtonDiagnosis.setEnabled(false);
+        jToggleButtonPPMedication.setEnabled(false);
+        
     }
-
-    public static void diagnosis() {
-        em.getTransaction().begin();
-        for (int i = 0; i < 25; i++) {
-            Diagnoses d = new Diagnoses();
-            d.setId(i);
-            d.setName("Diagnosis" + i);
-            em.persist(d);
-        }
-        em.getTransaction().commit();
+    
+    public void enableProfilePatient(){
+        jTextFieldPatientProfileName.setEnabled(true);
+        jTextFieldPatientProfileHeight.setEnabled(true);
+        jTextFieldPatientProfileWeight.setEnabled(true);
+        jTextFieldPPMedication.setEnabled(true);
+        jTextFieldPatientProfileName.setEnabled(true);
+        
+        jComboBoxPatientProfileDay.setEnabled(true);
+        jComboBoxPatientProfileGender.setEnabled(true);
+        jComboBoxPatientProfileMarital.setEnabled(true);
+        jComboBoxPatientProfileMonth.setEnabled(true);
+        jComboBoxPatientProfilePregnant.setEnabled(true);
+        jComboBoxPatientProfileYear.setEnabled(true);
+        
+        jToggleButtonDiagnosis.setEnabled(true);
+        jToggleButtonPPMedication.setEnabled(true);
     }
+    
+    
+    
+    
+//    public static void createPatients() {
+//        em.getTransaction().begin();
+//        for (int i = 0; i < 25; i++) {
+//
+//            Patients p = new Patients();
+//            p.setName("Patient" + i);
+//
+//            if (i % 2 == 0) {
+//                p.setGender('m');
+//                p.setHeight(i * 100);
+//                int h = i * 100;
+//                p.setWeight(((i * 100) + (i * 2)));
+//                double w = (i * 100) + (i * 2);
+//                double b = h / (w * w);
+//                p.setBmi(BigDecimal.valueOf(i));
+//                if ((1 + i) % 4 == 0) {
+//                    p.setMaritalStatus(0);
+//                } else {
+//                    p.setMaritalStatus(1);
+//
+//                }
+//            } else {
+//                p.setGender('f');
+//                p.setHeight(i * 100);
+//                int h = i * 100;
+//                p.setWeight(((i * 100) + (i * 2)));
+//                double w = (i * 100) + (i * 2);
+//                double b = h / (w * w);
+//                p.setBmi(BigDecimal.valueOf(i));
+//
+//                if ((i + 1) % 3 == 0) {
+//                    p.setMaritalStatus(0);
+//                } else {
+//                    p.setMaritalStatus(1);
+//                    if ((i + 1) % 4 == 0) {
+//                        p.setIsPregnant(0);
+//                    } else {
+//                        p.setIsPregnant(1);
+//                    }
+//                }
+//
+//
+//            }
+//
+//
+//            Date d = new Date(102, 5, 23);
+//            p.setBirthDate(d);
+//            em.persist(p);
+//
+//        }
+//
+//        em.getTransaction().commit();
+//
+//    }
+//
+//    public static void diagnosis() {
+//        em.getTransaction().begin();
+//        for (int i = 0; i < 25; i++) {
+//            Diagnoses d = new Diagnoses();
+//            d.setId(i);
+//            d.setName("Diagnosis" + i);
+//            em.persist(d);
+//        }
+//        em.getTransaction().commit();
+//    }
 
     public static void findAllPatients() {
 
@@ -2281,77 +2608,77 @@ public class Eroshetta extends javax.swing.JFrame {
     }
 
     public static void getAllDiagnosis() {
-        Query q = em.createNamedQuery("Diagnoses.findAll");
-        List allDiagnosis = (List<Diagnoses>) q.getResultList();
-        System.out.println(allDiagnosis.size());
+//        Query q = em.createNamedQuery("Diagnoses.findAll");
+//        List allDiagnosis = (List<Diagnoses>) q.getResultList();
+//        System.out.println(allDiagnosis.size());
     }
 
-    public static void setOne() {
-        Query q = em.createNamedQuery("Patients.findAll");
-        List patientsList = (List<Patients>) q.getResultList();
-        Patients p = (Patients) patientsList.get(0);
-        System.out.println(p.getName());
+//    public static void setOne() {
+//        Query q = em.createNamedQuery("Patients.findAll");
+//        List patientsList = (List<Patients>) q.getResultList();
+//        Patients p = (Patients) patientsList.get(0);
+//        System.out.println(p.getName());
+//
+//        Query q2 = em.createNamedQuery("Diagnoses.findAll");
+//        List allDiagnosis = (List<Diagnoses>) q2.getResultList();
+////        p.setDiagnosesCollection(allDiagnosis);
+//        List pDiagnosis = (List<Diagnoses>) p.getDiagnosesCollection();
+//        pDiagnosis.addAll(allDiagnosis);
+//        p.setDiagnosesCollection(pDiagnosis);
+////        System.out.println(pDiagnosis.addAll(allDiagnosis));
+//
+//    }
 
-        Query q2 = em.createNamedQuery("Diagnoses.findAll");
-        List allDiagnosis = (List<Diagnoses>) q2.getResultList();
-//        p.setDiagnosesCollection(allDiagnosis);
-        List pDiagnosis = (List<Diagnoses>) p.getDiagnosesCollection();
-        pDiagnosis.addAll(allDiagnosis);
-        p.setDiagnosesCollection(pDiagnosis);
-//        System.out.println(pDiagnosis.addAll(allDiagnosis));
-
-    }
-
-    public static void patientsDiagnosis() {
-        Query q = em.createNamedQuery("Patients.findAll");
-        List patientsList = (List<Patients>) q.getResultList();
-
-        Query q2 = em.createNamedQuery("Diagnoses.findAll");
-        Collection allDiagnosis = q2.getResultList();
-
-        System.out.println(allDiagnosis.size());
-        System.out.println("All Diagnosis wa 7raaaaaaaaaaam ");
-
-//        for(int i=0; i<allDiagnosis.size(); i++){
-//            Diagnoses d = (Diagnoses) allDiagnosis.get(i);
-//            System.out.println(d.getName());
+//    public static void patientsDiagnosis() {
+//        Query q = em.createNamedQuery("Patients.findAll");
+//        List patientsList = (List<Patients>) q.getResultList();
+//
+//        Query q2 = em.createNamedQuery("Diagnoses.findAll");
+//        Collection allDiagnosis = q2.getResultList();
+//
+////        System.out.println(allDiagnosis.size());
+////        System.out.println("All Diagnosis wa 7raaaaaaaaaaam ");
+//
+////        for(int i=0; i<allDiagnosis.size(); i++){
+////            Diagnoses d = (Diagnoses) allDiagnosis.get(i);
+////            System.out.println(d.getName());
+////        }
+////        
+//
+//        for (int i = 0; i < patientsList.size(); i++) {
+////            System.out.println(i);
+//            Patients p = (Patients) patientsList.get(i);
+////            List diagnosisList = (List <Diagnoses>) p.getDiagnosesCollection();
+//            p.setDiagnosesCollection(allDiagnosis);
+//
+////            Query q2 = em.createNamedQuery("Diagnoses.findAll");
+////            List allDiagnosis = (List <Diagnoses>) q.getResultList();   
+////            
+////            System.out.println(p.getName());
+//
+////            System.out.println("Now importing to " +i);
+////            System.out.println("Now getting to " +i);
+////            for(int j=0; j<diagnosisList.size(); j++){
+////                System.out.println(j);
+////                Diagnoses diag = (Diagnoses) diagnosisList.get(j);
+////                System.out.println(diag.getName());
+////            }
+//
 //        }
-//        
-
-        for (int i = 0; i < patientsList.size(); i++) {
-//            System.out.println(i);
-            Patients p = (Patients) patientsList.get(i);
-//            List diagnosisList = (List <Diagnoses>) p.getDiagnosesCollection();
-            p.setDiagnosesCollection(allDiagnosis);
-
-//            Query q2 = em.createNamedQuery("Diagnoses.findAll");
-//            List allDiagnosis = (List <Diagnoses>) q.getResultList();   
-//            
-//            System.out.println(p.getName());
-
-//            System.out.println("Now importing to " +i);
-//            System.out.println("Now getting to " +i);
-//            for(int j=0; j<diagnosisList.size(); j++){
-//                System.out.println(j);
-//                Diagnoses diag = (Diagnoses) diagnosisList.get(j);
-//                System.out.println(diag.getName());
-//            }
-
-        }
-
-    }
-
-    public static void getCurrentMedications() {
-        Query q = em.createNamedQuery("Patients.findById");
-        q.setParameter("id", 1);
-        List l = (List<Patients>) q.getResultList();
-        Patients p = (Patients) l.get(0);
-        List patientDrugList = (List) p.getDrugsCollection();
-        Drugs d = (Drugs) patientDrugList.get(0);
-
-        System.out.println(d.getTradeName());
-
-    }
+//
+//    }
+//
+//    public static void getCurrentMedications() {
+//        Query q = em.createNamedQuery("Patients.findById");
+//        q.setParameter("id", 1);
+//        List l = (List<Patients>) q.getResultList();
+//        Patients p = (Patients) l.get(0);
+//        List patientDrugList = (List) p.getDrugsCollection();
+//        Drugs d = (Drugs) patientDrugList.get(0);
+//
+//        System.out.println(d.getTradeName());
+//
+//    }
 
     /**
      * @param args the command line arguments
@@ -2421,6 +2748,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
 //     createPatients();
+//     diagnosis();
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
 //em.getTransaction().begin();
@@ -2432,14 +2760,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
 
 
-//        setOne();
-//        patientsDiagnosis();
-//        getAllDiagnosis();
-//        diagnosis();
-//        getCurrentMedications();
-//        findAllPatients();
-//        em.close();
-//        emf.close();
+
 
 
 
