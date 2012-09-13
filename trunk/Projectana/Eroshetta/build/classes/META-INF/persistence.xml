@@ -12,6 +12,7 @@
     <class>eroshetta.DrugTime</class>
     <class>eroshetta.Drugs</class>
     <class>eroshetta.PrescriptionHasDrug</class>
+    <class>eroshetta.DrugTimes</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/eroshetta"/>
       <property name="javax.persistence.jdbc.password" value="APP"/>
