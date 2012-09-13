@@ -1460,6 +1460,8 @@ public class Eroshetta extends javax.swing.JFrame {
                 System.out.println("Error gettign current patients Drugs.");
                 
             }
+            
+            this.oldPrescriptions();
 
         }
         
