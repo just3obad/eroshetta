@@ -2008,9 +2008,9 @@ public class Eroshetta extends javax.swing.JFrame {
         System.out.println(currentPatient.getName());
         currentPrescription.setPatientId(currentPatient);
         currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
-        Collection<PrescriptionHasDrug> times = new ArrayList();
+        Collection<DrugTimes> times = new ArrayList();
         for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-            PrescriptionHasDrug time = new PrescriptionHasDrug();
+            DrugTimes time = new DrugTimes();
                 time.setDrugs(drugsPanels.get(i).panelDrug);
                 time.setPrescriptions(currentPrescription);
                 time.setDrugTime("");
@@ -2034,7 +2034,7 @@ public class Eroshetta extends javax.swing.JFrame {
             }
             times.add(time);
         }
-        currentPrescription.setPrescriptionHasDrugCollection(times);
+        currentPrescription.setDrugTimesCollection(times);
         
         //Kareem
         

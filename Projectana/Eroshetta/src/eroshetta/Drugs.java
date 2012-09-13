@@ -65,6 +65,11 @@ public class Drugs implements Serializable {
     private Collection<Drugs> drugsCollection;
     @ManyToMany(mappedBy = "drugsCollection")
     private Collection<Drugs> drugsCollection1;
+    @JoinTable(name = "PRESCRIPTION_HAS_DRUG", joinColumns = {
+        @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "PRESCRIPTION_ID", referencedColumnName = "ID")})
+    @ManyToMany
+    private Collection<Prescriptions> prescriptionsCollection;
     @ManyToMany(mappedBy = "drugsCollection")
     private Collection<Diagnoses> diagnosesCollection;
     @JoinTable(name = "DRUG_HAS_SIDEEFFECT", joinColumns = {
@@ -78,12 +83,10 @@ public class Drugs implements Serializable {
     @ManyToMany
     private Collection<Patients> patientsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "drugs")
-    private Collection<GenericNames> genericNamesCollection;
+    private Collection<DrugTimes> drugTimesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "drugs")
-    private Collection<PrescriptionHasDrug> prescriptionHasDrugCollection;
-    
-    
-    
+    private Collection<GenericNames> genericNamesCollection;
+
     public Drugs() {
     }
 
@@ -198,6 +201,15 @@ public class Drugs implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Prescriptions> getPrescriptionsCollection() {
+        return prescriptionsCollection;
+    }
+
+    public void setPrescriptionsCollection(Collection<Prescriptions> prescriptionsCollection) {
+        this.prescriptionsCollection = prescriptionsCollection;
+    }
+
+    @XmlTransient
     public Collection<Diagnoses> getDiagnosesCollection() {
         return diagnosesCollection;
     }
@@ -225,21 +237,21 @@ public class Drugs implements Serializable {
     }
 
     @XmlTransient
+    public Collection<DrugTimes> getDrugTimesCollection() {
+        return drugTimesCollection;
+    }
+
+    public void setDrugTimesCollection(Collection<DrugTimes> drugTimesCollection) {
+        this.drugTimesCollection = drugTimesCollection;
+    }
+
+    @XmlTransient
     public Collection<GenericNames> getGenericNamesCollection() {
         return genericNamesCollection;
     }
 
     public void setGenericNamesCollection(Collection<GenericNames> genericNamesCollection) {
         this.genericNamesCollection = genericNamesCollection;
-    }
-
-    @XmlTransient
-    public Collection<PrescriptionHasDrug> getPrescriptionHasDrugCollection() {
-        return prescriptionHasDrugCollection;
-    }
-
-    public void setPrescriptionHasDrugCollection(Collection<PrescriptionHasDrug> prescriptionHasDrugCollection) {
-        this.prescriptionHasDrugCollection = prescriptionHasDrugCollection;
     }
 
     @Override
@@ -264,7 +276,7 @@ public class Drugs implements Serializable {
 
     @Override
     public String toString() {
-        return this.tradeName+"("+this.className+")";
+        return this.getTradeName()+"("+this.getClassName()+")";
     }
     
 }

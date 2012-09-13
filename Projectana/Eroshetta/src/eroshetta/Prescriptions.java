@@ -35,17 +35,13 @@ public class Prescriptions implements Serializable {
     private Date date;
     @Column(name = "NOTES")
     private String notes;
+    @ManyToMany(mappedBy = "prescriptionsCollection")
+    private Collection<Drugs> drugsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescriptions")
-    private Collection<PrescriptionHasDrug> prescriptionHasDrugCollection;
+    private Collection<DrugTimes> drugTimesCollection;
     @JoinColumn(name = "PATIENT_ID", referencedColumnName = "ID")
     @ManyToOne
     private Patients patientId;
-    
-     @JoinTable(name = "PRESCRIPTION_HAS_DRUG", joinColumns = {
-        @JoinColumn(name = "PRESCRIPTION_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "DRUG_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private Collection<Drugs> DrugsCollection;
 
     public Prescriptions() {
     }
@@ -79,12 +75,21 @@ public class Prescriptions implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PrescriptionHasDrug> getPrescriptionHasDrugCollection() {
-        return prescriptionHasDrugCollection;
+    public Collection<Drugs> getDrugsCollection() {
+        return drugsCollection;
     }
 
-    public void setPrescriptionHasDrugCollection(Collection<PrescriptionHasDrug> prescriptionHasDrugCollection) {
-        this.prescriptionHasDrugCollection = prescriptionHasDrugCollection;
+    public void setDrugsCollection(Collection<Drugs> drugsCollection) {
+        this.drugsCollection = drugsCollection;
+    }
+
+    @XmlTransient
+    public Collection<DrugTimes> getDrugTimesCollection() {
+        return drugTimesCollection;
+    }
+
+    public void setDrugTimesCollection(Collection<DrugTimes> drugTimesCollection) {
+        this.drugTimesCollection = drugTimesCollection;
     }
 
     public Patients getPatientId() {
@@ -93,14 +98,6 @@ public class Prescriptions implements Serializable {
 
     public void setPatientId(Patients patientId) {
         this.patientId = patientId;
-    }
-    public  Collection<Drugs> getDrugsCollection()
-    {
-        return this.DrugsCollection;
-    }
-    public void setDrugsCollection(Collection<Drugs> drugs)
-    {
-        this.DrugsCollection = drugs;
     }
 
     @Override

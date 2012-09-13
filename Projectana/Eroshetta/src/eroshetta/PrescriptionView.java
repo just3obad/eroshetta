@@ -120,7 +120,7 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       for(int i=0; i<presc.getDrugsCollection().size() ; i++)
       {
           Drugs drug  = (Drugs)presc.getDrugsCollection().toArray()[i];
-          PrescriptionHasDrug prescTime = (PrescriptionHasDrug) presc.getPrescriptionHasDrugCollection().toArray()[i];
+          DrugTimes prescTime = (DrugTimes) presc.getDrugTimesCollection().toArray()[i];
           g.drawString(prescTime.getDrugTime(),320,170+h);
           g.drawString(i+". "+drug.getTradeName(),10,170+h);
           h = h+30;
