@@ -190,6 +190,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jPanelPatientOldPresc = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -484,6 +485,11 @@ public class Eroshetta extends javax.swing.JFrame {
         jLabelPatientProfilePregnant.setText("Pregnant:");
 
         jButton1.setText("New");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Edit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -497,6 +503,15 @@ public class Eroshetta extends javax.swing.JFrame {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Cancel");
+        jButton4.setAutoscrolls(true);
+        jButton4.setEnabled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -563,6 +578,8 @@ public class Eroshetta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -630,7 +647,8 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addGroup(jPanelPatientProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3)
+                        .addComponent(jButton4)))
                 .addContainerGap())
         );
 
@@ -1052,7 +1070,10 @@ public class Eroshetta extends javax.swing.JFrame {
     public void oldPrescriptions()
     {
         
-        jPanelPatientOldPresc.removeAll();
+        try {
+            //Sorry ya kemo 3al try wl catch di
+            
+              jPanelPatientOldPresc.removeAll();
         jPanelPatientOldPresc.repaint();
         jPanelPatientOldPresc.setLayout(new java.awt.GridLayout(10, 0));
         JButton  oldP;
@@ -1069,6 +1090,12 @@ public class Eroshetta extends javax.swing.JFrame {
 //            oldP.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY, i,true));
             jPanelPatientOldPresc.add(oldP);
            
+        }
+            
+            
+        } catch (Exception e) {
+            
+            System.out.println(e.getMessage());
         }
     }
             
@@ -1345,20 +1372,21 @@ public class Eroshetta extends javax.swing.JFrame {
     
     public void clearProfilePatient(){
         try {
-//            jTextFieldPatientProfileName.setText("No One");
-//            jTextFieldPatientProfileHeight.setText("");
-//            jTextFieldPatientProfileWeight.setText("");
-//            jTextFieldPatientProfileBMI.setText("");
-//            jComboBoxPatientProfileDay.setSelectedIndex(0);
-//            jComboBoxPatientProfileGender.setSelectedIndex(0);
-//            jComboBoxPatientProfileMarital.setSelectedIndex(0);
-//            jComboBoxPatientProfileMonth.setSelectedIndex(0);
-//            jComboBoxPatientProfilePregnant.setSelectedIndex(0);
-//            jComboBoxPatientProfileYear.setSelectedIndex(0);
+            jTextFieldPatientProfileName.setText("");
+            jTextFieldPatientProfileHeight.setText("");
+            jTextFieldPatientProfileWeight.setText("");
+            jTextFieldPatientProfileBMI.setText("");
+            jComboBoxPatientProfileDay.setSelectedIndex(0);
+            jComboBoxPatientProfileGender.setSelectedIndex(0);
+            jComboBoxPatientProfileMarital.setSelectedIndex(0);
+            jComboBoxPatientProfileMonth.setSelectedIndex(0);
+            jComboBoxPatientProfilePregnant.setSelectedIndex(0);
+            jComboBoxPatientProfileYear.setSelectedIndex(0);
+            jListPPM3edication.removeAll();
+            jListPPDiagnosis.removeAll();
+            jListPatientsBook.clearSelection();
             
-            jPanelPatientProfile.setVisible(false);
-            
-//            System.out.println("a7aaaaaaaaaaa");
+
             
         } catch (Exception e) {
             
@@ -1630,7 +1658,7 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.profileGenderMaritalStatus();
-//        saveFlag=false;
+//        saveFlag=5; Moshkila
     }//GEN-LAST:event_jComboBoxPatientProfileMaritalActionPerformed
 
     /*
@@ -1644,13 +1672,13 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jComboBoxPatientProfileYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileYearActionPerformed
         // TODO add your handling code here:
         this.leapYearModification();
-//        saveFlag=false;
+//        saveFlag=7;
     }//GEN-LAST:event_jComboBoxPatientProfileYearActionPerformed
 
     private void jComboBoxPatientProfileMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileMonthActionPerformed
         // TODO add your handling code here:
         this.leapYearModification();
-//        saveFlag=false;
+//        saveFlag=8;
     }//GEN-LAST:event_jComboBoxPatientProfileMonthActionPerformed
 
     private void jComboBoxPatientProfileDayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileDayMouseClicked
@@ -1661,12 +1689,12 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         this.profileGenderMaritalStatus();
-//        saveFlag=false;
+//        saveFlag=9; Moshkila
     }//GEN-LAST:event_jComboBoxPatientProfileGenderActionPerformed
 
     private void jTextFieldPatientProfileNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileNameActionPerformed
         // TODO add your handling code here:
-//        saveFlag=false;
+//        saveFlag=6;
     }//GEN-LAST:event_jTextFieldPatientProfileNameActionPerformed
 
     private void jToggleButtonDiagnosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonDiagnosisActionPerformed
@@ -2153,6 +2181,7 @@ public class Eroshetta extends javax.swing.JFrame {
     
             this.disableProfilePatient();
             jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
             int x = jListPatientsBook.getSelectedIndex();
             Query qRefresh = em.createNamedQuery("Patients.findAll"); 
             patientsBookList=qRefresh.getResultList(); 
@@ -2180,28 +2209,30 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
         this.enableProfilePatient();
+        saveFlag=false;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBoxPatientProfileDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfileDayActionPerformed
         // TODO add your handling code here:
         dayHazard=Integer.parseInt(String.valueOf(jComboBoxPatientProfileDay.getSelectedItem()));
-//        saveFlag=false;
+//        saveFlag=1;
     }//GEN-LAST:event_jComboBoxPatientProfileDayActionPerformed
 
     private void jComboBoxPatientProfilePregnantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPatientProfilePregnantActionPerformed
         // TODO add your handling code here:
-//        saveFlag=false;
+//        saveFlag=2; Moshkila
     }//GEN-LAST:event_jComboBoxPatientProfilePregnantActionPerformed
 
     private void jTextFieldPatientProfileWeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileWeightActionPerformed
         // TODO add your handling code here:
-//        saveFlag=false;
+//        saveFlag=3;
     }//GEN-LAST:event_jTextFieldPatientProfileWeightActionPerformed
 
     private void jTextFieldPatientProfileHeightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileHeightActionPerformed
         // TODO add your handling code here:
-//        saveFlag=false;
+//        saveFlag=4;
     }//GEN-LAST:event_jTextFieldPatientProfileHeightActionPerformed
 
     private void jTextFieldPatientProfileWeightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileWeightKeyReleased
@@ -2226,6 +2257,56 @@ public class Eroshetta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jTextFieldPatientProfileWeightKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        currentPatient = new Patients();
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        this.enableProfilePatient();
+        saveFlag=false;
+        
+        this.clearProfilePatient();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    
+        try {
+            int selcted = jListPatientsBook.getSelectedIndex();
+            this.disableProfilePatient();
+
+            DefaultListModel temp = new DefaultListModel();
+            jListPatientsBook.setModel(temp);
+            for (int i = 0; i < patientsBookList.size(); i++) {
+                temp.add(i, patientsBookList.get(i).getName());
+            }
+            currentPatient = patientsBookList.get(selcted);
+            jListPatientsBook.setSelectedIndex(selcted);
+            saveFlag = true;
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+            System.out.println("Caught the new patient exception");
+            DefaultListModel temp = new DefaultListModel();
+            jListPatientsBook.setModel(temp);
+            for (int i = 0; i < patientsBookList.size(); i++) {
+                temp.add(i, patientsBookList.get(i).getName());
+            }
+            currentPatient = patientsBookList.get(0);
+            jListPatientsBook.setSelectedIndex(0);
+            saveFlag = true;
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public void saveProfilePatient(){
         em.getTransaction().begin();
@@ -2791,6 +2872,7 @@ public class Eroshetta extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBoxPatientProfileDay;
     private javax.swing.JComboBox jComboBoxPatientProfileGender;
     private javax.swing.JComboBox jComboBoxPatientProfileMarital;
