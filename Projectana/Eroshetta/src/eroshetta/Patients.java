@@ -22,7 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Patients.findAll", query = "SELECT p FROM Patients p"),
     @NamedQuery(name = "Patients.findById", query = "SELECT p FROM Patients p WHERE p.id = :id"),
-    @NamedQuery(name = "Patients.findByName", query = "SELECT p FROM Patients p WHERE p.name = :name"),
+    
+//    Select * from table where upper(table.name) like upper('IgNoreCaSe');
+
+    @NamedQuery(name = "Patients.findByName", query = "SELECT p FROM Patients p WHERE  LOWER(p.name) LIKE LOWER(:pName)"),
     @NamedQuery(name = "Patients.findByBirthDate", query = "SELECT p FROM Patients p WHERE p.birthDate = :birthDate"),
     @NamedQuery(name = "Patients.findByIsPregnant", query = "SELECT p FROM Patients p WHERE p.isPregnant = :isPregnant"),
     @NamedQuery(name = "Patients.findByMaritalStatus", query = "SELECT p FROM Patients p WHERE p.maritalStatus = :maritalStatus"),
