@@ -238,7 +238,6 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jComboBoxPatientProfileYear" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jTextFieldPatientProfileBMI" min="-2" pref="41" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jComboBoxPatientProfileMarital" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -259,9 +258,13 @@
                                       </Group>
                                       <Component id="jTextFieldPatientProfileName" min="-2" pref="180" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jToggleButtonDiagnosis" min="-2" pref="63" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jToggleButtonDiagnosis" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldPatientProfileBMI" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelBMIDesc" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabelPPMedication" min="-2" max="-2" attributes="0"/>
                                               <Component id="jScrollPanePPDiagnosisMedication" min="-2" pref="132" max="-2" attributes="0"/>
                                           </Group>
@@ -325,6 +328,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabelPatientProfileBMI" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextFieldPatientProfileBMI" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelBMIDesc" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -671,6 +675,14 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelBMIDesc">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="BMI"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabelBMIDesc.setVisible(false);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
