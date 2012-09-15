@@ -1365,14 +1365,15 @@ public class Eroshetta extends javax.swing.JFrame {
             
 //            System.out.println(patientsBookList.size());
             
-//            if(patientsBookList.isEmpty()){
-////                this.clearProfilePatient();
-//                DefaultListModel tempModel = new DefaultListModel();
-//                jListPatientsBook.setModel(tempModel);
-//                tempModel.addElement("Sorry, No match");
-//                currentPatient=null;
-//            }
-//            else{
+            if(patientsBookList.isEmpty()){
+                this.clearProfilePatient();
+                DefaultListModel tempModel = new DefaultListModel();
+                jListPatientsBook.setModel(tempModel);
+                tempModel.addElement("Sorry, No match");
+                currentPatient=null;
+                disableProfilePatient();
+            }
+            else{
                 
 //            jPanelPatientProfile.setVisible(true);
             
@@ -1384,7 +1385,7 @@ public class Eroshetta extends javax.swing.JFrame {
             currentPatient=patientsBookList.get(0);
             jListPatientsBook.setSelectedIndex(0);
 }
-//        } 
+        } 
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -2457,10 +2458,10 @@ public class Eroshetta extends javax.swing.JFrame {
             double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
             double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
             
-            System.out.println("Weight"+weight+" Kg");
-            System.out.println("Height "+height+" m");
+//            System.out.println("Weight"+weight+" Kg");
+//            System.out.println("Height "+height+" m");
             Double calc = (weight/(height*height))*100;
-            System.out.println("BMI"+calc);
+//            System.out.println("BMI"+calc);
             String tmp = String.valueOf(calc);
             tmp=tmp.substring(0, 4);
             calc = Double.parseDouble(tmp);
@@ -2471,7 +2472,7 @@ public class Eroshetta extends javax.swing.JFrame {
             
         } catch (Exception e) {
             
-            System.out.println("Error instant calculating the BMI" + e.getMessage());
+            System.out.println("Error instant calculating the BMI " + e.getMessage());
             if(!jTextFieldPatientProfileHeight.getText().isEmpty() && tanak==false){
                 JOptionPane.showMessageDialog(this, "Please, Enter a valid number", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
                 tanak=true;
