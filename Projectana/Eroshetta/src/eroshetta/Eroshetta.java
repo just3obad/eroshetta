@@ -1090,7 +1090,9 @@ public class Eroshetta extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e)
             {
               PrescriptionView prescView = new PrescriptionView(p);
-              new PrescriptionFrame(prescView).setVisible(true);  
+              PrescriptionFrame prescFrame = new PrescriptionFrame(prescView);
+              prescFrame.saveFlag = false;
+              prescFrame.setVisible(true);
             }});
 //            oldP.setBorder(javax.swing.BorderFactory.createLineBorder(Color.GRAY, i,true));
             jPanelPatientOldPresc.add(oldP);
@@ -2004,16 +2006,16 @@ public class Eroshetta extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextArea1KeyPressed
 
     private void savePreviewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savePreviewMouseClicked
+        Calendar cal = Calendar.getInstance();//
         currentPrescription = new Prescriptions();
         System.out.println(currentPatient.getName());
+        currentPrescription.setDate(cal.getTime());//
         currentPrescription.setPatientId(currentPatient);
-        currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
+       // currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
         Collection<DrugTimes> times = new ArrayList();
         for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-            DrugTimes time = new DrugTimes();
-                time.setDrugs(drugsPanels.get(i).panelDrug);
-                time.setPrescriptions(currentPrescription);
-                time.setDrugTime("");
+                DrugTimes time = new DrugTimes(1,drugsPanels.get(i).panelDrug.getId());
+                time.setDrugTime(":::::");
             if (drugsPanels.get(i).jCheckBox1.isSelected()) {
                 time.setDrugTime(drugsPanels.get(i).jCheckBox1.getText());
             }
@@ -2034,12 +2036,15 @@ public class Eroshetta extends javax.swing.JFrame {
             }
             times.add(time);
         }
-        currentPrescription.setDrugTimesCollection(times);
+        //currentPrescription.setDrugTimesCollection(times);
         
         //Kareem
         
-        PrescriptionView prescView = new PrescriptionView(currentPrescription); 
-        new PrescriptionFrame(prescView).setVisible(true);
+        PrescriptionView prescView = new PrescriptionView(currentPrescription,times); 
+        PrescriptionFrame prescFrame = new PrescriptionFrame(prescView);
+        prescFrame.saveFlag = true;
+        prescFrame.getPrintButton().setText("Save & Print");
+        prescFrame.setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_savePreviewMouseClicked
