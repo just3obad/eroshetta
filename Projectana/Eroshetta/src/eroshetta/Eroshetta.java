@@ -1394,9 +1394,9 @@ public class Eroshetta extends javax.swing.JFrame {
     public void clearProfilePatient(){
         try {
             jTextFieldPatientProfileName.setText("");
-            jTextFieldPatientProfileHeight.setText("");
-            jTextFieldPatientProfileWeight.setText("");
-            jTextFieldPatientProfileBMI.setText("");
+            jTextFieldPatientProfileHeight.setText("0");
+            jTextFieldPatientProfileWeight.setText("0");
+            jTextFieldPatientProfileBMI.setText("0");
             jComboBoxPatientProfileDay.setSelectedIndex(0);
             jComboBoxPatientProfileGender.setSelectedIndex(0);
             jComboBoxPatientProfileMarital.setSelectedIndex(0);
@@ -1584,7 +1584,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
             try {
                 
-                if(currentPatient.getWeight() != null){
+                if(currentPatient.getWeight() != null || jTextFieldPatientProfileWeight.getText().isEmpty() ){
                     jTextFieldPatientProfileWeight.setText(String.valueOf(currentPatient.getWeight()));
                 }
                 else{
@@ -1599,7 +1599,7 @@ public class Eroshetta extends javax.swing.JFrame {
             
             try {
                 
-                if(currentPatient.getHeight()!=null){
+                if(currentPatient.getHeight()!=null || jTextFieldPatientProfileHeight.getText().isEmpty()){
                     jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
                 }
                 else{
@@ -2346,14 +2346,16 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         currentPatient = new Patients();
+        
+        
+        saveFlag=false;
+        
+        this.clearProfilePatient();
+        this.enableProfilePatient();
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
-        this.enableProfilePatient();
-        saveFlag=false;
-        
-        this.clearProfilePatient();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2393,6 +2395,8 @@ public class Eroshetta extends javax.swing.JFrame {
             saveFlag = true;
             jButton3.setEnabled(false);
             jButton4.setEnabled(false);
+             jButton1.setEnabled(true);
+            jButton2.setEnabled(true);
         }
         
     }//GEN-LAST:event_jButton4ActionPerformed
