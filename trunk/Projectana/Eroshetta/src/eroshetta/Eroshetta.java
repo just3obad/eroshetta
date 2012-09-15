@@ -1689,6 +1689,7 @@ public class Eroshetta extends javax.swing.JFrame {
             //change the modelList for the medication.
             jListPPDiagnosisMedication.setModel(modelAllDrugs);
             System.out.println("1st Condition");
+            jTextFieldPPMedication.setText("");
         } else {
             if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == true) {
                 jToggleButtonDiagnosis.setSelected(false);
@@ -1697,6 +1698,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 System.out.println("2nd Condition");
                 //change the modelList for the medication.
                 jListPPDiagnosisMedication.setModel(modelAllDrugs);
+                jTextFieldPPMedication.setText("");
             } else {
                 if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == false) {
                     jLabelPPMedication.setVisible(false);
@@ -1706,6 +1708,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     jListPPM3edication.setEnabled(false);
                     System.out.println("3rd Condition");
                     whichEdit=0;
+                    jTextFieldPPMedication.setText("");
                 }
             }
         }
@@ -1770,6 +1773,7 @@ public class Eroshetta extends javax.swing.JFrame {
             jListPPDiagnosis.setEnabled(true);
             jListPPDiagnosisMedication.setModel(modelallDiagnoses);
             //change the modelList for the diagnosis.
+            jTextFieldPPMedication.setText("");
 
             System.out.println("1st Condition");
         } else {
@@ -1780,6 +1784,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 System.out.println("2nd Condition");
                 //change the modelList for the diagnosis
                 jListPPDiagnosisMedication.setModel(modelallDiagnoses);
+                jTextFieldPPMedication.setText("");
             } else {
                 if (jToggleButtonDiagnosis.isSelected() == false && jToggleButtonPPMedication.isSelected() == false) {
                     jLabelPPMedication.setVisible(false);
@@ -1789,6 +1794,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     jListPPDiagnosis.setEnabled(false);
                     System.out.println("3rd Condition");
                     whichEdit=0;
+                    jTextFieldPPMedication.setText("");
                 }
             }
         }
@@ -2395,6 +2401,31 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(whichEdit==1){
             //Drugs Search
+            
+            
+            
+                    String query = this.jTextFieldPPMedication.getText();
+        allDrugs = Eroshetta.drug_search(query);
+        final ArrayList<String> s = new ArrayList();
+        for (int i = 0; i < allDrugs.size(); i++) {
+//                this.jArrayList_Drugs.(finos.get(i).getTradeName());
+            if (allDrugs.get(i).getTradeName() != null || allDrugs.get(i).getClassName() != null) {
+                s.add(allDrugs.get(i).getTradeName() + "(" + allDrugs.get(i).getClassName() + ")");
+            }
+
+        }
+        jListPPDiagnosisMedication.setModel(new javax.swing.AbstractListModel() {
+            public int getSize() {
+                return allDrugs.size();
+            }
+
+            public Object getElementAt(int i) {
+                return allDrugs.get(i);
+            }
+        }); // TODO add your handling code here:
+            
+            
+            
             
         }
         else{
