@@ -4,6 +4,7 @@
  */
 package eroshetta;
 
+import java.awt.Color;
 import java.awt.event.*;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -1553,6 +1554,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     
                     if(tmp2<18.5){
                         jLabelBMIDesc.setText("Underweight");
+                        jLabelBMIDesc.setForeground(Color.red);
                     }
                     else{
                         if(tmp2>=18.5&&tmp2<=24.9){
@@ -1560,6 +1562,7 @@ public class Eroshetta extends javax.swing.JFrame {
                         }
                         else{
                             jLabelBMIDesc.setText("Overweight");
+                            jLabelBMIDesc.setForeground(Color.red);
                         }
                     }
                     
