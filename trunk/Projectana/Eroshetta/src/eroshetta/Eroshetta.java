@@ -393,8 +393,8 @@ public class Eroshetta extends javax.swing.JFrame {
 
         DefaultComboBoxModel pregnantComboModel = new DefaultComboBoxModel();
         jComboBoxPatientProfilePregnant.setModel(pregnantComboModel);
-        pregnantComboModel.addElement("Yes");
         pregnantComboModel.addElement("No");
+        pregnantComboModel.addElement("Yes");
         jComboBoxPatientProfilePregnant.setVisible(false);
         jLabelPatientProfilePregnant.setVisible(false);
         jComboBoxPatientProfilePregnant.addActionListener(new java.awt.event.ActionListener() {
@@ -2517,7 +2517,12 @@ public class Eroshetta extends javax.swing.JFrame {
         
         try {
             
-            currentPatient.setIsPregnant(jComboBoxPatientProfilePregnant.getSelectedIndex());
+            if(currentPatient.getGender()=='f' && currentPatient.getMaritalStatus()==1){
+                currentPatient.setIsPregnant(1);
+            }
+            else{
+                currentPatient.setIsPregnant(0);
+            }
             
         } catch (Exception e) {
             
@@ -2532,10 +2537,10 @@ public class Eroshetta extends javax.swing.JFrame {
             double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
             double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
             
-            System.out.println("Weight"+weight+" Kg");
-            System.out.println("Height "+height+" m");
+//            System.out.println("Weight"+weight+" Kg");
+//            System.out.println("Height "+height+" m");
             Double calc = (weight/(height*height))*100;
-            System.out.println("BMI"+calc);
+//            System.out.println("BMI"+calc);
             String tmp = String.valueOf(calc);
             tmp=tmp.substring(0, 4);
             calc = Double.parseDouble(tmp);
