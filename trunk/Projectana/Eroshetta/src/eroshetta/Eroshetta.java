@@ -1566,6 +1566,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     else{
                         if(tmp2>=18.5&&tmp2<=24.9){
                             jLabelBMIDesc.setText("Normalweight");
+                            jLabelBMIDesc.setForeground(Color.black);
                         }
                         else{
                             jLabelBMIDesc.setText("Overweight");
