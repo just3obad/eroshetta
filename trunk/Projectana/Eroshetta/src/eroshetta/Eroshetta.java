@@ -1447,10 +1447,11 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
 
         // TODO add your handling code here:
+        this.disableProfilePatient();
         
         if(counterPatients%2==0){
-        System.out.println("The save flaag is "+ saveFlag);    
-            this.disableProfilePatient();
+//        System.out.println("The save flaag is "+ saveFlag);    
+            
             
             
             
@@ -1530,8 +1531,13 @@ public class Eroshetta extends javax.swing.JFrame {
 
             try {
                 
-                String oldBmi = String.valueOf(currentPatient.getBmi());
-                jTextFieldPatientProfileBMI.setText(oldBmi);
+                if(currentPatient.getBmi()!=null && currentPatient.getHeight()!=0 && currentPatient.getWeight() !=0){
+                    String oldBmi = String.valueOf(currentPatient.getBmi());
+                    jTextFieldPatientProfileBMI.setText(oldBmi);
+                }
+                else{
+                    jTextFieldPatientProfileBMI.setText("0");
+                }
                 
             } catch (Exception e) {
                 
@@ -1540,7 +1546,12 @@ public class Eroshetta extends javax.swing.JFrame {
 
             try {
                 
-                jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
+                if(currentPatient.getWeight() != null){
+                    jTextFieldPatientProfileWeight.setText(String.valueOf(currentPatient.getWeight()));
+                }
+                else{
+                    jTextFieldPatientProfileWeight.setText("0");
+                }
                 
             } catch (Exception e) {
                 
@@ -1550,7 +1561,12 @@ public class Eroshetta extends javax.swing.JFrame {
             
             try {
                 
-                jTextFieldPatientProfileWeight.setText(String.valueOf(currentPatient.getWeight()));
+                if(currentPatient.getHeight()!=null){
+                    jTextFieldPatientProfileHeight.setText(String.valueOf(currentPatient.getHeight()));
+                }
+                else{
+                    jTextFieldPatientProfileHeight.setText("0");
+                }
                 
             } catch (Exception e) {
                 
@@ -2193,6 +2209,8 @@ public class Eroshetta extends javax.swing.JFrame {
             this.disableProfilePatient();
             jButton3.setEnabled(false);
             jButton4.setEnabled(false);
+            jButton1.setEnabled(true);
+            jButton2.setEnabled(true);
             int x = jListPatientsBook.getSelectedIndex();
             Query qRefresh = em.createNamedQuery("Patients.findAll"); 
             patientsBookList=qRefresh.getResultList(); 
@@ -2221,6 +2239,8 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
         this.enableProfilePatient();
         saveFlag=false;
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -2274,6 +2294,8 @@ public class Eroshetta extends javax.swing.JFrame {
         currentPatient = new Patients();
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
         this.enableProfilePatient();
         saveFlag=false;
         
@@ -2300,6 +2322,8 @@ public class Eroshetta extends javax.swing.JFrame {
             saveFlag = true;
             jButton3.setEnabled(false);
             jButton4.setEnabled(false);
+            jButton1.setEnabled(true);
+            jButton2.setEnabled(true);
 
         } catch (Exception e) {
 
@@ -2389,21 +2413,30 @@ public class Eroshetta extends javax.swing.JFrame {
         }
         
         try {
+           
+            currentPatient.setWeight(Integer.parseInt(jTextFieldPatientProfileWeight.getText()));
+            currentPatient.setHeight(Integer.parseInt(jTextFieldPatientProfileHeight.getText()));
             
-            int weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
-            int height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/100;
-            currentPatient.setWeight(weight);
-            currentPatient.setHeight(height*100);
-            BigDecimal calc = BigDecimal.valueOf((weight)/(height*height));
-            currentPatient.setBmi(calc);
+            double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
+            double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
+            
+            System.out.println("Weight"+weight+" Kg");
+            System.out.println("Height "+height+" m");
+            Double calc = (weight/(height*height))*100;
+            System.out.println("BMI"+calc);
+            String tmp = String.valueOf(calc);
+            tmp=tmp.substring(0, 4);
+            calc = Double.parseDouble(tmp);
+            
             jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
+            currentPatient.setBmi(BigDecimal.valueOf(calc));
             
 
             
         } catch (Exception e) {
             
             
-//            System.out.println("Error updating weight or height or bmi");
+            System.out.println("Error updating weight or height or bmi");
             System.out.println(e.getMessage());
 //            JOptionPane.showMessageDialog(this, "Please select a p", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
         }
