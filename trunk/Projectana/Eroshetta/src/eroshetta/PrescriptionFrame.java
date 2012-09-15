@@ -9,9 +9,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.print.PrinterJob;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -21,8 +24,9 @@ import javax.swing.SwingUtilities;
  */
 public class PrescriptionFrame extends javax.swing.JFrame {
         PrescriptionView presc;
-       static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
-       static EntityManager em = emf.createEntityManager();
+       static EntityManagerFactory emf = Eroshetta.emf;
+       static EntityManager em = Eroshetta.em;
+       public static boolean saveFlag = false;
         
         
 
@@ -54,6 +58,10 @@ public class PrescriptionFrame extends javax.swing.JFrame {
         
         
         
+    }
+    public JButton getPrintButton()
+    {
+        return this.printPresc;
     }
             
 
@@ -135,6 +143,37 @@ public class PrescriptionFrame extends javax.swing.JFrame {
 
     private void printPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printPrescActionPerformed
         // TODO add your handling code here:
+        if(saveFlag)
+        {
+         
+            em.getTransaction().begin();
+            Prescriptions p = this.presc.getCurrentPresc();
+            
+
+            em.persist(p);
+            em.getTransaction().commit();
+            System.out.println(p.getId());
+            Collection<DrugTimes> dTimes = new ArrayList<DrugTimes>();
+            dTimes = this.presc.getDrugTimes();
+            Collection<DrugTimes>finalTimes = new ArrayList<DrugTimes>();
+            for(int i=0; i<dTimes.size() ;i++)
+            {
+                DrugTimes dTime = (DrugTimes)dTimes.toArray()[i];
+                System.out.println(dTime.toString());
+                dTime.drugTimesPK.setPrescriptionId(p.getId());
+                System.out.println(dTime.getPrescriptions());
+                finalTimes.add(dTime);
+                
+                
+            }
+
+            em.getTransaction().begin();
+            p.setDrugTimesCollection(finalTimes);
+            em.persist(p);
+            em.getTransaction().commit();
+            
+           
+        }
         SwingUtilities.invokeLater(new Runnable() {
          public void run() {
             try {

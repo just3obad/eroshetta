@@ -9,6 +9,8 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.Collection;
+import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,11 +23,11 @@ import javax.swing.SwingUtilities;
  * @author Administrator
  */
 public class PrescriptionView extends javax.swing.JPanel implements Printable{
-    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("EroshettaPU");
-    static EntityManager em = emf.createEntityManager();
+    static EntityManagerFactory emf = Eroshetta.emf;
+    static EntityManager em = Eroshetta.em;
     Prescriptions presc;
-    
-
+    Collection<DrugTimes> dTimes;
+   // Collection<Drugs> dCollec;
     /**
      * Creates new form PrescriptionView
      */
@@ -36,7 +38,29 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
     {
         initComponents();
          presc = p;
+         dTimes = presc.getDrugTimesCollection();
     }
+    public PrescriptionView(Prescriptions p,Collection<DrugTimes> times)
+    {
+        
+        
+        initComponents();
+         presc = p;
+         dTimes = times;
+    }
+    public Prescriptions getCurrentPresc()
+    {
+        return this.presc;
+    }
+    public Collection<DrugTimes> getDrugTimes()
+    {
+        return this.dTimes;
+    }
+//    public Collection<Drugs> getDrugColl()
+//    {
+//        return this.dCollec;
+//    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,7 +100,8 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
 		
       return retval;
    }
-   public void paint(Graphics g) { 
+   public void paint(Graphics g) {
+      
       super.paint(g);
       javax.persistence.Query q =em.createNamedQuery("Doctor.findAll");
       Doctor d =  (Doctor)q.getSingleResult();
@@ -109,18 +134,25 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       g.setFont(font2);
       g.drawString("Dr. "+d.getName(),35,20);
       g.drawImage(img1,5,25,25,25, this);
-      g.drawString("0"+d.getOfficeNo(),35,50);
+      g.drawString(d.getOfficeNo(),35,50);
       g.drawImage(img2,5,55,25,25,this);
-      g.drawString("0"+d.getMobileNo(),35,80);
+      g.drawString(d.getMobileNo(),35,80);
       g.drawString("Name: "+presc.getPatientId().getName(),35 ,115);
       g.drawString("Date: "+presc.getDate(),320,115);
       g.drawLine(50, 130, 570, 130);
       g.drawLine(50, 133, 570, 133);
       int h = 0;
-      for(int i=0; i<presc.getDrugsCollection().size() ; i++)
+      //System.out.println(presc.getDrugsCollection().size()+"<>");
+      for(int i=0; i<dTimes.size() ; i++)
       {
-          Drugs drug  = (Drugs)presc.getDrugsCollection().toArray()[i];
-          DrugTimes prescTime = (DrugTimes) presc.getDrugTimesCollection().toArray()[i];
+          DrugTimes dTime = (DrugTimes) dTimes.toArray()[i];
+          javax.persistence.Query q1 =em.createNamedQuery("Drugs.findById");
+          q1.setParameter("id", dTime.drugTimesPK.getDrugId() );
+          Drugs drug = (Drugs)q1.getSingleResult();
+    
+         
+        //  Drugs drug  = (Drugs)presc.getDrugsCollection().toArray()[i];
+          DrugTimes prescTime = (DrugTimes) dTimes.toArray()[i];
           g.drawString(prescTime.getDrugTime(),320,170+h);
           g.drawString(i+". "+drug.getTradeName(),10,170+h);
           h = h+30;
