@@ -2010,6 +2010,7 @@ public class Eroshetta extends javax.swing.JFrame {
         currentPrescription = new Prescriptions();
         System.out.println(currentPatient.getName());
         currentPrescription.setDate(cal.getTime());//
+        currentPrescription.setNotes(jTextArea1.getText());
         currentPrescription.setPatientId(currentPatient);
        // currentPrescription.setDrugsCollection(drugsCollectionInPrescription);
         Collection<DrugTimes> times = new ArrayList();
