@@ -46,6 +46,7 @@ public class Eroshetta extends javax.swing.JFrame {
     public static DefaultListModel modelAllPatients;
     public static boolean saveFlag;
     public static int dayHazard;
+    public static boolean tanak;
 
     
     
@@ -423,6 +424,11 @@ public class Eroshetta extends javax.swing.JFrame {
         jTextFieldPatientProfileHeight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPatientProfileHeightActionPerformed(evt);
+            }
+        });
+        jTextFieldPatientProfileHeight.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPatientProfileHeightKeyReleased(evt);
             }
         });
 
@@ -2300,23 +2306,33 @@ public class Eroshetta extends javax.swing.JFrame {
 
     private void jTextFieldPatientProfileWeightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileWeightKeyReleased
         // TODO add your handling code here:
+        
+        
+        
 
         try {
-
-            int weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
-            int height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/100;
-
-            currentPatient.setWeight(weight);
-            currentPatient.setHeight(height);
-            BigDecimal calc = BigDecimal.valueOf((height)/(weight*weight));
-            currentPatient.setBmi(calc);
+            
+            double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
+            double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
+            
+            System.out.println("Weight"+weight+" Kg");
+            System.out.println("Height "+height+" m");
+            Double calc = (weight/(height*height))*100;
+            System.out.println("BMI"+calc);
+            String tmp = String.valueOf(calc);
+            tmp=tmp.substring(0, 4);
+            calc = Double.parseDouble(tmp);
+            
             jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
+            tanak = false;
+            
+            
         } catch (Exception e) {
-
-            jTextFieldPatientProfileBMI.setText(String.valueOf(0.0));
-            System.out.println("Error in the weight instatnt calc");
-            //            JOptionPane.showMessageDialog(this, "Please enter a valid weight", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
-
+            System.out.println("Error instant calculating the BMI" + e.getMessage());
+            if(!jTextFieldPatientProfileWeight.getText().isEmpty() && tanak==false){
+                JOptionPane.showMessageDialog(this, "Please, Enter a valid number", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+                tanak=true;
+            }
         }
 
     }//GEN-LAST:event_jTextFieldPatientProfileWeightKeyReleased
@@ -2396,6 +2412,39 @@ public class Eroshetta extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jTextFieldPPMedicationKeyReleased
+
+    private void jTextFieldPatientProfileHeightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileHeightKeyReleased
+        // TODO add your handling code here:
+        
+        
+        try {
+            
+            double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
+            double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
+            
+            System.out.println("Weight"+weight+" Kg");
+            System.out.println("Height "+height+" m");
+            Double calc = (weight/(height*height))*100;
+            System.out.println("BMI"+calc);
+            String tmp = String.valueOf(calc);
+            tmp=tmp.substring(0, 4);
+            calc = Double.parseDouble(tmp);
+            tanak = false;
+            
+            jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
+            
+            
+        } catch (Exception e) {
+            
+            System.out.println("Error instant calculating the BMI" + e.getMessage());
+            if(!jTextFieldPatientProfileHeight.getText().isEmpty() && tanak==false){
+                JOptionPane.showMessageDialog(this, "Please, Enter a valid number", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+                tanak=true;
+                
+            }
+        }
+        
+    }//GEN-LAST:event_jTextFieldPatientProfileHeightKeyReleased
 
     public void saveProfilePatient(){
         em.getTransaction().begin();
