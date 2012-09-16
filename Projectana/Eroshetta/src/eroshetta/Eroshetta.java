@@ -1960,6 +1960,7 @@ public class Eroshetta extends javax.swing.JFrame {
             }
             try {
                 String s = "";
+                boolean flag = false;
                 Collection<Diagnoses> drugsContraAlreadyDiagnosis = d.getDiagnosesCollection();
                 Query qr = em.createNamedQuery("Diagnoses.findAll");
                 List<Diagnoses> tmpList = qr.getResultList();
@@ -1968,14 +1969,17 @@ public class Eroshetta extends javax.swing.JFrame {
                     for (int k = 0; k < tmpList.size(); k++) {
                         Diagnoses b = (Diagnoses) tmpList.toArray()[k];
                         if (a.getId() == b.getId()) {
+                            flag = true;
                             s= s +  a.getName() + " ,";
                         }
                     }
                 }
+                if(flag){
                 o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with " +s + "  Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
                             if (o != 0) {
                                 return;
                             }
+                }
             } catch (NullPointerException e) {
             }
 
