@@ -2319,8 +2319,8 @@ public class Eroshetta extends javax.swing.JFrame {
         jButton4.setEnabled(true);
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
-        jToggleButtonDiagnosis.setEnabled(false);
-        jToggleButtonPPMedication.setEnabled(false);
+//        jToggleButtonDiagnosis.setEnabled(false);
+//        jToggleButtonPPMedication.setEnabled(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2715,8 +2715,18 @@ public class Eroshetta extends javax.swing.JFrame {
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
         jButton4.setEnabled(false);
-        jToggleButtonDiagnosis.setEnabled(true);
-        jToggleButtonPPMedication.setEnabled(true);
+//        jToggleButtonDiagnosis.setEnabled(true);
+        jToggleButtonDiagnosis.setSelected(false);
+//        jToggleButtonPPMedication.setEnabled(true);
+        jToggleButtonPPMedication.setSelected(false);
+//        jTextFieldPPMedication.setEnabled(false);
+//        jListPPDiagnosisMedication.setEnabled(false);
+//        jLabelPPMedication.setEnabled(false);
+        jTextFieldPPMedication.setVisible(false);
+        jListPPDiagnosisMedication.setVisible(false);
+        jLabelPPMedication.setVisible(false);
+//        jScrollPanePPDiagnosisMedication.setEnabled(false);
+        jScrollPanePPDiagnosisMedication.setVisible(false);
         
     }
     
