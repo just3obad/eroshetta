@@ -4,6 +4,8 @@
  */
 package eroshetta;
 
+import java.util.List;
+
 /**
  *
  * @author Mouaz
@@ -52,6 +54,11 @@ public class DrugPresPanel extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(0, 0));
 
         jCheckBox1.setText("Before meal");
+        jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox1StateChanged(evt);
+            }
+        });
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
@@ -59,8 +66,23 @@ public class DrugPresPanel extends javax.swing.JPanel {
         });
 
         jCheckBox2.setText("After meal");
+        jCheckBox2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox2StateChanged(evt);
+            }
+        });
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
 
         jCheckBox3.setText("Bed time");
+        jCheckBox3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox3StateChanged(evt);
+            }
+        });
 
         jButton1.setText("X");
         jButton1.setToolTipText("Remove the Drug from List");
@@ -76,10 +98,25 @@ public class DrugPresPanel extends javax.swing.JPanel {
         });
 
         jCheckBox4.setText("Three times");
+        jCheckBox4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox4StateChanged(evt);
+            }
+        });
 
         jCheckBox5.setText("Twice");
+        jCheckBox5.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox5StateChanged(evt);
+            }
+        });
 
         jCheckBox6.setText("Once");
+        jCheckBox6.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox6StateChanged(evt);
+            }
+        });
         jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox6ActionPerformed(evt);
@@ -127,7 +164,54 @@ public class DrugPresPanel extends javax.swing.JPanel {
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
-
+public void changeCheck1(List <DrugPresPanel>drugsPanels){
+    for(int i=0;i<drugsPanels.size();i++){
+        if(drugsPanels.get(i).panelDrug.getId()==this.panelDrug.getId()){
+           drugsPanels.get(i).jCheckBox1.setSelected(this.jCheckBox1.isSelected()); 
+           return;
+        }
+    }
+}
+public void changeCheck2(List <DrugPresPanel>drugsPanels){
+    for(int i=0;i<drugsPanels.size();i++){
+        if(drugsPanels.get(i).panelDrug.getId()==this.panelDrug.getId()){
+           drugsPanels.get(i).jCheckBox2.setSelected(this.jCheckBox2.isSelected()); 
+           return;
+        }
+    }
+}
+public void changeCheck3(List <DrugPresPanel>drugsPanels){
+    for(int i=0;i<drugsPanels.size();i++){
+        if(drugsPanels.get(i).panelDrug.getId()==this.panelDrug.getId()){
+           drugsPanels.get(i).jCheckBox3.setSelected(this.jCheckBox3.isSelected()); 
+           return;
+        }
+    }
+}
+public void changeCheck4(List <DrugPresPanel>drugsPanels){
+    for(int i=0;i<drugsPanels.size();i++){
+        if(drugsPanels.get(i).panelDrug.getId()==this.panelDrug.getId()){
+           drugsPanels.get(i).jCheckBox4.setSelected(this.jCheckBox4.isSelected()); 
+           return;
+        }
+    }
+}
+public void changeCheck5(List <DrugPresPanel>drugsPanels){
+    for(int i=0;i<drugsPanels.size();i++){
+        if(drugsPanels.get(i).panelDrug.getId()==this.panelDrug.getId()){
+           drugsPanels.get(i).jCheckBox5.setSelected(this.jCheckBox5.isSelected());
+           return;
+        }
+    }
+}
+public void changeCheck6(List <DrugPresPanel>drugsPanels){
+    for(int i=0;i<drugsPanels.size();i++){
+        if(drugsPanels.get(i).panelDrug.getId()==this.panelDrug.getId()){
+           drugsPanels.get(i).jCheckBox6.setSelected(this.jCheckBox6.isSelected());
+           return;
+        }
+    }
+}
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 this.e.DrugsInPrescription.removeAll();
 this.e.DrugsInPrescription.setVisible(false);
@@ -145,6 +229,36 @@ this.e.DrugsInPrescription.setVisible(true);
     private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox6ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
+
+        this.changeCheck1(Eroshetta.drugsPanels);// TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1StateChanged
+
+    private void jCheckBox2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox2StateChanged
+        this.changeCheck2(Eroshetta.drugsPanels);        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox2StateChanged
+
+    private void jCheckBox3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox3StateChanged
+        this.changeCheck3(Eroshetta.drugsPanels);        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3StateChanged
+
+    private void jCheckBox6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox6StateChanged
+        this.changeCheck4(Eroshetta.drugsPanels);        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox6StateChanged
+
+    private void jCheckBox5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox5StateChanged
+        this.changeCheck5(Eroshetta.drugsPanels);        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox5StateChanged
+
+    private void jCheckBox4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox4StateChanged
+        this.changeCheck6(Eroshetta.drugsPanels); 
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox4StateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
