@@ -2325,6 +2325,8 @@ public class Eroshetta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         currentPatient = new Patients();
+        currentPatienDiagnoses.clear();
+        currentPatienMedications.clear();
         
         
         saveFlag=false;
@@ -2433,7 +2435,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
     public void saveProfilePatient(){
         em.getTransaction().begin();
-        boolean saveW=true;
+//        saveW=true;
         
         
         try {
@@ -2492,15 +2494,21 @@ public class Eroshetta extends javax.swing.JFrame {
             double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
             double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
             
-            Double calc = (weight/(height*height))*100;
-
-            String tmp = String.valueOf(calc);
-            tmp=tmp.substring(0, 4);
+            Double calc;
+            String tmp;
+            
+           if(weight!=0 && height!=0){
+               calc = (weight / (height * height)) * 100;
+               tmp = String.valueOf(calc);
+               tmp = tmp.substring(0, 4);
+           }else{
+               tmp="0.0";
+           }
             calc = Double.parseDouble(tmp);
             
             jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
             currentPatient.setBmi(BigDecimal.valueOf(calc));
-            saveW=true;
+//            saveW=true;
             
 
             
@@ -2510,12 +2518,7 @@ public class Eroshetta extends javax.swing.JFrame {
             System.out.println("Error updating weight or height or bmi");
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "Please enter a valid weight or height.", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
-            enableProfilePatient();
-            jButton1.setEnabled(false);
-            jButton2.setEnabled(false);
-            jButton3.setEnabled(true);
-            jButton4.setEnabled(true);
-            saveW=false;
+//            saveW=false;
         }
         
 
@@ -2534,10 +2537,10 @@ public class Eroshetta extends javax.swing.JFrame {
             
         }
         
-        if(!saveW){
+        
             em.persist(currentPatient);
             em.getTransaction().commit();
-        }
+        
     }
     
     public boolean checkExistDrug(Drugs test){
