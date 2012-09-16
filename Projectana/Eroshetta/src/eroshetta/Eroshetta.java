@@ -1400,6 +1400,7 @@ public class Eroshetta extends javax.swing.JFrame {
             jListPPDiagnosis.setModel(new DefaultListModel());
             jListPPM3edication.setModel(new DefaultListModel());
             jListPatientsBook.clearSelection();
+            jLabelBMIDesc.setVisible(false);
             
 
             
