@@ -197,8 +197,15 @@ public class PrescriptionFrame extends javax.swing.JFrame {
             }
          }
       });
-           this.setDefaultCloseOperation(this.HIDE_ON_CLOSE);
-           this.setVisible(false);
+            Eroshetta.DrugsInPrescription.removeAll();
+            Eroshetta.DrugsInPrescription.revalidate();
+            Eroshetta.DrugsInPrescription.repaint();
+            Eroshetta.drugsPanels.clear();
+            Eroshetta.drugsCollectionInPrescription.clear();
+            Eroshetta.workingOnPrescription = false;
+            Eroshetta.jTextArea1.setText(null);
+            this.setDefaultCloseOperation(this.HIDE_ON_CLOSE);
+            this.setVisible(false);
     }//GEN-LAST:event_printPrescActionPerformed
 
     private void cancelPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPrescActionPerformed

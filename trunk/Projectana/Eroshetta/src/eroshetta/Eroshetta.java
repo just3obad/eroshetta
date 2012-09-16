@@ -672,7 +672,7 @@ public class Eroshetta extends javax.swing.JFrame {
         );
         jPanelPatientOldPrescLayout.setVerticalGroup(
             jPanelPatientOldPrescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
+            .addGap(0, 585, Short.MAX_VALUE)
         );
 
         jScrollPane5.setViewportView(jPanelPatientOldPresc);
@@ -692,7 +692,7 @@ public class Eroshetta extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+                .addComponent(jPanelPatientProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -944,7 +944,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(checkBoxClass)
                     .addComponent(checkBoxGeneric))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1838,7 +1838,7 @@ public class Eroshetta extends javax.swing.JFrame {
         this.DrugsInPrescription.revalidate();
 
     }
-    boolean workingOnPrescription = false;
+    static boolean workingOnPrescription = false;
     static Prescriptions currentPrescription = new Prescriptions();
 //    static ArrayList<Prescriptions> currentPrescription= new <Prescriptions>ArrayList();
     static Collection<Drugs> drugsCollectionInPrescription = new ArrayList();
@@ -3034,7 +3034,7 @@ if (this.workingOnPrescription) {
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel DrugsInPrescription;
+    public static javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
     private javax.swing.JButton addToPresc;
     private static javax.swing.JCheckBox checkBoxClass;
@@ -3117,7 +3117,7 @@ if (this.workingOnPrescription) {
     private javax.swing.JScrollPane jScrollPanePPMedication;
     private javax.swing.JScrollPane jScrollPanePatientsBook;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
+    public static javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldPPMedication;
     private javax.swing.JTextField jTextFieldPatientProfileBMI;
     private javax.swing.JTextField jTextFieldPatientProfileHeight;
