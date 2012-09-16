@@ -1944,18 +1944,16 @@ public class Eroshetta extends javax.swing.JFrame {
             * 
             */
             try {
-                Collection<Drugs> drugsContraAlreadyDrugs = d.getDrugsCollection();
-                for (int j = 0; j < this.drugsCollectionInPrescription.size(); j++) {
-                    Drugs a = (Drugs) this.drugsCollectionInPrescription.toArray()[j];
-                    for (int k = 0; k < drugsContraAlreadyDrugs.size(); k++) {
-                        Drugs b = (Drugs) drugsContraAlreadyDrugs.toArray()[k];
-                        if (a.getId() == b.getId()) {
+                for (int j = 0; j < drugsCollectionInPrescription.size(); j++) {
+                    Drugs a = (Drugs) drugsCollectionInPrescription.toArray()[j];
+                    
+                        if (this.anyInteract(a, d)) {
                             o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with " + a.toString() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
                             if (o != 0) {
                                 return;
                             }
                         }
-                    }
+                    
                 }
             } catch (NullPointerException e) {
             }
@@ -1991,14 +1989,15 @@ public class Eroshetta extends javax.swing.JFrame {
             this.workingOnPrescription = true;
             this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
             drugsCollectionInPrescription.add(d);
-            drugsPanels.clear();
-            drugsPanels.removeAll(drugsPanels);
-            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-                Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
-                DrugPresPanel drugPanel = new DrugPresPanel(drugruga, currentPrescription, this);
-                drugsPanels.add(drugPanel);
-
-            }
+            drugsPanels.add(new DrugPresPanel(d, currentPrescription, this));
+//            drugsPanels.clear();
+//            drugsPanels.removeAll(drugsPanels);
+//            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+//                Drugs drugruga = (Drugs) drugsCollectionInPrescription.toArray()[i];
+//                DrugPresPanel drugPanel = new DrugPresPanel(drugruga, currentPrescription, this);
+//                drugsPanels.add(drugPanel);
+//
+//            }
 
             this.DrugsInPrescription.removeAll();
             if (drugsPanels.size() < 4) {
@@ -2007,9 +2006,9 @@ public class Eroshetta extends javax.swing.JFrame {
                 this.DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
             }
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
-                Drugs drugrug = (Drugs) drugsCollectionInPrescription.toArray()[i];
-                DrugPresPanel drugPanel = new DrugPresPanel(drugrug, currentPrescription, this);
-                this.DrugsInPrescription.add(drugPanel);
+//                Drugs drugrug = (Drugs) drugsCollectionInPrescription.toArray()[i];
+//                DrugPresPanel drugPanel = new DrugPresPanel(drugrug, currentPrescription, this);
+                this.DrugsInPrescription.add(drugsPanels.get(i));
             }
 
             this.DrugsInPrescription.revalidate();
@@ -2034,6 +2033,23 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addToPrescMouseClicked
 
+    public static boolean anyInteract(Drugs a , Drugs b){
+    Collection<Drugs> aDrugs = a.getDrugsCollection();
+    Collection<Drugs> bDrugs = b.getDrugsCollection();
+                for(int i =0;i<aDrugs.size();i++){
+                    Drugs tmp  = (Drugs) aDrugs.toArray()[i];
+                    if(tmp.getId()==b.getId()){
+                        return true;
+                    }
+                }
+                for(int i =0;i<bDrugs.size();i++){
+                    Drugs tmp  = (Drugs) bDrugs.toArray()[i];
+                    if(tmp.getId()==a.getId()){
+                        return true;
+                    }
+                }
+                return false;
+}
     private void jListPatientsBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPatientsBookMouseClicked
         if (this.workingOnPrescription) {
             int o = JOptionPane.showConfirmDialog(new JButton("parent"), "Prescription Progress will be lost , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
