@@ -57,6 +57,7 @@ public class Eroshetta extends javax.swing.JFrame {
         
         Query q = em.createNamedQuery("Patients.findAll");
         patientsBookList = (List<Patients>) q.getResultList();
+        
            
         Query q2 = em.createNamedQuery("Diagnoses.findAll");
         allDiagnoses = (List<Diagnoses>) q2.getResultList();
@@ -375,7 +376,7 @@ public class Eroshetta extends javax.swing.JFrame {
         DefaultComboBoxModel modelComboBoxYear = new DefaultComboBoxModel();
         jComboBoxPatientProfileYear.setModel(modelComboBoxYear
         );
-        for(int i=Calendar.getInstance().get(Calendar.YEAR); i>=1970; i--){
+        for(int i=Calendar.getInstance().get(Calendar.YEAR); i>=1925; i--){
             modelComboBoxYear.addElement(i);
         }
         jComboBoxPatientProfileYear.addActionListener(new java.awt.event.ActionListener() {
@@ -415,20 +416,10 @@ public class Eroshetta extends javax.swing.JFrame {
                 jTextFieldPatientProfileWeightActionPerformed(evt);
             }
         });
-        jTextFieldPatientProfileWeight.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldPatientProfileWeightKeyReleased(evt);
-            }
-        });
 
         jTextFieldPatientProfileHeight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPatientProfileHeightActionPerformed(evt);
-            }
-        });
-        jTextFieldPatientProfileHeight.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldPatientProfileHeightKeyReleased(evt);
             }
         });
 
@@ -1406,6 +1397,8 @@ public class Eroshetta extends javax.swing.JFrame {
             jComboBoxPatientProfileYear.setSelectedIndex(0);
             jListPPM3edication.removeAll();
             jListPPDiagnosis.removeAll();
+            jListPPDiagnosis.setModel(new DefaultListModel());
+            jListPPM3edication.setModel(new DefaultListModel());
             jListPatientsBook.clearSelection();
             
 
@@ -2250,9 +2243,10 @@ public class Eroshetta extends javax.swing.JFrame {
             else{
                 
                 
-            this.saveProfilePatient();
+            
     
             this.disableProfilePatient();
+            this.saveProfilePatient();
             jButton3.setEnabled(false);
             jButton4.setEnabled(false);
             jButton1.setEnabled(true);
@@ -2312,39 +2306,6 @@ public class Eroshetta extends javax.swing.JFrame {
 //        saveFlag=4;
     }//GEN-LAST:event_jTextFieldPatientProfileHeightActionPerformed
 
-    private void jTextFieldPatientProfileWeightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileWeightKeyReleased
-        // TODO add your handling code here:
-        
-        
-        
-
-        try {
-            
-            double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
-            double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
-            
-            System.out.println("Weight"+weight+" Kg");
-            System.out.println("Height "+height+" m");
-            Double calc = (weight/(height*height))*100;
-            System.out.println("BMI"+calc);
-            String tmp = String.valueOf(calc);
-            tmp=tmp.substring(0, 4);
-            calc = Double.parseDouble(tmp);
-            
-            jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
-            tanak = false;
-            
-            
-        } catch (Exception e) {
-            System.out.println("Error instant calculating the BMI" + e.getMessage());
-            if(!jTextFieldPatientProfileWeight.getText().isEmpty() && tanak==false){
-                JOptionPane.showMessageDialog(this, "Please, Enter a valid number", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
-                tanak=true;
-            }
-        }
-
-    }//GEN-LAST:event_jTextFieldPatientProfileWeightKeyReleased
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         currentPatient = new Patients();
@@ -2358,6 +2319,8 @@ public class Eroshetta extends javax.swing.JFrame {
         jButton4.setEnabled(true);
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
+        jToggleButtonDiagnosis.setEnabled(false);
+        jToggleButtonPPMedication.setEnabled(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2450,41 +2413,9 @@ public class Eroshetta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldPPMedicationKeyReleased
 
-    private void jTextFieldPatientProfileHeightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPatientProfileHeightKeyReleased
-        // TODO add your handling code here:
-        
-        
-        try {
-            
-            double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
-            double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
-            
-//            System.out.println("Weight"+weight+" Kg");
-//            System.out.println("Height "+height+" m");
-            Double calc = (weight/(height*height))*100;
-//            System.out.println("BMI"+calc);
-            String tmp = String.valueOf(calc);
-            tmp=tmp.substring(0, 4);
-            calc = Double.parseDouble(tmp);
-            tanak = false;
-            
-            jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
-            
-            
-        } catch (Exception e) {
-            
-            System.out.println("Error instant calculating the BMI " + e.getMessage());
-            if(!jTextFieldPatientProfileHeight.getText().isEmpty() && tanak==false){
-                JOptionPane.showMessageDialog(this, "Please, Enter a valid number", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
-                tanak=true;
-                
-            }
-        }
-        
-    }//GEN-LAST:event_jTextFieldPatientProfileHeightKeyReleased
-
     public void saveProfilePatient(){
         em.getTransaction().begin();
+        boolean saveW=true;
         
         
         try {
@@ -2543,16 +2474,15 @@ public class Eroshetta extends javax.swing.JFrame {
             double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
             double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
             
-//            System.out.println("Weight"+weight+" Kg");
-//            System.out.println("Height "+height+" m");
             Double calc = (weight/(height*height))*100;
-//            System.out.println("BMI"+calc);
+
             String tmp = String.valueOf(calc);
             tmp=tmp.substring(0, 4);
             calc = Double.parseDouble(tmp);
             
             jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
             currentPatient.setBmi(BigDecimal.valueOf(calc));
+            saveW=true;
             
 
             
@@ -2561,7 +2491,13 @@ public class Eroshetta extends javax.swing.JFrame {
             
             System.out.println("Error updating weight or height or bmi");
             System.out.println(e.getMessage());
-//            JOptionPane.showMessageDialog(this, "Please select a p", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter a valid weight or height.", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+            enableProfilePatient();
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(true);
+            jButton4.setEnabled(true);
+            saveW=false;
         }
         
 
@@ -2580,8 +2516,10 @@ public class Eroshetta extends javax.swing.JFrame {
             
         }
         
-        em.persist(currentPatient);
-        em.getTransaction().commit();
+        if(!saveW){
+            em.persist(currentPatient);
+            em.getTransaction().commit();
+        }
     }
     
     public boolean checkExistDrug(Drugs test){
@@ -2773,6 +2711,12 @@ public class Eroshetta extends javax.swing.JFrame {
         
         jToggleButtonDiagnosis.setEnabled(false);
         jToggleButtonPPMedication.setEnabled(false);
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jToggleButtonDiagnosis.setEnabled(true);
+        jToggleButtonPPMedication.setEnabled(true);
         
     }
     
@@ -2963,27 +2907,46 @@ public class Eroshetta extends javax.swing.JFrame {
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Eroshetta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /*
          * Create and display the form
          */
+        
+        
+ try {
+            // Set System L&F
+        UIManager.setLookAndFeel(
+            UIManager.getSystemLookAndFeelClassName());
+    } 
+    catch (UnsupportedLookAndFeelException e) {
+       // handle exception
+    }
+    catch (ClassNotFoundException e) {
+       // handle exception
+    }
+    catch (InstantiationException e) {
+       // handle exception
+    }
+    catch (IllegalAccessException e) {
+       // handle exception
+    }
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
