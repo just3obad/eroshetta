@@ -148,20 +148,23 @@ public class PrescriptionFrame extends javax.swing.JFrame {
          
             em.getTransaction().begin();
             Prescriptions p = this.presc.getCurrentPresc();
-            
-
             em.persist(p);
+            em.flush();
+            em.refresh(p);
+            em.refresh(p.getPatientId());
             em.getTransaction().commit();
-            System.out.println(p.getId());
+            
+    //        System.out.println(p.getId());
+            
             Collection<DrugTimes> dTimes = new ArrayList<DrugTimes>();
             dTimes = this.presc.getDrugTimes();
             Collection<DrugTimes>finalTimes = new ArrayList<DrugTimes>();
             for(int i=0; i<dTimes.size() ;i++)
             {
                 DrugTimes dTime = (DrugTimes)dTimes.toArray()[i];
-                System.out.println(dTime.toString());
+      //        System.out.println(dTime.toString());
                 dTime.drugTimesPK.setPrescriptionId(p.getId());
-                System.out.println(dTime.getPrescriptions());
+      //        System.out.println(dTime.getPrescriptions());
                 finalTimes.add(dTime);
                 
                 
@@ -194,7 +197,8 @@ public class PrescriptionFrame extends javax.swing.JFrame {
             }
          }
       });
-        
+           this.setDefaultCloseOperation(this.HIDE_ON_CLOSE);
+           this.setVisible(false);
     }//GEN-LAST:event_printPrescActionPerformed
 
     private void cancelPrescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPrescActionPerformed
