@@ -2314,6 +2314,8 @@ public class Eroshetta extends javax.swing.JFrame {
         saveFlag=false;
         
         this.clearProfilePatient();
+        jListPPDiagnosis.removeAll();
+        jListPPM3edication.removeAll();
         this.enableProfilePatient();
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
