@@ -1959,6 +1959,7 @@ public class Eroshetta extends javax.swing.JFrame {
             } catch (NullPointerException e) {
             }
             try {
+                String s = "";
                 Collection<Diagnoses> drugsContraAlreadyDiagnosis = d.getDiagnosesCollection();
                 Query qr = em.createNamedQuery("Diagnoses.findAll");
                 List<Diagnoses> tmpList = qr.getResultList();
@@ -1967,13 +1968,14 @@ public class Eroshetta extends javax.swing.JFrame {
                     for (int k = 0; k < tmpList.size(); k++) {
                         Diagnoses b = (Diagnoses) tmpList.toArray()[k];
                         if (a.getId() == b.getId()) {
-                            o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with " + a.getName() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-                            if (o != 0) {
-                                return;
-                            }
+                            s= s +  a.getName() + " ,";
                         }
                     }
                 }
+                o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with " +s + "  Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+                            if (o != 0) {
+                                return;
+                            }
             } catch (NullPointerException e) {
             }
 
@@ -2052,7 +2054,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 return false;
 }
     private void jListPatientsBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPatientsBookMouseClicked
-        if (this.workingOnPrescription) {
+if (this.workingOnPrescription) {
             int o = JOptionPane.showConfirmDialog(new JButton("parent"), "Prescription Progress will be lost , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
             if (o != 0) {
                 this.jListPatientsBook.setSelectedIndex(this.workingPatientIndex);
@@ -2066,7 +2068,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 this.workingOnPrescription = false;
                 this.jTextArea1.setText(null);
             }
-        }
+        }        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jListPatientsBookMouseClicked
@@ -2088,7 +2090,7 @@ public class Eroshetta extends javax.swing.JFrame {
         Collection<DrugTimes> times = new ArrayList();
         for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
                 DrugTimes time = new DrugTimes(1,drugsPanels.get(i).panelDrug.getId());
-                time.setDrugTime(":::::");
+                time.setDrugTime("");
             if (drugsPanels.get(i).jCheckBox1.isSelected()) {
                 time.setDrugTime(drugsPanels.get(i).jCheckBox1.getText());
             }
