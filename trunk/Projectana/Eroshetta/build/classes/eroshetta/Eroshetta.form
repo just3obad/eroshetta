@@ -185,7 +185,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanelPatientProfile" pref="604" max="32767" attributes="0"/>
+                      <Component id="jPanelPatientProfile" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane5" alignment="1" min="-2" max="32767" attributes="0"/>
@@ -238,7 +238,6 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jComboBoxPatientProfileYear" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jTextFieldPatientProfileBMI" min="-2" pref="41" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jComboBoxPatientProfileMarital" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -259,9 +258,13 @@
                                       </Group>
                                       <Component id="jTextFieldPatientProfileName" min="-2" pref="180" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jToggleButtonDiagnosis" min="-2" pref="63" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jToggleButtonDiagnosis" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldPatientProfileBMI" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelBMIDesc" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabelPPMedication" min="-2" max="-2" attributes="0"/>
                                               <Component id="jScrollPanePPDiagnosisMedication" min="-2" pref="132" max="-2" attributes="0"/>
                                           </Group>
@@ -325,6 +328,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabelPatientProfileBMI" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextFieldPatientProfileBMI" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelBMIDesc" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -483,7 +487,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxPatientProfileYearActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="for(int i=Calendar.getInstance().get(Calendar.YEAR); i&gt;=1970; i--){&#xa;        modelComboBoxYear.addElement(i);&#xa;    }"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="for(int i=Calendar.getInstance().get(Calendar.YEAR); i&gt;=1925; i--){&#xa;        modelComboBoxYear.addElement(i);&#xa;    }"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultComboBoxModel modelComboBoxYear = new DefaultComboBoxModel();"/>
                   </AuxValues>
                 </Component>
@@ -505,7 +509,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxPatientProfilePregnantActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultComboBoxModel pregnantComboModel = new DefaultComboBoxModel();&#xa;jComboBoxPatientProfilePregnant.setModel(pregnantComboModel);&#xa;pregnantComboModel.addElement(&quot;Yes&quot;);&#xa;pregnantComboModel.addElement(&quot;No&quot;);&#xa;jComboBoxPatientProfilePregnant.setVisible(false);&#xa;jLabelPatientProfilePregnant.setVisible(false);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultComboBoxModel pregnantComboModel = new DefaultComboBoxModel();&#xa;jComboBoxPatientProfilePregnant.setModel(pregnantComboModel);&#xa;pregnantComboModel.addElement(&quot;No&quot;);&#xa;pregnantComboModel.addElement(&quot;Yes&quot;);&#xa;jComboBoxPatientProfilePregnant.setVisible(false);&#xa;jLabelPatientProfilePregnant.setVisible(false);"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldPatientProfileBMI">
@@ -519,7 +523,6 @@
                 <Component class="javax.swing.JTextField" name="jTextFieldPatientProfileWeight">
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldPatientProfileWeightActionPerformed"/>
-                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldPatientProfileWeightKeyReleased"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldPatientProfileHeight">
@@ -672,6 +675,14 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JLabel" name="jLabelBMIDesc">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="BMI"/>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabelBMIDesc.setVisible(false);"/>
+                  </AuxValues>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JScrollPane" name="jScrollPane5">
@@ -695,7 +706,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="584" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="585" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -791,7 +802,7 @@
                               <Component id="checkBoxGeneric" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="240" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="241" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -1254,6 +1265,9 @@
                       <Events>
                         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextArea1KeyPressed"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1277,7 +1291,7 @@
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
