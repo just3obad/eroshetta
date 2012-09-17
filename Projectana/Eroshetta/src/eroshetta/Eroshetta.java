@@ -33,6 +33,7 @@ public class Eroshetta extends javax.swing.JFrame {
     public static int counterDiagnosis = 0;
     public static int counterDrugs = 0;
     public static int counterBoth = 0;
+    public static int counterBoth2=0;
     public static int counterPatients=0;
 
     public static List<Drugs> allDrugs = new ArrayList<Drugs>();
@@ -428,17 +429,17 @@ public class Eroshetta extends javax.swing.JFrame {
         jLabelPatientProfileHeightCM.setText("cm.");
 
         jListPPDiagnosis.setEnabled(false);
-        jListPPDiagnosis.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListPPDiagnosisValueChanged(evt);
+        jListPPDiagnosis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jListPPDiagnosisMouseReleased(evt);
             }
         });
         jScrollPanePPDiagnosis.setViewportView(jListPPDiagnosis);
 
         jListPPM3edication.setEnabled(false);
-        jListPPM3edication.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListPPM3edicationValueChanged(evt);
+        jListPPM3edication.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jListPPM3edicationMouseReleased(evt);
             }
         });
         jScrollPanePPMedication.setViewportView(jListPPM3edication);
@@ -446,9 +447,9 @@ public class Eroshetta extends javax.swing.JFrame {
         jScrollPanePPDiagnosisMedication.setVisible(false);
 
         jListPPDiagnosisMedication.setVisible(false);
-        jListPPDiagnosisMedication.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListPPDiagnosisMedicationValueChanged(evt);
+        jListPPDiagnosisMedication.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jListPPDiagnosisMedicationMouseReleased(evt);
             }
         });
         jScrollPanePPDiagnosisMedication.setViewportView(jListPPDiagnosisMedication);
@@ -459,7 +460,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
         for(int i=0; i<allDrugs.size();i++){
             Drugs d = allDrugs.get(i);
-            modelAllDrugs.add(i, d.getClassName());
+            modelAllDrugs.add(i, d.getTradeName()+"("+d.getClassName()+")");
         }
 
         jTextFieldPPMedication.setVisible(false);
@@ -1361,11 +1362,13 @@ public class Eroshetta extends javax.swing.JFrame {
                 jListPatientsBook.setModel(tempModel);
                 tempModel.addElement("Sorry, No match");
 //                currentPatient=null;
+                jListPatientsBook.clearSelection();
                 disableProfilePatient();
                 this.clearProfilePatient();
                 jListPPDiagnosis.removeAll();
                 jListPPM3edication.removeAll();
                 jListPatientsBook.setEnabled(false);
+                jButton2.setEnabled(false);
             }
             else{
                 
@@ -1393,6 +1396,7 @@ public class Eroshetta extends javax.swing.JFrame {
             jTextFieldPatientProfileHeight.setText("0");
             jTextFieldPatientProfileWeight.setText("0");
             jTextFieldPatientProfileBMI.setText("0");
+//            jTextFieldPatientsBook.setText("");
             jComboBoxPatientProfileDay.setSelectedIndex(0);
             jComboBoxPatientProfileGender.setSelectedIndex(0);
             jComboBoxPatientProfileMarital.setSelectedIndex(0);
@@ -1485,7 +1489,7 @@ public class Eroshetta extends javax.swing.JFrame {
 //            System.out.println(currentPatient.getGender());
  
             } catch (Exception e) {
-                System.out.println("Error Intializing the current patient.");
+//                System.out.println("Error Intializing the current patient.");
                 
             }
             
@@ -1545,7 +1549,6 @@ public class Eroshetta extends javax.swing.JFrame {
 
             try {
                 
-                if(currentPatient.getBmi()!=null && currentPatient.getHeight()!=0 && currentPatient.getWeight() !=0){
                     String oldBmi = String.valueOf(currentPatient.getBmi());
                     jTextFieldPatientProfileBMI.setText(oldBmi);
                     
@@ -1572,10 +1575,8 @@ public class Eroshetta extends javax.swing.JFrame {
                         }
                     }
                     
-                }
-                else{
-                    jTextFieldPatientProfileBMI.setText("0");
-                }
+                
+         
                 
             } catch (Exception e) {
                 
@@ -1664,7 +1665,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jListPPM3edication.setModel(modelPPMedicaion);
         for (int i = 0; i < currentPatienMedications.size(); i++) {
             Drugs d = (Drugs) currentPatienMedications.get(i);
-            modelPPMedicaion.add(i, d.getClassName());
+            modelPPMedicaion.add(i, d.getTradeName()+"("+d.getClassName()+")");
         }
     }
     
@@ -2132,83 +2133,6 @@ if (this.workingOnPrescription) {
         // TODO add your handling code here:
     }//GEN-LAST:event_savePreviewMouseClicked
 
-    private void jListPPDiagnosisMedicationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPDiagnosisMedicationValueChanged
-        // TODO add your handling code here:
-        try {
-            if(counterBoth%2==0){
-                if(whichEdit ==1){
-                    //drugs added to the patient
-                    
-                    int selectedDrugIndex = jListPPDiagnosisMedication.getSelectedIndex();
-//                    System.out.println("Selcted drug index is "+selectedDrugIndex);
-//                    System.out.println("Selcted drug  is "+jListPPDiagnosisMedication.getSelectedValue());
-                    Drugs selectedDrug = allDrugs.get(selectedDrugIndex);
-//                    System.out.println("Slected drug name is "+ selectedDrug.getClassName());
-//                    System.out.println(allDrugs.size());
-//                    System.out.println(allDrugs.get(selectedDrugIndex).getClassName());
-//                    System.out.println(allDrugs.get(selectedDrugIndex).getId());
-                    
-                    if(!this.checkExistDrug(selectedDrug)){
-                        
-                        DefaultListModel model = (DefaultListModel) jListPPM3edication.getModel();
-                        model.addElement(selectedDrug.getTradeName());
-                        jListPPM3edication.setModel(model);
-                        
-//                        System.out.println("Hello");
-                        
-                        List newDrugsList = currentPatienMedications;
-                        newDrugsList.add(selectedDrug);
-                        currentPatient.setDrugsCollection(newDrugsList);
-                        currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
-                        
-//                        System.out.println("Hello Again");
-
-                        this.addDrugDB(selectedDrug.getId());
-                    }
-                    else{
-                       JOptionPane.showMessageDialog(this, "This Drug is already added", "Eroshetta", JOptionPane.INFORMATION_MESSAGE); 
-                    }
-                }
-                else{
-                    //diagnosis added to the patient
-                    int selectedDiagnosisIndex = jListPPDiagnosisMedication.getSelectedIndex();
-//                    System.out.println("Selected diagnosis index is "+selectedDiagnosisIndex);
-//                    System.out.println("Selcted diagnosis  is "+jListPPDiagnosisMedication.getSelectedValue());
-                    
-                    Diagnoses selectedDiagnosis = allDiagnoses.get(selectedDiagnosisIndex);
-//                    System.out.println(selectedDiagnosis.getName());
-//                    System.out.println(allDiagnoses.size());
-//                    System.out.println(allDiagnoses.get(selectedDiagnosisIndex).getName());
-//                    System.out.println(allDiagnoses.get(selectedDiagnosisIndex).getId());
-                    
-                   if(!this.checkExistDiagnosis(selectedDiagnosis)){
-                       DefaultListModel model = (DefaultListModel) jListPPDiagnosis.getModel();
-                       model.addElement(selectedDiagnosis.getName());
-                       jListPPDiagnosis.setModel(model);
-//                       
-//                       
-//                        System.out.println("Hello");
-
-                        List newDiagnosisList = currentPatienDiagnoses;
-                        newDiagnosisList.add(selectedDiagnosis);
-                        currentPatient.setDiagnosesCollection(newDiagnosisList);
-                        currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
-                        
-//                        System.out.println("Hello Again");
-
-                        this.addDiagnosisDB(selectedDiagnosis.getId());
-                        
-                   }
-                   else{
-                       JOptionPane.showMessageDialog(this, "This Diagnosis is already added", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
-                   }
-                }
-            }
-            counterBoth++;
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jListPPDiagnosisMedicationValueChanged
-
     public void addDiagnosisDB(int diagnosisID){
         try {
             Connection con = DriverManager.getConnection(host, usrN, usrP);
@@ -2244,26 +2168,31 @@ if (this.workingOnPrescription) {
     }
     
     
-    private void jListPPM3edicationValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPM3edicationValueChanged
-        // TODO add your handling code here:
-        if(counterDrugs%2==0){
-//            System.out.println("In the if "+counterDrugs);
-            this.deleteDrug();
-        }
-        counterDrugs++;
-    }//GEN-LAST:event_jListPPM3edicationValueChanged
-
-    private void jListPPDiagnosisValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPPDiagnosisValueChanged
-        // TODO add your handling code here:
-        if(counterDiagnosis%2==0){
-            this.deleteDiagnosis();
-        }
-        counterDiagnosis++;
-    }//GEN-LAST:event_jListPPDiagnosisValueChanged
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:        
          try {
+             
+             
+//             System.out.println("Weight is >>>" + jTextFieldPatientProfileWeight.getText());
+//             System.out.println("Height is >>>" + jTextFieldPatientProfileHeight.getText());
+            if (jTextFieldPatientProfileHeight.getText().isEmpty() && jTextFieldPatientProfileWeight.getText().isEmpty()) {
+                 
+                    jTextFieldPatientProfileHeight.setText("0");
+                    jTextFieldPatientProfileWeight.setText("0");
+//                    System.out.println("Both Empty");
+             }
+            
+            if(jTextFieldPatientProfileHeight.getText().isEmpty() && !jTextFieldPatientProfileWeight.getText().isEmpty()){
+                    jTextFieldPatientProfileHeight.setText("0");
+//                    System.out.println("Height Empty " + jTextFieldPatientProfileWeight.getText() );
+                
+            }
+            
+            if(jTextFieldPatientProfileWeight.getText().isEmpty() && !jTextFieldPatientProfileHeight.getText().isEmpty()){
+                jTextFieldPatientProfileWeight.setText("0");
+//            System.out.println("Weight Empty " + jTextFieldPatientProfileHeight.getText() );
+            }
+             
             if(jTextFieldPatientProfileName.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please enter the patient`s name", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -2273,14 +2202,15 @@ if (this.workingOnPrescription) {
                     JOptionPane.showMessageDialog(this, "Please enter a valid weight or height.", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                    
-                    
-                    
+                this.saveProfilePatient();     
             this.disableProfilePatient();
-            this.saveProfilePatient();
+           
             jButton3.setEnabled(false);
             jButton4.setEnabled(false);
             jButton1.setEnabled(true);
             jButton2.setEnabled(true);
+              jTextFieldPatientsBook.setText("");
+              jListPatientsBook.setEnabled(true);
             int x = jListPatientsBook.getSelectedIndex();
             Query qRefresh = em.createNamedQuery("Patients.findAll"); 
             patientsBookList=qRefresh.getResultList(); 
@@ -2294,6 +2224,7 @@ if (this.workingOnPrescription) {
             jListPatientsBook.setSelectedIndex(x);
             currentPatient=patientsBookList.get(x);
             saveFlag=true;
+          
                     
                     
                 }
@@ -2358,6 +2289,7 @@ if (this.workingOnPrescription) {
         jButton4.setEnabled(true);
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
+//        jListPatientsBook.setSelectedIndex(patientsBookList.size()-1);
 //        jToggleButtonDiagnosis.setEnabled(false);
 //        jToggleButtonPPMedication.setEnabled(false);
         
@@ -2412,7 +2344,7 @@ if (this.workingOnPrescription) {
             
             
             
-                    String query = this.jTextFieldPPMedication.getText();
+        String query = this.jTextFieldPPMedication.getText();
         allDrugs = Eroshetta.drug_search(query);
         final ArrayList<String> s = new ArrayList();
         for (int i = 0; i < allDrugs.size(); i++) {
@@ -2451,6 +2383,116 @@ if (this.workingOnPrescription) {
             
         }
     }//GEN-LAST:event_jTextFieldPPMedicationKeyReleased
+
+    private void jListPPM3edicationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPPM3edicationMouseReleased
+        // TODO add your handling code here:
+        
+        
+                    this.deleteDrug();
+
+    jListPPM3edication.clearSelection();        
+        
+    }//GEN-LAST:event_jListPPM3edicationMouseReleased
+
+    private void jListPPDiagnosisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPPDiagnosisMouseReleased
+        // TODO add your handling code here:
+        
+            this.deleteDiagnosis();
+            
+
+        jListPPDiagnosis.clearSelection();
+        
+        
+    }//GEN-LAST:event_jListPPDiagnosisMouseReleased
+
+    private void jListPPDiagnosisMedicationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPPDiagnosisMedicationMouseReleased
+        // TODO add your handling code here:
+        
+                try {
+            //whichEdit ==1
+            if(whichEdit ==1){
+                    //drugs added to the patient
+                    
+                    int selectedDrugIndex = jListPPDiagnosisMedication.getSelectedIndex();
+//                    System.out.println("Selcted drug index is "+selectedDrugIndex);
+//                    System.out.println("Selcted drug  is "+jListPPDiagnosisMedication.getSelectedValue());
+                    Drugs selectedDrug = allDrugs.get(selectedDrugIndex);
+//                    System.out.println("Slected drug name is "+ selectedDrug.getClassName());
+//                    System.out.println(allDrugs.size());
+//                    System.out.println(allDrugs.get(selectedDrugIndex).getClassName());
+//                    System.out.println(allDrugs.get(selectedDrugIndex).getId());
+                    
+                    if(!this.checkExistDrug(selectedDrug)){
+                        
+                        DefaultListModel model = (DefaultListModel) jListPPM3edication.getModel();
+                        model.addElement(selectedDrug.getTradeName()+"("+selectedDrug.getClassName()+")");
+                        jListPPM3edication.setModel(model);
+                        
+//                        System.out.println("Hello");
+                        
+                        List newDrugsList = currentPatienMedications;
+                        newDrugsList.add(selectedDrug);
+                        currentPatient.setDrugsCollection(newDrugsList);
+                        currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
+                        
+//                        System.out.println("Hello Again");
+
+                        this.addDrugDB(selectedDrug.getId());
+                    }
+                    else{
+                       JOptionPane.showMessageDialog(this, "This Drug is already added", "Eroshetta", JOptionPane.INFORMATION_MESSAGE); 
+                    }
+                }
+        
+            
+            //
+            else{
+                        
+                    //diagnosis added to the patient
+                    int selectedDiagnosisIndex = jListPPDiagnosisMedication.getSelectedIndex();
+//                    System.out.println("Selected diagnosis index is "+selectedDiagnosisIndex);
+//                    System.out.println("Selcted diagnosis  is "+jListPPDiagnosisMedication.getSelectedValue());
+                    
+                    Diagnoses selectedDiagnosis = allDiagnoses.get(selectedDiagnosisIndex);
+//                    System.out.println(selectedDiagnosis.getName());
+//                    System.out.println(allDiagnoses.size());
+//                    System.out.println(allDiagnoses.get(selectedDiagnosisIndex).getName());
+//                    System.out.println(allDiagnoses.get(selectedDiagnosisIndex).getId());
+                    
+                   if(!this.checkExistDiagnosis(selectedDiagnosis)){
+                       DefaultListModel model = (DefaultListModel) jListPPDiagnosis.getModel();
+                       model.addElement(selectedDiagnosis.getName());
+                       jListPPDiagnosis.setModel(model);
+//                       
+//                       
+//                        System.out.println("Hello");
+
+                        List newDiagnosisList = currentPatienDiagnoses;
+                        newDiagnosisList.add(selectedDiagnosis);
+                        currentPatient.setDiagnosesCollection(newDiagnosisList);
+                        currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
+                        
+//                        System.out.println("Hello Again");
+
+                        this.addDiagnosisDB(selectedDiagnosis.getId());
+                        
+                   }
+                   else{
+                       JOptionPane.showMessageDialog(this, "This Diagnosis is already added", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+                   }
+                
+                  
+                }
+                
+            
+            jListPPDiagnosisMedication.clearSelection();
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+    }//GEN-LAST:event_jListPPDiagnosisMedicationMouseReleased
 
     public void saveProfilePatient(){
         em.getTransaction().begin();
@@ -2491,52 +2533,64 @@ if (this.workingOnPrescription) {
             
         }
         
+     
+        
         try {
-            
-            if(currentPatient.getGender()=='f' && currentPatient.getMaritalStatus()==1){
-                currentPatient.setIsPregnant(1);
-            }
-            else{
-                currentPatient.setIsPregnant(0);
-            }
-            
+            currentPatient.setIsPregnant(jComboBoxPatientProfilePregnant.getSelectedIndex());
         } catch (Exception e) {
-            
-            System.out.println("Error updating pregnancy");
         }
         
         try {
+            if(jComboBoxPatientProfileGender.getSelectedIndex()==0 || (jComboBoxPatientProfileGender.getSelectedIndex()==1 && jComboBoxPatientProfileMarital.getSelectedIndex()==0)){
+                currentPatient.setIsPregnant(0);
+            }
+        } catch (Exception e) {
+        }
+        
+        
+        try {
            
-            currentPatient.setWeight(Integer.parseInt(jTextFieldPatientProfileWeight.getText()));
-            currentPatient.setHeight(Integer.parseInt(jTextFieldPatientProfileHeight.getText()));
+       
             
-            double weight = Integer.parseInt(jTextFieldPatientProfileWeight.getText());
-            double height = Integer.parseInt(jTextFieldPatientProfileHeight.getText())/10; 
+            double weight = Double.parseDouble(jTextFieldPatientProfileWeight.getText());
+            double height = Double.parseDouble(jTextFieldPatientProfileHeight.getText())/100; 
+//            System.out.println("double Weight is " + weight);
+//            System.out.println("double Heighsghft is " + height);
             
             Double calc;
             String tmp;
+
             
-           if(weight!=0 && height!=0){
-               calc = (weight / (height * height)) * 100;
+            if(weight==0 || height==0){
+                tmp="0";
+            }
+            else{
+               calc = (weight / (height * height));
                tmp = String.valueOf(calc);
-               tmp = tmp.substring(0, 4);
-           }else{
-               tmp="0.0";
-           }
+               tmp = tmp.substring(0, 5);
+               System.out.println("Weight "+weight);
+               System.out.println("Height "+height);
+               System.out.println("BMI"+tmp);
+            }
             calc = Double.parseDouble(tmp);
             
             jTextFieldPatientProfileBMI.setText(String.valueOf(calc));
+            currentPatient.setWeight(Integer.parseInt(jTextFieldPatientProfileWeight.getText()));
+            currentPatient.setHeight(Integer.parseInt(jTextFieldPatientProfileHeight.getText()));
+            
+            if(calc>=100){
+             tmp=tmp.substring(0, 2);
+             calc = Double.parseDouble(tmp);
+            }
             currentPatient.setBmi(BigDecimal.valueOf(calc));
-//            saveW=true;
-            
-
-            
+        
+         
         } catch (Exception e) {
             
             
             System.out.println("Error updating weight or height or bmi");
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(this, "Please enter a valid weight or height.", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(this, "Please enter a valid weight or height.", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
 //            saveW=false;
         }
         
@@ -2592,22 +2646,23 @@ if (this.workingOnPrescription) {
 //            System.out.println("All drugs llist is "+ allDrugs.size());
 //            System.out.println("The seleceted drug is "+ allDrugs.get(selectedDrugIndex).getClassName());
 
-            DefaultListModel modelDeleteMedication = (DefaultListModel) jListPPM3edication.getModel();
+                DefaultListModel modelDeleteMedication = (DefaultListModel) jListPPM3edication.getModel();
 //            System.out.println(modelDeleteMedication.get(selectedDrugIndex));
-            modelDeleteMedication.remove(selectedDrugIndex);
-            jListPPM3edication.setModel(modelDeleteMedication);
-
+                modelDeleteMedication.remove(selectedDrugIndex);
+                jListPPM3edication.setModel(modelDeleteMedication);
+                jListPPM3edication.clearSelection();
 //            System.out.println("COME HERE");
 
             List newDrugsList = currentPatienMedications;
             newDrugsList.remove(selectedDrugIndex);
             currentPatient.setDrugsCollection(newDrugsList);
             currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
-
+            
+            
 //            System.out.println("COME HERE AGAIN");
 
             this.deleteDrugDB(deletedDrug.getId());
-
+ 
 
         } catch (Exception e) {
         }
@@ -2643,6 +2698,7 @@ if (this.workingOnPrescription) {
             DefaultListModel modelDeleteDiagnosis = (DefaultListModel) jListPPDiagnosis.getModel();
             modelDeleteDiagnosis.remove(selectedDiagnosisIndex);
             jListPPDiagnosis.setModel(modelDeleteDiagnosis);
+            jListPPDiagnosis.clearSelection();
 
 //            System.out.println("COME HERE");
 
@@ -2652,8 +2708,9 @@ if (this.workingOnPrescription) {
             currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
 
 //            System.out.println("COME HERE AGAIN");
-
+            
             this.deleteDiagnosisDB(deletedDiagnoses.getId());
+            
 
         } catch (Exception e) {
         }
@@ -2748,6 +2805,9 @@ if (this.workingOnPrescription) {
         jComboBoxPatientProfileMonth.setEnabled(false);
         jComboBoxPatientProfilePregnant.setEnabled(false);
         jComboBoxPatientProfileYear.setEnabled(false);
+        jListPPDiagnosis.setEnabled(false);
+        jListPPM3edication.setEnabled(false);
+        jListPPDiagnosisMedication.setEnabled(false);
         
         jToggleButtonDiagnosis.setEnabled(false);
         jToggleButtonPPMedication.setEnabled(false);
@@ -2786,6 +2846,9 @@ if (this.workingOnPrescription) {
         
         jToggleButtonDiagnosis.setEnabled(true);
         jToggleButtonPPMedication.setEnabled(true);
+        jListPPDiagnosis.setEnabled(true);
+        jListPPDiagnosisMedication.setEnabled(true);
+        jListPPM3edication.setEnabled(true);
     }
     
     

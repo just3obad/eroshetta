@@ -554,7 +554,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListPPDiagnosisValueChanged"/>
+                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jListPPDiagnosisMouseReleased"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jListPPDiagnosis.setEnabled(false);"/>
@@ -576,7 +576,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListPPM3edicationValueChanged"/>
+                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jListPPM3edicationMouseReleased"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jListPPM3edication.setEnabled(false);"/>
@@ -594,10 +594,10 @@
                   <SubComponents>
                     <Component class="javax.swing.JList" name="jListPPDiagnosisMedication">
                       <Events>
-                        <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListPPDiagnosisMedicationValueChanged"/>
+                        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jListPPDiagnosisMedicationMouseReleased"/>
                       </Events>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="for(int i=0; i&lt;allDiagnoses.size();i++){&#xa;    Diagnoses d = allDiagnoses.get(i);&#xa;    modelallDiagnoses.add(i, d.getName());&#xa;}&#xa;&#xa;for(int i=0; i&lt;allDrugs.size();i++){&#xa;    Drugs d = allDrugs.get(i);&#xa;    modelAllDrugs.add(i, d.getClassName());&#xa;}"/>
+                        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="for(int i=0; i&lt;allDiagnoses.size();i++){&#xa;    Diagnoses d = allDiagnoses.get(i);&#xa;    modelallDiagnoses.add(i, d.getName());&#xa;}&#xa;&#xa;for(int i=0; i&lt;allDrugs.size();i++){&#xa;    Drugs d = allDrugs.get(i);&#xa;    modelAllDrugs.add(i, d.getTradeName()+&quot;(&quot;+d.getClassName()+&quot;)&quot;);&#xa;}"/>
                         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jListPPDiagnosisMedication.setVisible(false);"/>
                       </AuxValues>
                     </Component>
