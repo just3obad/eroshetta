@@ -1357,24 +1357,28 @@ public class Eroshetta extends javax.swing.JFrame {
 //            System.out.println(patientsBookList.size());
             
             if(patientsBookList.isEmpty()){
-                this.clearProfilePatient();
                 DefaultListModel tempModel = new DefaultListModel();
                 jListPatientsBook.setModel(tempModel);
                 tempModel.addElement("Sorry, No match");
-                currentPatient=null;
+//                currentPatient=null;
                 disableProfilePatient();
+                this.clearProfilePatient();
+                jListPPDiagnosis.removeAll();
+                jListPPM3edication.removeAll();
+                jListPatientsBook.setEnabled(false);
             }
             else{
                 
 //            jPanelPatientProfile.setVisible(true);
-            
+            jListPatientsBook.setEnabled(true);
             DefaultListModel modelPatientSearch = new DefaultListModel();
             jListPatientsBook.setModel(modelPatientSearch);
             for (int i = 0; i < patientsBookList.size(); i++) {
                 modelPatientSearch.add(i, patientsBookList.get(i).getName());
             }
-            currentPatient=patientsBookList.get(0);
-            jListPatientsBook.setSelectedIndex(0);
+//            currentPatient=patientsBookList.get(0);
+//            jListPatientsBook.setSelectedIndex(0);
+            jListPatientsBook.clearSelection();
 }
         } 
         catch (Exception e) {
@@ -2147,7 +2151,7 @@ if (this.workingOnPrescription) {
                     if(!this.checkExistDrug(selectedDrug)){
                         
                         DefaultListModel model = (DefaultListModel) jListPPM3edication.getModel();
-                        model.addElement(selectedDrug.getClassName());
+                        model.addElement(selectedDrug.getTradeName());
                         jListPPM3edication.setModel(model);
                         
 //                        System.out.println("Hello");
@@ -2265,9 +2269,12 @@ if (this.workingOnPrescription) {
             }
             else{
                 
-                
-            
-    
+                if(!DoctorInfo.isNumeric(jTextFieldPatientProfileHeight.getText()) || !DoctorInfo.isNumeric(jTextFieldPatientProfileWeight.getText())){
+                    JOptionPane.showMessageDialog(this, "Please enter a valid weight or height.", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                   
+                    
+                    
             this.disableProfilePatient();
             this.saveProfilePatient();
             jButton3.setEnabled(false);
@@ -2287,6 +2294,11 @@ if (this.workingOnPrescription) {
             jListPatientsBook.setSelectedIndex(x);
             currentPatient=patientsBookList.get(x);
             saveFlag=true;
+                    
+                    
+                }
+            
+    
             }
             
             
