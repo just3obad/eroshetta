@@ -72,11 +72,11 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
     private void initComponents() {
 
         setBackground(new java.awt.Color(153, 255, 102));
-        setMaximumSize(new java.awt.Dimension(400, 688));
-        setMinimumSize(new java.awt.Dimension(400, 688));
+        setMaximumSize(new java.awt.Dimension(533, 556));
+        setMinimumSize(new java.awt.Dimension(533, 556));
         setName("");
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(400, 688));
+        setPreferredSize(new java.awt.Dimension(533, 556));
         setRequestFocusEnabled(false);
         setLayout(new java.awt.BorderLayout());
     }// </editor-fold>//GEN-END:initComponents
@@ -129,7 +129,7 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       mt.addImage(img3,0);
       
       Font font1 = new Font("Book Antiqua", Font.PLAIN, 30);
-      Font font2 = new Font("Monotype Corsiva", Font.PLAIN, 20);
+      Font font2 = new Font("Monotype Corsiva", Font.PLAIN, 18);
       
       g.setFont(font2);
       g.drawString("Dr. "+d.getName(),35,20);
@@ -138,9 +138,9 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       g.drawImage(img2,5,55,25,25,this);
       g.drawString(d.getMobileNo(),35,80);
       g.drawString("Name: "+presc.getPatientId().getName(),35 ,115);
-      g.drawString("Date: "+presc.getDate(),320,115);
-      g.drawLine(50, 130, 570, 130);
-      g.drawLine(50, 133, 570, 133);
+      g.drawString("Date: "+presc.getDate().toLocaleString(),320,115);
+      g.drawLine(50, 130, 460, 130);
+      g.drawLine(50, 133, 460, 133);
       int h = 0;
       //System.out.println(presc.getDrugsCollection().size()+"<>");
       for(int i=0; i<dTimes.size() ; i++)
@@ -163,16 +163,16 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       
 
       try{
-      g.drawString(presc.getNotes(),10,550);
+      g.drawString(presc.getNotes(),10,440);
       }
       catch(Exception e)
       {
           
       }
-      g.drawLine(50,600,570,600);
-      g.drawLine(50,603,570,603);
-      g.drawImage(img3,5,618,25,25, this);
-      g.drawString(d.getAddress(),35,643);
+      g.drawLine(50,480,460,480);
+      g.drawLine(50,483,460,483);
+      g.drawImage(img3,5,500,25,25, this);
+      g.drawString(d.getAddress(),35,525);
 
       
       

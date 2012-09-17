@@ -97,7 +97,8 @@ public class PrescriptionFrame extends javax.swing.JFrame {
         });
 
         prescContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        prescContainer.setPreferredSize(new java.awt.Dimension(620, 880));
+        prescContainer.setMaximumSize(new java.awt.Dimension(533, 556));
+        prescContainer.setPreferredSize(new java.awt.Dimension(533, 556));
 
         javax.swing.GroupLayout prescContainerLayout = new javax.swing.GroupLayout(prescContainer);
         prescContainer.setLayout(prescContainerLayout);
@@ -107,7 +108,7 @@ public class PrescriptionFrame extends javax.swing.JFrame {
         );
         prescContainerLayout.setVerticalGroup(
             prescContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,15 +124,15 @@ public class PrescriptionFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(printPresc, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelPresc, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                        .addComponent(cancelPresc, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                         .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(prescContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(prescContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(printPresc)
                     .addComponent(cancelPresc))

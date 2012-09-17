@@ -967,6 +967,7 @@ public class Eroshetta extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setDocument(new JTextFieldLimit(62));
         jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextArea1KeyPressed(evt);
