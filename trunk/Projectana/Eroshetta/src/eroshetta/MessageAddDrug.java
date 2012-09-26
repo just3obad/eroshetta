@@ -55,9 +55,9 @@ static Eroshetta e;
     }
         public void paint( Graphics g ) {
        super.paint( g );
-       g.drawImage(imagp,  330 , 70 , 60 , 60 , imageObserver);
-       g.drawImage(imagn,  330, 140 , 60 , 60 , imageObserver1);
-       g.drawImage(imagi,  330 , 210 , 60 , 60 , imageObserver2);
+       g.drawImage(imagp,  400 , 70 , 60 , 60 , imageObserver);
+       g.drawImage(imagn,  400, 140 , 60 , 60 , imageObserver1);
+       g.drawImage(imagi,  400 , 210 , 60 , 60 , imageObserver2);
        
    }
     /**
@@ -104,7 +104,7 @@ static Eroshetta e;
         drugsText.setEditable(false);
         drugsText.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         drugsText.setRows(5);
-        drugsText.setText("no interactions with any drug in the prescription\n\t");
+        drugsText.setText("no interactions with any drug in prescription\n\t");
         jScrollPane1.setViewportView(drugsText);
 
         diagnosesContra.setColumns(20);
@@ -126,25 +126,27 @@ static Eroshetta e;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(26, 26, 26)
-                .addComponent(jButton2))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(73, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
-                        .addComponent(jLabel4)))
-                .addGap(0, 88, Short.MAX_VALUE))
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,6 +171,7 @@ static Eroshetta e;
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         this.setVisible(false);
+        e.enable();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2MouseClicked
 
