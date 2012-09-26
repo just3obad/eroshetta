@@ -13,7 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRootPane;
 
 /**
  *
@@ -39,6 +41,9 @@ static Eroshetta e;
     public MessageAddDrug(Eroshetta er) throws IOException {
         e=er;
         initComponents();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//        this.setUndecorated(true);  
+//this.getRootPane().setWindowDecorationStyle(JRootPane.NONE); 
 //this.getContentPane().add(new JLabel(), BorderLayout.CENTER);
         this.setLocation(500, 230);
 // this.images.setLayout(new java.awt.BorderLayout());
@@ -173,6 +178,8 @@ static Eroshetta e;
         this.setVisible(false);
         e.enable();
         e.openWarning = false;
+//        e.setVisible(false);
+        e.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -180,6 +187,7 @@ static Eroshetta e;
         e.addDirect = true;
         e.addDrugDirect();
         this.setVisible(false);
+        
         e.openWarning = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
