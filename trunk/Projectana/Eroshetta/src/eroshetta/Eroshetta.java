@@ -5,6 +5,7 @@
 package eroshetta;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.*;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -1890,6 +1891,7 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
 
         try {
             final MessageAddDrug m = new MessageAddDrug(this);
+            Font font1 = new Font("Arial", Font.BOLD,12);
             m.setVisible(false);
         int o;
         if (this.jListPatientsBook.getSelectedIndex() == -1) {
@@ -1968,6 +1970,7 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
 //                    }
                     openWarning = true;
                     m.pregnantTeext.setText("The drug may be harmful for pregnant women");
+                    m.pregnantTeext.setFont(font1);
                 }
             } catch (NullPointerException e) {
                 System.out.println("patien is null");
@@ -2034,7 +2037,8 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
 //                                return;
 //                            }
                     openWarning = true;
-                    m.diagnosesContra.setText("The drug may contradict with " + s);
+                    m.diagnosesContra.setText("The drug may contradict with " +"/n"+ s);
+                    m.diagnosesContra.setFont(font1);
                 }
                 
             } catch (NullPointerException e) {
@@ -2051,9 +2055,12 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
                 }
             }
             if(openWarning){
-                if(flag){
-                m.drugsText.setText("The drug may interact with " +"\n"+ drugsAnti.toString().substring(1, drugsAnti.toString().length()-1));
-                }this.enable(false);
+//                if(flag){
+                if(drugsAnti.size()>0){
+                m.drugsText.setText("The drug may interact with " +"\n"+ drugsAnti.toString());
+                m.drugsText.setFont(font1);
+                }
+                this.enable(false);
                 m.setVisible(true);
                 return;
             }
