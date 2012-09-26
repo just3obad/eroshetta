@@ -172,6 +172,7 @@ static Eroshetta e;
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         this.setVisible(false);
         e.enable();
+        e.openWarning = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2MouseClicked
 
@@ -179,6 +180,7 @@ static Eroshetta e;
         e.addDirect = true;
         e.addDrugDirect();
         this.setVisible(false);
+        e.openWarning = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
