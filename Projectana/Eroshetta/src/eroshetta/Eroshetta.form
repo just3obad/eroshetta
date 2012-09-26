@@ -1156,13 +1156,15 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="addToPresc">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Add to Prescription"/>
-                          </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addToPrescMouseClicked"/>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addToPrescActionPerformed"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_CodeGeneration" type="java.lang.Integer" value="1"/>
+                            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Eroshetta_addToPresc"/>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>

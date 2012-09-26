@@ -6,9 +6,6 @@
     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
     </Property>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[403, 301]"/>
-    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[403, 301]"/>
     </Property>
@@ -86,11 +83,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Proceed"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="NO, I will revise my choice"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -107,13 +110,19 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="drugsText">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Courier New" size="12" style="0"/>
+            </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="&apos;\u005cdf&apos;bmd\u005cbd " containsInvalidXMLChars="true"/>
+            <Property name="text" type="java.lang.String" value="no interactions with any drug in the prescription&#xa;&#x9;"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -124,13 +133,19 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea3">
+        <Component class="javax.swing.JTextArea" name="diagnosesContra">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Courier New" size="12" style="0"/>
+            </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="&apos;\u005cdf&apos;bmd\u005cbd " containsInvalidXMLChars="true"/>
+            <Property name="text" type="java.lang.String" value="there is no contraindication with any diagnoses"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -141,13 +156,19 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea4">
+        <Component class="javax.swing.JTextArea" name="pregnantTeext">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Courier New" size="12" style="0"/>
+            </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="&apos;\u005cdf&apos;bmd\u005cbd " containsInvalidXMLChars="true"/>
+            <Property name="text" type="java.lang.String" value="the drug does not harm pregnants"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

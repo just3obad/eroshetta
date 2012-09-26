@@ -22,9 +22,9 @@ import javax.swing.JLabel;
 public class MessageAddDrug extends javax.swing.JFrame {
 //ImageObserver imageObserver;
 ImageIcon icon = new ImageIcon("p.jpg");
-Image imagp = icon.getImage();;
+Image imagp = icon.getImage();
 ImageIcon iconn = new ImageIcon("n.jpg");
-Image imagi = iconn.getImage();;
+Image imagi = iconn.getImage();
  ImageIcon iconi = new ImageIcon("i.jpg");
 Image imagn = iconi.getImage();
 ImageObserver imageObserver = icon.getImageObserver();
@@ -35,7 +35,9 @@ ImageObserver imageObserver2 = iconi.getImageObserver();
     /**
      * Creates new form MessageAddDrug
      */
-    public MessageAddDrug() throws IOException {
+static Eroshetta e;
+    public MessageAddDrug(Eroshetta er) throws IOException {
+        e=er;
         initComponents();
 //this.getContentPane().add(new JLabel(), BorderLayout.CENTER);
         this.setLocation(500, 230);
@@ -71,41 +73,53 @@ ImageObserver imageObserver2 = iconi.getImageObserver();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        drugsText = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        diagnosesContra = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
+        pregnantTeext = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.white);
-        setMaximumSize(new java.awt.Dimension(403, 301));
         setMinimumSize(new java.awt.Dimension(403, 301));
 
         jButton1.setText("Proceed");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("NO, I will revise my choice");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Warning!!");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setEditable(false);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("'\\df'bmd\\bd ");
-        jScrollPane1.setViewportView(jTextArea1);
+        drugsText.setColumns(20);
+        drugsText.setEditable(false);
+        drugsText.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        drugsText.setRows(5);
+        drugsText.setText("no interactions with any drug in the prescription\n\t");
+        jScrollPane1.setViewportView(drugsText);
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setEditable(false);
-        jTextArea3.setRows(5);
-        jTextArea3.setText("'\\df'bmd\\bd ");
-        jScrollPane3.setViewportView(jTextArea3);
+        diagnosesContra.setColumns(20);
+        diagnosesContra.setEditable(false);
+        diagnosesContra.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        diagnosesContra.setRows(5);
+        diagnosesContra.setText("there is no contraindication with any diagnoses");
+        jScrollPane3.setViewportView(diagnosesContra);
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setEditable(false);
-        jTextArea4.setRows(5);
-        jTextArea4.setText("'\\df'bmd\\bd ");
-        jScrollPane4.setViewportView(jTextArea4);
+        pregnantTeext.setColumns(20);
+        pregnantTeext.setEditable(false);
+        pregnantTeext.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        pregnantTeext.setRows(5);
+        pregnantTeext.setText("the drug does not harm pregnants");
+        jScrollPane4.setViewportView(pregnantTeext);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,6 +167,18 @@ ImageObserver imageObserver2 = iconi.getImageObserver();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        e.addDirect = true;
+        e.addDrugDirect();
+        this.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -191,7 +217,7 @@ ImageObserver imageObserver2 = iconi.getImageObserver();
 
             public void run() {
                 try {
-                    new MessageAddDrug().setVisible(true);
+                    new MessageAddDrug(e).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(MessageAddDrug.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -200,14 +226,14 @@ ImageObserver imageObserver2 = iconi.getImageObserver();
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextArea diagnosesContra;
+    public javax.swing.JTextArea drugsText;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
+    public javax.swing.JTextArea pregnantTeext;
     // End of variables declaration//GEN-END:variables
 }

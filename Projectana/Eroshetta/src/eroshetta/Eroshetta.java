@@ -6,11 +6,14 @@ package eroshetta;
 
 import java.awt.Color;
 import java.awt.event.*;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.*;
 import javax.swing.*;
 
@@ -231,7 +234,13 @@ public class Eroshetta extends javax.swing.JFrame {
         drugMinor = new javax.swing.JLabel();
         drugFoods = new javax.swing.JLabel();
         drugClassName = new javax.swing.JLabel();
-        addToPresc = new javax.swing.JButton();
+        try {
+            addToPresc =(javax.swing.JButton)java.beans.Beans.instantiate(getClass().getClassLoader(), "eroshetta.Eroshetta_addToPresc");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
         checkBoxTrade = new javax.swing.JCheckBox();
         checkBoxClass = new javax.swing.JCheckBox();
         checkBoxGeneric = new javax.swing.JCheckBox();
@@ -799,7 +808,6 @@ public class Eroshetta extends javax.swing.JFrame {
 
         drugClassName.setText("                                     ");
 
-        addToPresc.setText("Add to Prescription");
         addToPresc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addToPrescMouseClicked(evt);
@@ -1875,9 +1883,14 @@ public class Eroshetta extends javax.swing.JFrame {
     static Prescriptions currentPrescription = new Prescriptions();
 //    static ArrayList<Prescriptions> currentPrescription= new <Prescriptions>ArrayList();
     static Collection<Drugs> drugsCollectionInPrescription = new ArrayList();
-
+static boolean openWarning = false;
+static boolean addDirect = false;
     private void addToPrescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addToPrescMouseClicked
+ArrayList<String> drugsAnti = new <String>ArrayList(); 
 
+        try {
+            final MessageAddDrug m = new MessageAddDrug(this);
+            m.setVisible(false);
         int o;
         if (this.jListPatientsBook.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Please select a patient", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
@@ -1949,10 +1962,12 @@ public class Eroshetta extends javax.swing.JFrame {
             try {
                 System.out.println("drug contra" +d.getContraPregnant() + "patient " +currentPatient.getIsPregnant());
                 if (d.getContraPregnant() == 1 && currentPatient.getIsPregnant() == 1) {
-                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant women  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-                    if (o != 0) {
-                        return;
-                    }
+//                    o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may be harmful for pregnant women  , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+//                    if (o != 0) {
+//                        return;
+//                    }
+                    openWarning = true;
+                    m.pregnantTeext.setText("The drug may be harmful for pregnant women");
                 }
             } catch (NullPointerException e) {
                 System.out.println("patien is null");
@@ -1977,15 +1992,20 @@ public class Eroshetta extends javax.swing.JFrame {
             }
             * 
             */
+            
+            
             try {
                 for (int j = 0; j < drugsCollectionInPrescription.size(); j++) {
                     Drugs a = (Drugs) drugsCollectionInPrescription.toArray()[j];
                     
                         if (this.anyInteract(a, d)) {
-                            o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with " + a.toString() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-                            if (o != 0) {
-                                return;
-                            }
+//                            o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may interact with " + a.toString() + " , Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+//                            if (o != 0) {
+//                                return;
+//                            }
+                            openWarning=true;
+                            m.drugsText.setText("The drug may interact with ");
+                            drugsAnti.add(a.toString());
                         }
                     
                 }
@@ -2008,15 +2028,18 @@ public class Eroshetta extends javax.swing.JFrame {
                     }
                 }
                 if(flag){
-                o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with " +s + "  Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
-                            if (o != 0) {
-                                return;
-                            }
+//                o = JOptionPane.showConfirmDialog(new JButton("parent"), "The drug may contradict with " +s + "  Proceed?", "Eroshetta", JOptionPane.YES_NO_OPTION);
+//                            if (o != 0) {
+//                                return;
+//                            }
+                    openWarning = true;
+                    m.diagnosesContra.setText("The drug may contradict with " + s);
                 }
+                
             } catch (NullPointerException e) {
             }
 
-
+            
             System.out.println("tooooooo is 1 " + this.drugsPanels.size());
 //            currentPrescription.getDrugsCollection().add(d);
             for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
@@ -2025,6 +2048,11 @@ public class Eroshetta extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "you already added the drug", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
+            }
+            if(openWarning){
+                this.enable(false);
+                m.setVisible(true);
+                return;
             }
             this.workingOnPrescription = true;
             this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
@@ -2057,6 +2085,9 @@ public class Eroshetta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a drug", "Eroshetta", JOptionPane.INFORMATION_MESSAGE);
 
         }
+        } catch (IOException ex) {
+            Logger.getLogger(Eroshetta.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO add your handling code here:
 //        if(d.getPrice() != null){
 //         DrugPanel = new DrugPresPanel();
@@ -2073,6 +2104,30 @@ public class Eroshetta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addToPrescMouseClicked
 
+    public  void addDrugDirect(){
+        this.enable();
+        if(addDirect){
+                Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
+     this.workingOnPrescription = true;
+            this.workingPatientIndex = this.jListPatientsBook.getSelectedIndex();
+            drugsCollectionInPrescription.add(d);
+            drugsPanels.add(new DrugPresPanel(d, currentPrescription, this)); DrugsInPrescription.removeAll();
+            if (drugsPanels.size() < 4) {
+                DrugsInPrescription.setLayout(new java.awt.GridLayout(4, 0));
+            } else {
+                DrugsInPrescription.setLayout(new java.awt.GridLayout(drugsPanels.size(), 0));
+            }
+            for (int i = 0; i < drugsCollectionInPrescription.size(); i++) {
+                DrugsInPrescription.add(drugsPanels.get(i));
+            }
+
+            DrugsInPrescription.revalidate();
+             addDirect = false;
+           
+            return;
+}
+    }
+    
     public static boolean anyInteract(Drugs a , Drugs b){
     Collection<Drugs> aDrugs = a.getDrugsCollection();
     Collection<Drugs> bDrugs = b.getDrugsCollection();
@@ -3144,7 +3199,7 @@ if (this.workingOnPrescription) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JPanel DrugsInPrescription;
     private javax.swing.JPanel Panel_Drugs;
-    private javax.swing.JButton addToPresc;
+    public javax.swing.JButton addToPresc;
     private static javax.swing.JCheckBox checkBoxClass;
     private static javax.swing.JCheckBox checkBoxGeneric;
     private static javax.swing.JCheckBox checkBoxTrade;
