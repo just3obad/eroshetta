@@ -154,7 +154,7 @@
     <Component class="javax.swing.JComboBox" name="duration">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;One day&quot;, &quot;Three days&quot;, &quot;One week&quot;, &quot;Two weeks&quot;, &quot;One Months&quot;, &quot;Two months&quot;, &quot;Three months&quot; })" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel(new String[] { &quot;One day&quot;, &quot;Three days&quot;, &quot;One week&quot;, &quot;Two weeks&quot;,&quot;Three weeks&quot;, &quot;One Months&quot;, &quot;Two months&quot;, &quot;Three months&quot;,&quot;Six month&quot;, &quot;Nine month&quot; })" type="code"/>
         </Property>
       </Properties>
       <AuxValues>
