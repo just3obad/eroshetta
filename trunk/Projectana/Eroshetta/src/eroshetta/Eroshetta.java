@@ -2004,16 +2004,17 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
 //                                return;
 //                            }
                             openWarning=true;
-                            m.drugsText.setText("The drug may interact with ");
+//                            m.drugsText.setText("The drug may interact with ");
                             drugsAnti.add(a.toString());
                         }
                     
                 }
             } catch (NullPointerException e) {
             }
+            boolean flag = false;
             try {
                 String s = "";
-                boolean flag = false;
+                
                 Collection<Diagnoses> drugsContraAlreadyDiagnosis = d.getDiagnosesCollection();
                 Query qr = em.createNamedQuery("Diagnoses.findAll");
                 List<Diagnoses> tmpList = qr.getResultList();
@@ -2050,7 +2051,9 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
                 }
             }
             if(openWarning){
-                this.enable(false);
+                if(flag){
+                m.drugsText.setText("The drug may interact with " +"\n"+ drugsAnti.toString().substring(1, drugsAnti.toString().length()-1));
+                }this.enable(false);
                 m.setVisible(true);
                 return;
             }
