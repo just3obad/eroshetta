@@ -125,7 +125,7 @@ public class DrugPresPanel extends javax.swing.JPanel {
             }
         });
 
-        duration.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "One day", "Three days", "One week", "Two weeks", "One Months", "Two months", "Three months" }));
+        duration.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "One day", "Three days", "One week", "Two weeks","Three weeks", "One Months", "Two months", "Three months","Six month", "Nine month" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
