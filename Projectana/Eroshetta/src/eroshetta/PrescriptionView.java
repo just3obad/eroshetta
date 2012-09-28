@@ -14,6 +14,7 @@ import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -102,6 +103,7 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
    }
    public void paint(Graphics g) {
       
+      this.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
       super.paint(g);
       javax.persistence.Query q =em.createNamedQuery("Doctor.findAll");
       Doctor d =  (Doctor)q.getSingleResult();
@@ -115,11 +117,11 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       
      
       
-      
       Image img1;
       Image img2;
       Image img3;
       MediaTracker mt = new MediaTracker(this);
+     
       img1 = Toolkit.getDefaultToolkit().getImage("t.gif");
       img2 = Toolkit.getDefaultToolkit().getImage("m.gif");
       img3 = Toolkit.getDefaultToolkit().getImage("a.gif");
@@ -133,14 +135,15 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       
       g.setFont(font2);
       g.drawString("Dr. "+d.getName(),35,20);
-      g.drawImage(img1,5,25,25,25, this);
-      g.drawString(d.getOfficeNo(),35,50);
-      g.drawImage(img2,5,55,25,25,this);
-      g.drawString(d.getMobileNo(),35,80);
-      g.drawString("Name: "+presc.getPatientId().getName(),35 ,115);
-      g.drawString("Date: "+presc.getDate().toLocaleString(),320,115);
-      g.drawLine(50, 130, 460, 130);
-      g.drawLine(50, 133, 460, 133);
+      g.drawString(d.getDrTitle(),35, 45);
+      g.drawImage(img1,5,55,25,25, this);
+      g.drawString(d.getOfficeNo(),35,75);
+      g.drawImage(img2,5,85,25,25,this);
+      g.drawString(d.getMobileNo(),35,105);
+      g.drawString("Name: "+presc.getPatientId().getName(),35 ,145);
+      g.drawString("Date: "+presc.getDate().toLocaleString(),320,145);
+      g.drawLine(50, 160, 460, 160);
+      g.drawLine(50, 163, 460, 163);
       int h = 0;
       //System.out.println(presc.getDrugsCollection().size()+"<>");
       for(int i=0; i<dTimes.size() ; i++)
@@ -153,8 +156,8 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
          
         //  Drugs drug  = (Drugs)presc.getDrugsCollection().toArray()[i];
           DrugTimes prescTime = (DrugTimes) dTimes.toArray()[i];
-          g.drawString(prescTime.getDrugTime(),320,170+h);
-          g.drawString(i+". "+drug.getTradeName(),10,170+h);
+          g.drawString(prescTime.getDrugTime(),320,210+h);
+          g.drawString(i+". "+drug.getTradeName(),10,210+h);
           h = h+30;
        
       }

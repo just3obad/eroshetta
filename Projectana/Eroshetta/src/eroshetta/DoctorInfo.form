@@ -210,6 +210,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField5">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField5.setDocument(new JTextFieldLimit(76));"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
