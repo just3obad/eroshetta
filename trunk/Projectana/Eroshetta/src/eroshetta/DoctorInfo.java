@@ -127,6 +127,8 @@ public class DoctorInfo extends javax.swing.JFrame {
             }
         });
 
+        jTextField5.setDocument(new JTextFieldLimit(76));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -268,8 +270,10 @@ public class DoctorInfo extends javax.swing.JFrame {
             doc.setOfficeNo(office);
             doc.setMobileNo(mobile);
             em.persist(doc);
+            em.flush();
+            em.refresh(doc);
             em.getTransaction().commit();
-            saved = true;
+             saved = true;
             
 
         }
@@ -284,6 +288,8 @@ public class DoctorInfo extends javax.swing.JFrame {
              d.setOfficeNo(office);
              d.setMobileNo(mobile);
              em.persist(d);
+             em.flush();
+             em.refresh(d);
              em.getTransaction().commit();
              saved = true;
 
