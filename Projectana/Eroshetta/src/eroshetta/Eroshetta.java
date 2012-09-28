@@ -230,6 +230,8 @@ public class Eroshetta extends javax.swing.JFrame {
         drugFoods = new javax.swing.JLabel();
         drugClassName = new javax.swing.JLabel();
         addToPresc = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         checkBoxTrade = new javax.swing.JCheckBox();
         checkBoxClass = new javax.swing.JCheckBox();
         checkBoxGeneric = new javax.swing.JCheckBox();
@@ -800,6 +802,11 @@ public class Eroshetta extends javax.swing.JFrame {
             }
         });
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
+        jLabel16.setText("Contraindications:");
+
+        jLabel17.setText("                                           ");
+
         javax.swing.GroupLayout drugProfileLayout = new javax.swing.GroupLayout(drugProfile);
         drugProfile.setLayout(drugProfileLayout);
         drugProfileLayout.setHorizontalGroup(
@@ -824,21 +831,23 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addComponent(addToPresc, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(drugProfileLayout.createSequentialGroup()
-                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel16)
                     .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addGroup(drugProfileLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(drugProfileLayout.createSequentialGroup()
+                            .addContainerGap()
                             .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(drugFoods, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -848,8 +857,11 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(drugGenericNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(drugDosage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dosageForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(drugRoute, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                    .addComponent(drugPrecautions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(drugRoute, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(drugPrecautions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(drugProfileLayout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         drugProfileLayout.setVerticalGroup(
             drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -898,9 +910,13 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(drugFoods))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(drugProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(addToPresc)
-                .addContainerGap())
+                .addGap(33, 33, 33))
         );
 
         jScrollPane2.setViewportView(drugProfile);
@@ -945,9 +961,9 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(checkBoxClass)
                     .addComponent(checkBoxGeneric))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
         );
 
         jPanelPrescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -987,7 +1003,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPrescriptionLayout.setHorizontalGroup(
             jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
-                .addContainerGap(203, Short.MAX_VALUE)
+                .addContainerGap(206, Short.MAX_VALUE)
                 .addComponent(savePreview)
                 .addGap(33, 33, 33))
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
@@ -1023,9 +1039,9 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(jLabel15)
-                        .addGap(0, 146, Short.MAX_VALUE)))
+                        .addGap(0, 149, Short.MAX_VALUE)))
                 .addGap(27, 27, 27)
-                .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1302,6 +1318,17 @@ public class Eroshetta extends javax.swing.JFrame {
            }    
         }
         
+        Collection<Diagnoses> diagnoses = selectedDrug.getDiagnosesCollection();
+        Diagnoses diag;
+        String contras = "";
+        for(int k=0; k<diagnoses.size();k++)
+        {
+            diag = (Diagnoses) diagnoses.toArray()[k];
+            contras = contras + diag.getName()+ ", ";
+        }
+        
+        jLabel17.setText(contras);
+        jLabel17.setToolTipText(contras);
         
         drugClassName.setText(selectedDrug.getClassName());
         drugClassName.setToolTipText(selectedDrug.getClassName());
@@ -3152,6 +3179,8 @@ if (this.workingOnPrescription) {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
