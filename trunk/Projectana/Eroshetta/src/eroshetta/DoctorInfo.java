@@ -57,11 +57,11 @@ public class DoctorInfo extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
+        jTextField5 = new javax.swing.JTextField();
 
         setTitle("Doctor Information");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -105,13 +105,6 @@ public class DoctorInfo extends javax.swing.JFrame {
 
         jLabel5.setText("Title:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "psychiatrist", "podiatrist", "optometrist", "dentist", "urologist", "obstetrician", "pediatrician", "oncologist", "neurologist", "cardiologist", "nephrologist", "rheumatologist", "dermatologist", "endocrinologist", "gastrologist", " " }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,12 +143,12 @@ public class DoctorInfo extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField5)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(148, 148, 148)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -179,7 +172,7 @@ public class DoctorInfo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,7 +224,7 @@ public class DoctorInfo extends javax.swing.JFrame {
          List doctor = new ArrayList<Doctor>();
          javax.persistence.Query q =em.createNamedQuery("Doctor.findAll");
          doctor =   q.getResultList();
-         title = (String)jComboBox1.getSelectedItem();
+         title = jTextField5.getText();
          name = jTextField1.getText();
          address = jTextField2.getText();
          mobile = jTextField3.getText();
@@ -334,20 +327,20 @@ public class DoctorInfo extends javax.swing.JFrame {
         {
          Doctor doc = (Doctor) doctor.get(0);
          
-          int i = 0;
-          int index = 0;
-          String selectedItem;
-          System.out.println(jComboBox1.getItemCount());
-          while(i < jComboBox1.getItemCount())
-          {
-              selectedItem = (String)jComboBox1.getItemAt(i);
-              if(selectedItem.equalsIgnoreCase(doc.getDrTitle()))
-              {
-                  index = i;
-              }
-              i++;
-          }
-          jComboBox1.setSelectedIndex(index);
+//          int i = 0;
+//          int index = 0;
+//          String selectedItem;
+//          System.out.println(jComboBox1.getItemCount());
+//          while(i < jComboBox1.getItemCount())
+//          {
+//              selectedItem = (String)jComboBox1.getItemAt(i);
+//              if(selectedItem.equalsIgnoreCase(doc.getDrTitle()))
+//              {
+//                  index = i;
+//              }
+//              i++;
+//          }
+          jTextField5.setText(doc.getDrTitle());
           jTextField1.setText(doc.getName());
           jTextField2.setText(doc.getAddress());
           jTextField3.setText(doc.getMobileNo()+"");
@@ -356,11 +349,6 @@ public class DoctorInfo extends javax.swing.JFrame {
         
                 
     }//GEN-LAST:event_formWindowOpened
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
- 
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
@@ -415,7 +403,6 @@ public class DoctorInfo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -427,5 +414,6 @@ public class DoctorInfo extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
