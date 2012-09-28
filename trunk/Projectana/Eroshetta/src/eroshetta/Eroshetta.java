@@ -824,7 +824,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(drugClassName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(drugClassName, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                 .addGap(45, 45, 45))
             .addGroup(drugProfileLayout.createSequentialGroup()
                 .addContainerGap()
@@ -916,7 +916,7 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(addToPresc)
-                .addGap(33, 33, 33))
+                .addContainerGap())
         );
 
         jScrollPane2.setViewportView(drugProfile);
@@ -940,7 +940,6 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addContainerGap())
             .addComponent(jScrollPane1)
             .addComponent(jTextFieldSearchDrags, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Panel_DrugsLayout.createSequentialGroup()
                 .addComponent(checkBoxTrade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -948,6 +947,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkBoxGeneric)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
         Panel_DrugsLayout.setVerticalGroup(
             Panel_DrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1040,7 +1040,7 @@ public class Eroshetta extends javax.swing.JFrame {
                         .addGap(128, 128, 128)
                         .addComponent(jLabel15)
                         .addGap(0, 149, Short.MAX_VALUE)))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(

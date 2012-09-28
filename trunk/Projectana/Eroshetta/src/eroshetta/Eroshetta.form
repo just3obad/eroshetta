@@ -739,7 +739,7 @@
                               <EmptySpace min="0" pref="149" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="Panel_Drugs" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -778,7 +778,6 @@
                       </Group>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Component id="jTextFieldSearchDrags" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="0" min="-2" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="checkBoxTrade" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -787,6 +786,7 @@
                           <Component id="checkBoxGeneric" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="jScrollPane2" alignment="1" pref="300" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -884,7 +884,7 @@
                                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="drugClassName" max="32767" attributes="0"/>
+                                  <Component id="drugClassName" pref="132" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -1000,7 +1000,7 @@
                                   </Group>
                                   <EmptySpace pref="28" max="32767" attributes="0"/>
                                   <Component id="addToPresc" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
