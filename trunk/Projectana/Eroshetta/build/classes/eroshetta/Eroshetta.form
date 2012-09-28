@@ -219,60 +219,56 @@
                                           <Component id="jLabelPatientProfileName" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabelPatientProfileDiagnosis" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabelPatientProfileBirthday" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelAge" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jScrollPanePPDiagnosis" min="-2" pref="100" max="-2" attributes="0"/>
                                       <Component id="jScrollPanePPMedication" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jToggleButtonPPMedication" min="-2" pref="63" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jTextFieldPPMedication" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jToggleButtonPPMedication" min="-2" pref="63" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jTextFieldPPMedication" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jComboBoxPatientProfileGender" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jComboBoxPatientProfileDay" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jComboBoxPatientProfileMonth" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jComboBoxPatientProfileYear" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jComboBoxPatientProfileMarital" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jLabelPatientProfilePregnant" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jComboBoxPatientProfilePregnant" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jTextFieldPatientProfileWeight" min="-2" pref="41" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelPatientProfileWeiightKG" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jLabelPatientProfileHeight" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jTextFieldPatientProfileHeight" min="-2" pref="41" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jLabelPatientProfileHeightCM" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jTextFieldPatientProfileName" min="-2" pref="180" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jToggleButtonDiagnosis" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
+                                              <Component id="jTextFieldPatientProfileBMI" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jComboBoxPatientProfileGender" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jComboBoxPatientProfileDay" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jComboBoxPatientProfileMonth" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jComboBoxPatientProfileYear" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jComboBoxPatientProfileMarital" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabelPatientProfilePregnant" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jComboBoxPatientProfilePregnant" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jTextFieldPatientProfileWeight" min="-2" pref="41" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabelPatientProfileWeiightKG" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jLabelPatientProfileHeight" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jTextFieldPatientProfileHeight" min="-2" pref="41" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jLabelPatientProfileHeightCM" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jTextFieldPatientProfileName" min="-2" pref="180" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jToggleButtonDiagnosis" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
-                                                  <Component id="jTextFieldPatientProfileBMI" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabelBMIDesc" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabelPPMedication" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jScrollPanePPDiagnosisMedication" min="-2" pref="132" max="-2" attributes="0"/>
-                                              </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelBMIDesc" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabelPPMedication" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPanePPDiagnosisMedication" min="-2" pref="132" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jLabelAgeValue" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -298,12 +294,7 @@
                               <Component id="jLabelPatientProfileName" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextFieldPatientProfileName" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelAge" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelAgeValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabelPatientProfileGender" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboBoxPatientProfileGender" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -691,13 +682,6 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabelBMIDesc.setVisible(false);"/>
                   </AuxValues>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelAge">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Age:"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="jLabelAgeValue">
                 </Component>
               </SubComponents>
             </Container>
@@ -1156,15 +1140,13 @@
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="addToPresc">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Add to Prescription"/>
+                          </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addToPrescMouseClicked"/>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addToPrescActionPerformed"/>
                           </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_CodeGeneration" type="java.lang.Integer" value="1"/>
-                            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Eroshetta_addToPresc"/>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
