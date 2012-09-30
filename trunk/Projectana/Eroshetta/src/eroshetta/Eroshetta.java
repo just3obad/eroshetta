@@ -2205,6 +2205,7 @@ if (this.workingOnPrescription) {
             if (drugsPanels.get(i).jCheckBox6.isSelected()) {
                 time.setDrugTime(time.getDrugTime() +"," +drugsPanels.get(i).jCheckBox6.getText());
             }
+            time.setDrugTime(time.getDrugTime() +"," +drugsPanels.get(i).duration.getSelectedItem());
             times.add(time);
         }
         //currentPrescription.setDrugTimesCollection(times);
