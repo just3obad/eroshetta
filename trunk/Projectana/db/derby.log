@@ -1,11 +1,11 @@
-Wed Oct 03 21:09:01 GMT+02:00 2012 : Apache Derby Network Server - 10.8.1.2 - (1095077) started and ready to accept connections on port 1527
+Wed Oct 03 22:18:42 EET 2012 : Apache Derby Network Server - 10.8.2.2 - (1181258) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Wed Oct 03 21:09:02 GMT+02:00 2012:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-013a-2807-f4bb-fffff71fda6d 
-on database directory C:\Users\Mouaz\Desktop\eroshetta\Projectana\db\eroshetta  with class loader sun.misc.Launcher$AppClassLoader@5ab8df17 
-Loaded from file:/C:/Program%20Files/glassfish-3.1.2/javadb/lib/derby.jar
-java.vendor=Sun Microsystems Inc.
-java.runtime.version=1.6.0_27-b07
-user.dir=C:\Program Files\glassfish-3.1.2\javadb
-derby.system.home=C:\Users\Mouaz\Desktop\eroshetta\Projectana\db
+Wed Oct 03 22:18:44 EET 2012:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-013a-2847-c3a3-ffffae3d408a 
+on database directory C:\Users\Administrator.Kemo-PC\Desktop\eroshetta-135\Projectana\db\eroshetta  with class loader sun.misc.Launcher$AppClassLoader@1989f84 
+Loaded from file:/C:/Program%20Files/Sun/JavaDB/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_07-b10
+user.dir=C:\Program Files\Sun\JavaDB
+derby.system.home=C:\Users\Administrator.Kemo-PC\Desktop\eroshetta-135\Projectana\db
 Database Class Loader started - derby.database.classpath=''
