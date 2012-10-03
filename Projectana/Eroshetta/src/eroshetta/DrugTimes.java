@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "DrugTimes.findAll", query = "SELECT d FROM DrugTimes d"),
     @NamedQuery(name = "DrugTimes.findByPrescriptionId", query = "SELECT d FROM DrugTimes d WHERE d.drugTimesPK.prescriptionId = :prescriptionId"),
+    @NamedQuery(name = "DrugTimes.findByDrugDuration", query = "SELECT d FROM DrugTimes d WHERE d.drugDuration = :drugDuration"),
     @NamedQuery(name = "DrugTimes.findByDrugId", query = "SELECT d FROM DrugTimes d WHERE d.drugTimesPK.drugId = :drugId"),
     @NamedQuery(name = "DrugTimes.findByDrugTime", query = "SELECT d FROM DrugTimes d WHERE d.drugTime = :drugTime")})
 public class DrugTimes implements Serializable {
@@ -26,6 +27,8 @@ public class DrugTimes implements Serializable {
     protected DrugTimesPK drugTimesPK;
     @Column(name = "DRUG_TIME")
     private String drugTime;
+    @Column(name = "DRUG_DURATION")
+    private String drugDuration;
     @JoinColumn(name = "PRESCRIPTION_ID", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Prescriptions prescriptions;
@@ -58,6 +61,13 @@ public class DrugTimes implements Serializable {
 
     public void setDrugTime(String drugTime) {
         this.drugTime = drugTime;
+    }
+    public String getDrugDuration() {
+        return drugDuration;
+    }
+
+    public void setDrugDuration(String drugDuration) {
+        this.drugDuration = drugDuration ;
     }
 
     public Prescriptions getPrescriptions() {
