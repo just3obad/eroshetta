@@ -33,7 +33,37 @@ ImageObserver imageObserver = icon.getImageObserver();
 ImageObserver imageObserver1 = iconn.getImageObserver();
 ImageObserver imageObserver2 = iconi.getImageObserver();
 
+boolean w1 = false;
 
+    public boolean isW1() {
+        return w1;
+    }
+
+    public void setW1(boolean w1) {
+        this.w1 = w1;
+        this.pregnantTeext.setVisible(w1);
+    }
+
+    public boolean isW2() {
+        return w2;
+    }
+
+    public void setW2(boolean w2) {
+        this.w2 = w2;
+            this.drugsText.setVisible(w2);
+        
+    }
+
+    public boolean isW3() {
+        return w3;
+    }
+
+    public void setW3(boolean w3) {
+        this.w3 = w3;
+        this.diagnosesContra.setVisible(w3);
+    }
+boolean w2 = false;
+boolean w3 = false;
     /**
      * Creates new form MessageAddDrug
      */
@@ -41,11 +71,14 @@ static Eroshetta e;
     public MessageAddDrug(Eroshetta er) throws IOException {
         e=er;
         initComponents();
+        
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 //        this.setUndecorated(true);  
 //this.getRootPane().setWindowDecorationStyle(JRootPane.NONE); 
 //this.getContentPane().add(new JLabel(), BorderLayout.CENTER);
         this.setLocation(500, 230);
+        //w1=b1;
+        
 // this.images.setLayout(new java.awt.BorderLayout());
 // BufferedImage myPicture = ImageIO.read(new File("p.jpg"));
 //JLabel picLabel = new JLabel(icon );
@@ -60,9 +93,30 @@ static Eroshetta e;
     }
         public void paint( Graphics g ) {
        super.paint( g );
+       this.pregnantTeext.setVisible(w1);
+        //this.pregnantTeext.removeAll();
+        //w2=b2;
+        this.drugsText.setVisible(w3);
+        //w3=b3;
+        this.diagnosesContra.setVisible(w2);
+       if(w1){
        g.drawImage(imagp,  400 , 70 , 60 , 60 , imageObserver);
+       }
+//       }else{
+//           this.setSize(this.getHeight()-70, WIDTH);
+//       }
+       if(w2){
        g.drawImage(imagn,  400, 140 , 60 , 60 , imageObserver1);
+       }
+//       }else{
+//           this.setSize(this.getHeight()-70, WIDTH);
+//       }
+       if(w3){
        g.drawImage(imagi,  400 , 210 , 60 , 60 , imageObserver2);
+       }
+//       }else{
+//           this.setSize(this.getHeight()-70, WIDTH);
+//       }
        
    }
     /**
@@ -77,16 +131,15 @@ static Eroshetta e;
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        drugsText = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        diagnosesContra = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        pregnantTeext = new javax.swing.JTextArea();
+        pregnantTeext = new javax.swing.JLabel();
+        diagnosesContra = new javax.swing.JLabel();
+        drugsText = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.white);
         setMinimumSize(new java.awt.Dimension(403, 301));
+        setResizable(false);
 
         jButton1.setText("Proceed");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,69 +158,60 @@ static Eroshetta e;
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Warning!!");
 
-        drugsText.setColumns(20);
-        drugsText.setEditable(false);
-        drugsText.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        drugsText.setRows(5);
-        drugsText.setText("no interactions with any drug in prescription\n\t");
-        jScrollPane1.setViewportView(drugsText);
-
-        diagnosesContra.setColumns(20);
-        diagnosesContra.setEditable(false);
-        diagnosesContra.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        diagnosesContra.setRows(5);
-        diagnosesContra.setText("there is no contraindication with any diagnoses");
-        jScrollPane3.setViewportView(diagnosesContra);
-
-        pregnantTeext.setColumns(20);
-        pregnantTeext.setEditable(false);
-        pregnantTeext.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        pregnantTeext.setRows(5);
         pregnantTeext.setText("the drug does not harm pregnants");
-        jScrollPane4.setViewportView(pregnantTeext);
+
+        diagnosesContra.setText("drugs with diagnoses");
+
+        drugsText.setText("no interactions with any drug in prescription");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(73, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(26, 26, 26)
+                .addComponent(jButton2))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jLabel4))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(diagnosesContra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(145, 145, 145)
+                            .addComponent(jLabel4))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(pregnantTeext, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(drugsText, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))))
+                .addGap(0, 108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(pregnantTeext, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                .addComponent(drugsText, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addComponent(diagnosesContra, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel1)))
                 .addContainerGap())
         );
 
@@ -239,14 +283,12 @@ static Eroshetta e;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextArea diagnosesContra;
-    public javax.swing.JTextArea drugsText;
+    public javax.swing.JLabel diagnosesContra;
+    public javax.swing.JLabel drugsText;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    public javax.swing.JTextArea pregnantTeext;
+    public javax.swing.JLabel pregnantTeext;
     // End of variables declaration//GEN-END:variables
 }
