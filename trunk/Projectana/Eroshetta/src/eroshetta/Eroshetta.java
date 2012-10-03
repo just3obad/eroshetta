@@ -2003,6 +2003,7 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
                     openWarning = true;
                     m.pregnantTeext.setText("The drug may be harmful for pregnant women");
                     m.pregnantTeext.setFont(font1);
+                    m.setW1(true);
                 }
             } catch (NullPointerException e) {
                 System.out.println("patien is null");
@@ -2071,6 +2072,7 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
                     openWarning = true;
                     m.diagnosesContra.setText("The drug may contradict with " +"\n"+ s);
                     m.diagnosesContra.setFont(font1);
+                    m.setW2(true);
                 }
                 
             } catch (NullPointerException e) {
@@ -2091,9 +2093,11 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
                 if(drugsAnti.size()>0){
                 m.drugsText.setText("The drug may interact with " +"\n"+ drugsAnti.toString());
                 m.drugsText.setFont(font1);
+                m.setW3(true);
                 }
                 this.enable(false);
                 m.setVisible(true);
+                m.repaint();
                 return;
             }
             this.workingOnPrescription = true;
@@ -2147,7 +2151,7 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
     }//GEN-LAST:event_addToPrescMouseClicked
 
         public  void addDrugDirect(){
-        this.enable();
+        
         if(addDirect){
                 Drugs d = (Drugs) this.jList_Drugs.getSelectedValue();
      this.workingOnPrescription = true;
@@ -2165,7 +2169,7 @@ ArrayList<String> drugsAnti = new <String>ArrayList();
 
             DrugsInPrescription.revalidate();
              addDirect = false;
-           
+           this.enable();
             return;
 }
     }
