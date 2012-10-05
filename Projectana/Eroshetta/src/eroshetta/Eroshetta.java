@@ -6,6 +6,7 @@ package eroshetta;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.*;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -83,6 +84,14 @@ public class Eroshetta extends javax.swing.JFrame {
         dayHazard=currentPatient.getBirthDate().getDate();
         
         initComponents();
+        
+        //
+        jScrollPane2.revalidate();
+        jScrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        
+        //
         
         
        
@@ -853,7 +862,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(drugClassName, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addComponent(drugClassName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(45, 45, 45))
             .addGroup(drugProfileLayout.createSequentialGroup()
                 .addContainerGap()
@@ -976,7 +985,7 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkBoxGeneric)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane2)
         );
         Panel_DrugsLayout.setVerticalGroup(
             Panel_DrugsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -992,13 +1001,14 @@ public class Eroshetta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanelPrescription.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanelPrescription.setAutoscrolls(true);
-        jPanelPrescription.setMaximumSize(new java.awt.Dimension(226, 114));
-        jPanelPrescription.setMinimumSize(new java.awt.Dimension(226, 114));
+        jPanelPrescription.setMaximumSize(new java.awt.Dimension(442, 114));
+        jPanelPrescription.setMinimumSize(new java.awt.Dimension(442, 114));
 
         savePreview.setText("Preview for saving and printing");
         savePreview.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1032,7 +1042,7 @@ public class Eroshetta extends javax.swing.JFrame {
         jPanelPrescriptionLayout.setHorizontalGroup(
             jPanelPrescriptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
+                .addContainerGap(227, Short.MAX_VALUE)
                 .addComponent(savePreview)
                 .addGap(33, 33, 33))
             .addGroup(jPanelPrescriptionLayout.createSequentialGroup()
@@ -1068,9 +1078,9 @@ public class Eroshetta extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(jLabel15)
-                        .addGap(0, 149, Short.MAX_VALUE)))
+                        .addGap(0, 170, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Panel_Drugs, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1396,7 +1406,9 @@ public class Eroshetta extends javax.swing.JFrame {
         drugFoods.setToolTipText(selectedDrug.getFoodInteractions());
 
         drugProfile.revalidate();
-       
+        jScrollPane2.show();
+        jScrollPane2.revalidate();
+        jScrollPane2.repaint();
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -1518,6 +1530,7 @@ public class Eroshetta extends javax.swing.JFrame {
 //        System.out.println(drugId);
     }//GEN-LAST:event_jList_DrugsValueChanged
 */
+    
     static int workingPatientIndex = -1;
     private void jListPatientsBookValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPatientsBookValueChanged
 
