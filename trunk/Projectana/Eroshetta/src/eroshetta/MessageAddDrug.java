@@ -100,19 +100,19 @@ static Eroshetta e;
         //w3=b3;
         this.diagnosesContra.setVisible(w2);
        if(w1){
-       g.drawImage(imagp,  400 , 70 , 60 , 60 , imageObserver);
-       }
-//       }else{
-//           this.setSize(this.getHeight()-70, WIDTH);
-//       }
-       if(w2){
-       g.drawImage(imagn,  400, 140 , 60 , 60 , imageObserver1);
+       g.drawImage(imagp,  400 , 50 , 60 , 60 , imageObserver);
        }
 //       }else{
 //           this.setSize(this.getHeight()-70, WIDTH);
 //       }
        if(w3){
-       g.drawImage(imagi,  400 , 210 , 60 , 60 , imageObserver2);
+       g.drawImage(imagn,  400, 120 , 60 , 60 , imageObserver1);
+       }
+//       }else{
+//           this.setSize(this.getHeight()-70, WIDTH);
+//       }
+       if(w2){
+       g.drawImage(imagi,  400 , 190 , 60 , 60 , imageObserver2);
        }
 //       }else{
 //           this.setSize(this.getHeight()-70, WIDTH);
@@ -139,7 +139,6 @@ static Eroshetta e;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(java.awt.Color.white);
         setMinimumSize(new java.awt.Dimension(403, 301));
-        setResizable(false);
 
         jButton1.setText("Proceed");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,22 +174,21 @@ static Eroshetta e;
                 .addComponent(jButton2))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(diagnosesContra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(145, 145, 145)
-                            .addComponent(jLabel4))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(pregnantTeext, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pregnantTeext, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(drugsText, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
-                .addGap(0, 108, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(diagnosesContra, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,16 +199,16 @@ static Eroshetta e;
                 .addComponent(pregnantTeext, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(drugsText, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(diagnosesContra, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(23, 23, 23)
+                        .addComponent(diagnosesContra, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                         .addComponent(jLabel1)))
                 .addContainerGap())
         );
