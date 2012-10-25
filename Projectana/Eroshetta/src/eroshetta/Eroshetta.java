@@ -3194,7 +3194,7 @@ if (this.workingOnPrescription) {
  try {
             // Set System L&F
         UIManager.setLookAndFeel(
-            UIManager.getSystemLookAndFeelClassName());
+            "javax.swing.plaf.nimbus.NimbusLookAndFeel");
     } 
     catch (UnsupportedLookAndFeelException e) {
        // handle exception

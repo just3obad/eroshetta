@@ -146,6 +146,9 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
       g.drawLine(50, 163, 460, 163);
       int h = 0;
       //System.out.println(presc.getDrugsCollection().size()+"<>");
+      g.drawString("[Name]",10,190);
+      g.drawString("[Time]",200,190);
+      g.drawString("[Duration]",420,190);
       for(int i=0; i<dTimes.size() ; i++)
       {
           DrugTimes dTime = (DrugTimes) dTimes.toArray()[i];
@@ -154,10 +157,17 @@ public class PrescriptionView extends javax.swing.JPanel implements Printable{
           Drugs drug = (Drugs)q1.getSingleResult();
     
          
-        //  Drugs drug  = (Drugs)presc.getDrugsCollection().toArray()[i];
+        // Drugs drug  = (Drugs)presc.getDrugsCollection().toArray()[i];
           DrugTimes prescTime = (DrugTimes) dTimes.toArray()[i];
-          g.drawString(prescTime.getDrugTime(),320,210+h);
-          g.drawString(i+". "+drug.getTradeName(),10,210+h);
+          g.drawString(prescTime.getDrugTime(),200,230+h);
+          try{
+          g.drawString(prescTime.getDrugDuration(),420,230+h);
+          }
+          catch(Exception e)
+          {
+              
+          }
+          g.drawString(i+". "+drug.getTradeName(),10,230+h);
           h = h+30;
        
       }
