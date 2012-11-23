@@ -1473,10 +1473,10 @@ public class Eroshetta extends javax.swing.JFrame {
             jComboBoxPatientProfileMonth.setSelectedIndex(0);
             jComboBoxPatientProfilePregnant.setSelectedIndex(0);
             jComboBoxPatientProfileYear.setSelectedIndex(0);
-            jListPPM3edication.removeAll();
-            jListPPDiagnosis.removeAll();
             jListPPDiagnosis.setModel(new DefaultListModel());
             jListPPM3edication.setModel(new DefaultListModel());
+           // jListPPM3edication.removeAll();
+         //   jListPPDiagnosis.removeAll();
             jListPatientsBook.clearSelection();
             jLabelBMIDesc.setVisible(false);
             
@@ -1560,8 +1560,13 @@ public class Eroshetta extends javax.swing.JFrame {
 //            System.out.println(currentPatient.getGender());
  
             } catch (Exception e) {
-//                System.out.println("Error Intializing the current patient.");
+            
                 
+//                System.out.println("Error Intializing the current patient.");
+//                int selctedID = jListPatientsBook.getSelectedIndex();
+//                currentPatient = patientsBookList.get(selctedID);
+//                currentPatienDiagnoses = (List<Diagnoses>) currentPatient.getDiagnosesCollection();
+//                currentPatienMedications = (List<Drugs>) currentPatient.getDrugsCollection();
             }
             
         
@@ -1776,7 +1781,7 @@ public class Eroshetta extends javax.swing.JFrame {
         } else {
             if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == true) {
                 jToggleButtonDiagnosis.setSelected(false);
-                jListPPDiagnosis.setEnabled(false);
+                //jListPPDiagnosis.setEnabled(false);
                 jListPPM3edication.setEnabled(true);
                 System.out.println("2nd Condition");
                 //change the modelList for the medication.
@@ -1862,7 +1867,7 @@ public class Eroshetta extends javax.swing.JFrame {
         } else {
             if (jToggleButtonDiagnosis.isSelected() == true && jToggleButtonPPMedication.isSelected() == true) {
                 jToggleButtonPPMedication.setSelected(false);
-                jListPPM3edication.setEnabled(false);
+                //jListPPM3edication.setEnabled(false);
                 jListPPDiagnosis.setEnabled(true);
                 System.out.println("2nd Condition");
                 //change the modelList for the diagnosis
@@ -2417,15 +2422,13 @@ if (this.workingOnPrescription) {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         currentPatient = new Patients();
-        currentPatienDiagnoses.clear();
-        currentPatienMedications.clear();
+        currentPatienDiagnoses = new ArrayList <Diagnoses>();
+        currentPatienMedications = new ArrayList <Drugs>();
         
         
         saveFlag=false;
         
         this.clearProfilePatient();
-        jListPPDiagnosis.removeAll();
-        jListPPM3edication.removeAll();
         this.enableProfilePatient();
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
@@ -2994,9 +2997,9 @@ if (this.workingOnPrescription) {
         
         jToggleButtonDiagnosis.setEnabled(true);
         jToggleButtonPPMedication.setEnabled(true);
-        jListPPDiagnosis.setEnabled(true);
+        //jListPPDiagnosis.setEnabled(true);
         jListPPDiagnosisMedication.setEnabled(true);
-        jListPPM3edication.setEnabled(true);
+        //jListPPM3edication.setEnabled(true);
     }
     
     
