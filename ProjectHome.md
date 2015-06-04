@@ -1,0 +1,1 @@
+E-Roshetta is a project to help physicians, pharmacists and the health care systems at hospitals to enhance the quality and the accuracy of the medical prescriptions for different categories of patients to avoid inaccurate or wrong prescribed or wrong read prescriptions through developing a smart drug database with a user friendly interface
